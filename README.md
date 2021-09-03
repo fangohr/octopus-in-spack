@@ -1,63 +1,52 @@
-# oommf-in-spack
+# Octopus-in-spack
 
-Support repository for getting the [OOMMF](https://math.nist.gov/oommf/) package into [Spack](http://spack.readthedocs.io).
+Support repository for getting the [OCTOPUS code](http://octopus-code.org) package into [Spack](http://spack.readthedocs.io).
 
 ## Status
 
-Compile OOMMF in Debian (without spack): [![debian-compile-oommf-natively](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-compile-oommf-natively.yml/badge.svg)](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-compile-oommf-natively.yml)
+Compile Octopus in Debian (without spack): [![debian-compile-octopus-natively](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-compile-octopus-natively.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-compile-octopus-natively.yml)
 
-Compile OOMMF on (Debian) Linux with spack:
+Compile Octopus on (Debian) Linux with spack:
 
-[![debian-spack-develop](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg)](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-spack-develop.yml)
-[![debian-spack-v0.16.2](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg)](https://github.com/fangohr/oommf-in-spack/actions/workflows/debian-spack-v0.16.2.yml)
-
-Compile OOMMF on OSX with Spack: 
-
-[![osx-spack-v0.16.2-plus-epsilon](https://github.com/fangohr/oommf-in-spack/actions/workflows/osx-spack-v0.16.2.yml/badge.svg)](https://github.com/fangohr/oommf-in-spack/actions/workflows/osx-spack-v0.16.1.yml)
-[![osx-spack-develop](https://github.com/fangohr/oommf-in-spack/actions/workflows/osx-spack-develop.yml/badge.svg)](https://github.com/fangohr/oommf-in-spack/actions/workflows/osx-spack-develop.yml)
+[![debian-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml)
+[![debian-spack-v0.16.2](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml)
 
 
 # Required commands
 
-## Compilation of OOMMF
+## Compilation of Octopus
 
 At the moment, this is under development, and we need two lines:
 
 - get spack: `git clone https://github.com/fangohr/spack`
-- checkout the right branch: `git checkout add-oommf`
+- checkout the right branch: `git checkout octopus-review-2021-08`
 
 Then activate spack:
 
 - `source spack/share/spack/setup-env.sh`
 
-The compile oommf (this could take some time)
+The compile octopus (this could take some time)
 
-- `spack install oommf`
+- `spack install octopus`
 
 Ideally, there are no errors.
 
-## Additional tests
+This should install Octopus 11.1 
 
-We can run some additional checks with these commands:
 
-- `spack test run --alias oommftest oommf`
-
-To see the results, use
-- `spack test results -l oommftest`
-
-## To use OOMMF after installation
+## To use Octopus after installation
 
 1. Activate spack:
 
 - `source spack/share/spack/setup-env.sh`
 
-2. Load oommf
+2. Load octopus
 
-- `spack load oommf`
+- `spack load octopus`
 
-3. Use oommf
+3. Use octopus (it should be in the `$PATH`)
 
-Now `oommf.tcl` should be in the path and can be used as usual.
+
 
 
 
