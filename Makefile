@@ -7,7 +7,7 @@ run-spack:
 	docker run --rm -ti octopus-spack 
 
 # use particular versions of spack
-octopus-spack-v0.16.2:
+spack-v0.16.2:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.16.2 \
    -t octopus-spack-v0.16.2 .
 
