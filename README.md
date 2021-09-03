@@ -4,8 +4,6 @@ Support repository for getting the [OCTOPUS code](http://octopus-code.org) packa
 
 ## Status
 
-Compile Octopus in Debian (without spack): [![debian-compile-octopus-natively](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-compile-octopus-natively.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-compile-octopus-natively.yml)
-
 Compile Octopus on (Debian) Linux with spack:
 
 [![debian-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml)
@@ -19,7 +17,7 @@ Compile Octopus on (Debian) Linux with spack:
 At the moment, this is under development, and we need two lines:
 
 - get spack: `git clone https://github.com/fangohr/spack`
-- checkout the right branch: `git checkout octopus-review-2021-08`
+- check out the right branch: `git checkout octopus-review-2021-08`
 
 Then activate spack:
 
