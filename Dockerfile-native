@@ -1,18 +1,25 @@
 FROM debian:bullseye
 
+RUN mkdir -i  /opt/octopus/examples
+COPY examples /opt/octopus/examples
+
 RUN apt-get -y update
 # Convenience tools
 RUN apt-get -y install wget time nano vim emacs git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps
 # autoconf?
- 
-RUN wget http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
 
-RUN tar xfvz down.php\?file\=11.1%2Foctopus-11.1.tar.gz
-WORKDIR /root/octopus-11.1
+WORKDIR /opt
+RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
+
+RUN tar xfvz oct.tar.gz
+RUN pwd
+RUN ls -l 
+WORKDIR /opt/octopus-11.1
 RUN ./configure
 RUN make
 RUN make install
 
+RUN cd /opt/octopus/examples/h-atom && ./octopus
 
 CMD bash -l
 
