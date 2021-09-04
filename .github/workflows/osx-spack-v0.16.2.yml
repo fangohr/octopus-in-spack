@@ -1,0 +1,36 @@
+name: osx-spack-v0.16.2
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      # - name: Install GitHub CLI
+      #   run: |
+      #     brew update
+      #     brew install gh
+      - name: install spack
+        run: |
+          git clone https://github.com/spack/spack.git s
+          cd s && git checkout v0.16.2 && cd ..
+          ./s/bin/spack --version
+      - name: compile gcc10.3
+        run: |
+          #mkdir s/var/spack/repos/builtin/packages/oommf
+          cp -v spack/package.py s/var/spack/repos/builtin/packages/ooctopus
+          source s/share/spack/setup-env.sh && spack install gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack load gcc && spack find compiler
+          spack compilers
+      - name: compile octopus
+        run: |
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0
+      - name: run smoke tests
+        run: |
+          echo "To be added"
