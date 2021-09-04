@@ -1,0 +1,63 @@
+FROM debian:bullseye
+
+RUN apt-get -y update
+# Convenience tools
+RUN apt-get -y install wget time nano vim emacs git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential
+# autoconf?
+ 
+RUN wget http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
+
+
+RUN tar xfvz down.php\?file\=11.1%2Foctopus-11.1.tar.gz
+WORKDIR /root/octopus-11.1
+RUN ./configure
+RUN make
+RUN make install
+
+
+CMD bash -l
+
+# # From https://github.com/ax3l/dockerfiles/blob/master/spack/base/Dockerfile:
+# # install minimal spack dependencies
+# RUN        apt-get install -y --no-install-recommends \
+#               autoconf \
+#               build-essential \
+#               ca-certificates \
+#               coreutils \
+#               curl \
+#               environment-modules \
+#               gfortran \
+#               git \
+#               openssh-server \
+#               python \
+#               unzip \
+#               vim \
+#            && rm -rf /var/lib/apt/lists/*
+# 
+# 
+# ### XXX 
+# # load spack environment on login
+# RUN echo "source $SPACK_ROOT/share/spack/setup-env.sh" \
+#            > /etc/profile.d/spack.sh
+
+# RUN adduser user
+# USER user
+# WORKDIR /home/user
+# 
+# # install spack
+# RUN git clone https://github.com/spack/spack.git
+# # default branch is develop
+# RUN cd spack && git checkout $SPACK_VERSION
+# 
+# # # show which version we use
+# RUN $SPACK --version
+
+
+
+# # build octopus
+# COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus
+# 
+# CMD /bin/bash -l
+
