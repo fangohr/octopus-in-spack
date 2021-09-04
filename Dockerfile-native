@@ -2,11 +2,10 @@ FROM debian:bullseye
 
 RUN apt-get -y update
 # Convenience tools
-RUN apt-get -y install wget time nano vim emacs git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential
+RUN apt-get -y install wget time nano vim emacs git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps
 # autoconf?
  
 RUN wget http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
-
 
 RUN tar xfvz down.php\?file\=11.1%2Foctopus-11.1.tar.gz
 WORKDIR /root/octopus-11.1
