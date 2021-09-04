@@ -23,8 +23,10 @@ jobs:
           ./s/bin/spack --version
       - name: compile gcc10.3
         run: |
+          pwd
+          ls -l
           #mkdir s/var/spack/repos/builtin/packages/oommf
-          cp -v spack/package.py s/var/spack/repos/builtin/packages/ooctopus
+          cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
           source s/share/spack/setup-env.sh && spack install gcc@10.3.0
           source s/share/spack/setup-env.sh && spack load gcc && spack find compiler
           spack compilers
