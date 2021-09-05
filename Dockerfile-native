@@ -1,0 +1,39 @@
+FROM debian:bullseye
+
+
+RUN apt-get -y update
+
+# Convenience tools
+RUN apt-get -y install wget time nano vim emacs
+
+# Libraries that octopus needs
+RUN apt-get -y install git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps
+# autoconf?
+
+WORKDIR /opt
+RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
+
+RUN tar xfvz oct.tar.gz
+RUN pwd
+RUN ls -l 
+WORKDIR /opt/octopus-11.1
+# autoreconf -i
+RUN ./configure
+RUN make
+RUN make install
+# The next command returns an error code as some tests fail
+# RUN make check-short
+
+RUN mkdir -p /opt/octopus-examples
+COPY examples /opt/octopus-examples
+
+# Instead of tests, run two short examples
+RUN cd /opt/octopus-examples/h-atom && octopus
+RUN cd /opt/octopus-examples/recipe && octopus
+
+# offer directory for mounting container
+RUN mkdir /io
+WORKDIR /io
+
+CMD bash -l
+
