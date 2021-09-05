@@ -1,9 +1,8 @@
 FROM debian:bullseye
 
-RUN mkdir -p  /opt/octopus/examples
-COPY examples /opt/octopus/examples
 
 RUN apt-get -y update
+
 # Convenience tools
 RUN apt-get -y install wget time nano vim emacs
 
@@ -22,8 +21,19 @@ WORKDIR /opt/octopus-11.1
 RUN ./configure
 RUN make
 RUN make install
+# The next command returns an error code as some tests fail
+# RUN make check-short
 
-RUN cd /opt/octopus/examples/h-atom && ./octopus
+RUN mkdir -p /opt/octopus-examples
+COPY examples /opt/octopus-examples
+
+# Instead of tests, run two short examples
+RUN cd /opt/octopus-examples/h-atom && octopus
+RUN cd /opt/octopus-examples/recipe && octopus
+
+# offer directory for mounting container
+RUN mkdir /io
+WORKDIR /io
 
 CMD bash -l
 

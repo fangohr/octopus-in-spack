@@ -1,4 +1,4 @@
-name: debian-spack-develop
+name: debian-native
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
 
     steps:
