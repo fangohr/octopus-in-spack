@@ -11,4 +11,8 @@ spack-v0.16.2:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.16.2 \
    -t octopus-spack-v0.16.2 .
 
+native:
+	docker build -f Dockerfile-native -t octopus .
+
+
 .PHONY: octopus-spack-v0.16.2 octopus-spack run-spack 
