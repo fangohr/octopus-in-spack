@@ -5,13 +5,14 @@ Support repository for getting the [OCTOPUS code](http://octopus-code.org) packa
 
 ## Status
 
-Compile Octopus on (Debian) Linux with spack:
+Compile Octopus with Spack [on (Debian) Linux]:
 
 [![debian-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml)
 [![debian-spack-v0.16.2](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml)
 
 Compile Octopus on Debian Linux:
-[![debian-native](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-nativel/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-native.yml)
+
+[![debian-native](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-native.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-native.yml)
 
 
 # Required commands
