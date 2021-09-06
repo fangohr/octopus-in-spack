@@ -225,7 +225,7 @@ class Octopus(Package, CudaPackage):
                     'FFLAGS=-O2 -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz'])
             else:
                 args.extend([
-                    'FCFLAGS=-O2 -ffree-line-length-none'
+                    'FCFLAGS=-O2 -ffree-line-length-none',
                     'FFLAGS=-O2 -ffree-line-length-none'
                 ])
 
