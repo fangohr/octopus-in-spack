@@ -12,10 +12,6 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      # - name: Install GitHub CLI
-      #   run: |
-      #     brew update
-      #     brew install gh
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
@@ -29,6 +25,7 @@ jobs:
           source s/share/spack/setup-env.sh && spack install gcc@10.3.0
           source s/share/spack/setup-env.sh && spack load gcc && spack find compiler
       - name: show spack compilers
+        run: |
           spack compilers
           spack compiler info apple-clang
           spack compiler info gcc
