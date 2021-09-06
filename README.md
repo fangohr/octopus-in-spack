@@ -27,7 +27,7 @@ Then activate spack:
 
 - `source spack/share/spack/setup-env.sh`
 
-Then compile octopus (this could take some time) with netcdf support:
+Then compile octopus (this could take some time). For this example, we want to include netcdf support:
 
 - `spack install octopus +netcdf`
 
