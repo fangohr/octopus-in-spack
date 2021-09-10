@@ -1,0 +1,36 @@
+name: osx-spack-develop
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: install spack
+        run: |
+          git clone https://github.com/spack/spack.git s
+          ./s/bin/spack --version
+      - name: compile gcc10.3
+        run: |
+          pwd
+          ls -l
+          cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
+          source s/share/spack/setup-env.sh && spack install gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack load gcc && spack find compiler
+      - name: show spack compilers
+        run: |
+          spack compilers
+          spack compiler info apple-clang
+          spack compiler info gcc
+      - name: compile octopus
+        run: |
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang  
+      - name: run smoke tests
+        run: |
+          echo "To be added"
