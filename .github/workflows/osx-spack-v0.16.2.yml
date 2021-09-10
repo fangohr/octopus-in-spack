@@ -23,7 +23,7 @@ jobs:
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
           source s/share/spack/setup-env.sh && spack install gcc@10.3.0
-          source s/share/spack/setup-env.sh && spack load gcc && spack find compiler
+          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find
       - name: show spack compilers
         run: |
           spack compilers
