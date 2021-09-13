@@ -10,32 +10,11 @@ RUN apt-get -y install autoconf libtool
 RUN apt-get -y install git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev \
     libgsl-dev libfftw3-dev build-essential procps 
 # Optional dependencies
-RUN apt-get -y install libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev \
-    libgmp-dev likwid libmpfr-dev libboost-dev
-
-# Not recognised in `config.log`: libfm-dev
-
-# Other missing dependencies:
-# root@3c84fb9cc693:/opt/octopus-11.1# less config.log | grep WARNIN
-# root@ab9a50547c08:/opt/octopus-11.1# less config.log | grep WARNI
-# configure:12023: WARNING: Could not find libvdwxc library.
-# configure:13584: WARNING: Could not find PFFT library.
-# configure:13811: WARNING: Could not find PNFFT library.
-# configure:14326: WARNING: Could not find BerkeleyGW library.
-# configure:14420: WARNING: Could not find SPARSKIT library.
-# configure:15035: WARNING: elpa library is not used because scalapack is not found which is a prerequisite for elpa
-# configure:15105: WARNING: Could not find Libfm library.
-# configure:15306: WARNING: Could not find Futile library.
-# configure:15403: WARNING: Could not find PSolver library.
-# configure:16132: WARNING: Could not find ISF library.
-# configure:16301: WARNING: Could not find the poke library
-# configure:16587: WARNING: Octopus will be compiled without PARMETIS support
-# configure:16804: WARNING: Could not find DFTBPLUS library.
-
+RUN apt-get -y install libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev \
+    libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev
 
 WORKDIR /opt
 RUN git clone https://gitlab.com/octopus-code/octopus.git
-
 WORKDIR /opt/octopus
 
 # Record which version we are using
@@ -43,7 +22,12 @@ RUN git show > octopus-source-version
 RUN echo "octopus-source-clone-date: $date " >> octopus-source-version
 
 RUN autoreconf -i
-RUN ./configure 
+RUN ./configure
+
+# Which optional dependencies are missing?
+RUN cat config.log | grep WARN > octopus-configlog-warnings
+RUN cat octopus-configlog-warnings
+
 RUN make
 RUN make install
 
