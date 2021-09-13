@@ -1,4 +1,4 @@
-name: debian-native
+name: debian-develop
 
 on:
   push:
@@ -13,6 +13,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build Octopus on Debian in Docker
-      run: make native
+    - name: Build Octopus develop on Debian in Docker
+      run: make debian-develop
       
