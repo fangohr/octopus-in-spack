@@ -7,13 +7,17 @@ Support repository for getting the `OCTOPUS code <http://octopus-code.org>`__ pa
 Status
 ------
 
-Compile Octopus on (Debian) Linux with spack:
+Compile Octopus on Linux with Spack:
 
-|debian-spack-develop| |debian-spack-v0.16.2|
+|spack-develop-oct-11.1| Development branch of Spack, preferred version of Octopus 
+
+|spack-v0.16.2-oct-11.1| Spack release 0.16.2, preferred version of Octopus 
 
 Compile Octopus on Debian Linux:
 
-|debian-11.1| |debian-develop|
+|debian-11.1| Debian Bullseye (11), Octopus release 11.1
+
+|debian-develop| Debian Bullseye (11), Octopus develop branch
 
 Required commands
 =================
@@ -52,9 +56,9 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``)
 
-.. |debian-spack-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg
+.. |spack-develop-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml
-.. |debian-spack-v0.16.2| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg
+.. |spack-v0.16.2-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml
 .. |debian-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml
