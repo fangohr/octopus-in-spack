@@ -12,10 +12,10 @@ spack-v0.16.2:
    -t octopus-spack-v0.16.2 .
 
 debian-11.1:
-	docker build -f Dockerfile-native -t octopus .
+	docker build -f Dockerfile-debian -t octopus .
 
 debian-develop:
-	docker build -f Dockerfile-native-develop -t octopus-develop .
+	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
 
 .PHONY: octopus-spack-v0.16.2 octopus-spack run-spack debian-11.1 debian-develop
