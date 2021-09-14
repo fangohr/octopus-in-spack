@@ -1,4 +1,4 @@
-name: debian-native
+name: spack-v0.16.2
 
 on:
   push:
@@ -9,10 +9,11 @@ on:
 jobs:
 
   build:
+
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build Octopus on Debian in Docker
-      run: make native
+    - name: Build the Docker image
+      run: make spack-v0.16.2 
       

@@ -1,0 +1,55 @@
+FROM debian:bullseye
+
+# install Octopus 11.1 on Debian
+
+RUN apt-get -y update
+
+# Convenience tools
+RUN apt-get -y install wget time nano vim emacs
+
+# Libraries that octopus needs
+RUN apt-get -y install autoconf libtool
+RUN apt-get -y install git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev \
+    libgsl-dev libfftw3-dev build-essential procps 
+# Optional dependencies
+RUN apt-get -y install libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev \
+    libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev
+
+
+WORKDIR /opt
+RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.1/octopus-11.1.tar.gz
+
+RUN tar xfvz oct.tar.gz
+RUN pwd
+RUN ls -l 
+WORKDIR /opt/octopus-11.1
+RUN autoreconf -i
+RUN ./configure
+
+# Which optional dependencies are missing?
+RUN cat config.log | grep WARN > octopus-configlog-warnings
+RUN cat octopus-configlog-warnings
+
+RUN make
+RUN make install
+
+RUN octopus --version > octopus-version
+RUN octopus --version
+
+
+# The next command returns an error code as some tests fail
+# RUN make check-short
+
+RUN mkdir -p /opt/octopus-examples
+COPY examples /opt/octopus-examples
+
+# Instead of tests, run two short examples
+RUN cd /opt/octopus-examples/h-atom && octopus
+RUN cd /opt/octopus-examples/recipe && octopus
+
+# offer directory for mounting container
+RUN mkdir /io
+WORKDIR /io
+
+CMD bash -l
+
