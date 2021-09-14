@@ -1,8 +1,20 @@
+
+
+
+Octopus in spack
+================
+
+.. sectnum::
+
+.. contents:: 
+
 Octopus-in-spack
 ================
 
 Support repository for getting the `OCTOPUS code <http://octopus-code.org>`__ package into
 `Spack <http://spack.readthedocs.io>`__.
+
+Also providing some hints on how to install Octopus with Spack.
 
 Status
 ------

@@ -17,5 +17,11 @@ debian-11.1:
 debian-develop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
-
 .PHONY: octopus-spack-v0.16.2 octopus-spack run-spack debian-11.1 debian-develop
+
+
+
+dockerhub-update-11.1:
+	@echo "Run 'docker login'"
+	docker build -f Dockerfile-debian -t fangohr/octopus:11.1 .
+  @echo "Run 'docker push fangohr/octopus:11.1' "
