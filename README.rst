@@ -20,8 +20,14 @@ Compile Octopus on Debian Linux:
 
 |debian-develop| Debian Bullseye (11), Octopus develop branch
 
-Required commands
-=================
+Octopus in Container
+====================
+
+Please see `here <docker.rst>`__.
+
+
+Octopus and Spack - Quick start
+===============================
 
 Compilation of Octopus using Spack
 ----------------------------------
