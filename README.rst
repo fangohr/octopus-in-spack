@@ -11,7 +11,9 @@ Compile Octopus on (Debian) Linux with spack:
 
 |debian-spack-develop| |debian-spack-v0.16.2|
 
-Compile Octopus on Debian Linux: |debian-11.1|
+Compile Octopus on Debian Linux:
+
+|debian-11.1| |debian-develop|
 
 Required commands
 =================
@@ -56,3 +58,5 @@ To use Octopus after installation
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml
 .. |debian-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml
+.. |debian-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
