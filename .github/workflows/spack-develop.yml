@@ -1,4 +1,4 @@
-name: debian-spack-v0.16.2
+name: spack-develop
 
 on:
   push:
@@ -15,5 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: make spack-v0.16.2 
-      
+      run: make spack-develop
