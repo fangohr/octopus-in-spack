@@ -54,8 +54,12 @@ RUN $SPACK --version
 
 # build octopus
 COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
+
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+poke+python+likwid+libyaml+elpa+nlopt
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+poke+python+likwid+libyaml+elpa+nlopt
+
 
 CMD /bin/bash -l
 
