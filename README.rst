@@ -24,7 +24,9 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-develop-oct-11.1| Development branch of Spack, preferred version of Octopus 
 
-|spack-v0.16.2-oct-11.1| Spack release 0.16.2, preferred version of Octopus 
+|spack-v0.16.2-oct-11.1| Spack release 0.16.2, preferred version of Octopus
+
+|spack-v0.16.3-oct-11.1| Spack release 0.16.3, preferred version of Octopus
 
 Compile Octopus on Debian Linux:
 
@@ -83,6 +85,9 @@ To use Octopus after installation
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 .. |spack-v0.16.2-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml
+.. |spack-v0.16.3-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.3.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.3.yml
+
 .. |debian-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml
 .. |debian-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
