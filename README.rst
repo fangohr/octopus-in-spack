@@ -27,7 +27,13 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-v0.16.3-oct-11.1| Spack release 0.16.3, preferred version of Octopus
 
-|spack-develop-oct-11.1| Spack develop version, preferred version of Octopus. The spack `develop` branch is relatively unstable regarding successful building of Octopus. We have a `separate spack-develop <https://github.com/fangohr/octopus-in-spack/tree/spack-develop>`__ branch for this (so that the pass/fail of actions for the main branch does not depend on it), and show the result with this badge here for information.
+
+|spack-develop-oct-11.1| Spack develop version, preferred version of Octopus. 
+The spack `develop` branch is relatively unstable regarding successful building 
+of Octopus. We have a 
+`separate spack-develop <https://github.com/fangohr/octopus-in-spack/tree/spack-develop>`__ 
+branch for this (so that the pass/fail of actions for the main branch does not depend on 
+it), and show the result with this badge here for information.
 
 Compile Octopus on Debian Linux:
 
