@@ -2,9 +2,9 @@ name: spack-develop
 
 on:
   push:
-    branches: [ main ]
+    branches: [ spack-develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ spack-develop ]
 
 jobs:
 
