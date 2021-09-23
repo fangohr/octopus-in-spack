@@ -5,6 +5,10 @@ on:
     branches: [ spack-develop ]
   pull_request:
     branches: [ spack-develop ]
+  schedule:
+    # run once per week
+    - cron: "9 0 * * 1"
+
 
 jobs:
 
