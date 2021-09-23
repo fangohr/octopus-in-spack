@@ -79,7 +79,7 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``)
 
-.. |spack-develop-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
+.. |spack-develop-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 .. |spack-v0.16.2-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml
