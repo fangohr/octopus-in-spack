@@ -2,9 +2,11 @@ name: osx-spack-develop
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - osx
   pull_request:
-    branches: [ main ]
+    branches:
+      - osx
 
 jobs:
   build:
