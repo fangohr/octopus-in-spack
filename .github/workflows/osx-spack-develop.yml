@@ -30,7 +30,8 @@ jobs:
           source s/share/spack/setup-env.sh && spack compiler info gcc
       - name: compile octopus
         run: |
-          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang  
+          # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
           echo "To be added"

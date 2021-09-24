@@ -1,50 +1,14 @@
 # Octopus-in-spack
 
-Support repository for getting the [OCTOPUS code](http://octopus-code.org) package into [Spack](http://spack.readthedocs.io).
+Temporary branch to test compilation with OSX. Once this succeeds, we need to sort out how to bring this information into master.
+One option: have a dedicated branch for OSX testing, and only display the resulting badges in master. 
 
 ## Status
 
-Compile Octopus on (Debian) Linux with spack:
+Compile Octopus on OSX with spack:
 
-[![debian-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-develop.yml)
-[![debian-spack-v0.16.2](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-spack-v0.16.2.yml)
-
-
-# Required commands
-
-## Compilation of Octopus
-
-At the moment, this is under development, and we need two lines:
-
-- get spack: `git clone https://github.com/fangohr/spack`
-- check out the right branch: `git checkout octopus-review-2021-08`
-
-Then activate spack:
-
-- `source spack/share/spack/setup-env.sh`
-
-The compile octopus (this could take some time)
-
-- `spack install octopus`
-
-Ideally, there are no errors.
-
-This should install Octopus 11.1 
-
-
-## To use Octopus after installation
-
-1. Activate spack:
-
-- `source spack/share/spack/setup-env.sh`
-
-2. Load octopus
-
-- `spack load octopus`
-
-3. Use octopus (it should be in the `$PATH`)
-
-
+[![osx-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml)
+[![debian-spack-v0.16.3](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml/badge.svg)](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml)
 
 
 
