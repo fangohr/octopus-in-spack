@@ -47,7 +47,9 @@ class Octopus(Package, CudaPackage):
     variant('pfft', default=False,
             description='Compile with PFFT')
     variant('poke', default=False,
-            description='Compile with poke')
+            description='Compile with poke (not available in spack yet)')
+    variant('python', default=True,
+            description='Activates Python support')
     variant('likwid', default=False,
             description='Compile with likwid')
     variant('libvdwxc', default=False,
@@ -79,6 +81,8 @@ class Octopus(Package, CudaPackage):
     depends_on('fftw-api@3:', when='@10:')
     depends_on('metis@5:', when='+metis')
     depends_on('parmetis', when='+parmetis')
+    depends_on('py-numpy', when='+python')
+    depends_on('py-mpi4py', when='+python')
     depends_on('scalapack', when='+scalapack')
     depends_on('netcdf-fortran', when='+netcdf')
     depends_on('arpack-ng', when='+arpack')
@@ -201,6 +205,9 @@ class Octopus(Package, CudaPackage):
             args.extend([
                 '--enable-cuda'
             ])
+
+        if '+python' in spec:
+            args.extend('--enable-python')
 
         # --with-etsf-io-prefix=
         # --with-sparskit=${prefix}/lib/libskit.a
