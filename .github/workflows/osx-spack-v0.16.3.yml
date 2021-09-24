@@ -8,6 +8,7 @@ on:
     branches:
       - osx
 
+
 jobs:
   build:
     runs-on: macos-latest
@@ -25,16 +26,18 @@ jobs:
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
           source s/share/spack/setup-env.sh && spack install gcc@10.3.0
-          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find
+          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
       - name: show spack compilers
         run: |
-          spack compilers
-          spack compiler info apple-clang
-          spack compiler info gcc
+          source s/share/spack/setup-env.sh && spack compilers
+          source s/share/spack/setup-env.sh && spack compiler info apple-clang
+          source s/share/spack/setup-env.sh && spack compiler info gcc
       - name: compile octopus
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
-          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
-          echo "To be added"
+          source s/share/spack/setup-env.sh && cd /opt/octopus-examples/h-atom && octopus
+          source s/share/spack/setup-env.sh && cd /opt/octopus-examples/recipe && octopus
+
