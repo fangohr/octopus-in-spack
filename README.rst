@@ -20,7 +20,10 @@ Status
 ------
 
 
-Compile Octopus on Linux with Spack. Spack's preferred option is 11.1 at the
+Compile Octopus on Linux with Spack
+-----------------------------------
+
+Spack's preferred option is 11.1 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-v0.16.2-oct-11.1| Spack release 0.16.2, preferred version of Octopus
@@ -35,11 +38,19 @@ of Octopus. We have a
 branch for this (so that the pass/fail of actions for the main branch does not depend on 
 it), and show the result with this badge here for information.
 
-Compile Octopus on Debian Linux:
+Compile Octopus on Debian Linux (no spack)
+------------------------------------------
 
 |debian-11.1| Debian Bullseye (11), Octopus release 11.1
 
 |debian-develop| Debian Bullseye (11), Octopus develop branch
+
+
+Compile Octopus on OSX with spack (WIP)
+---------------------------------------
+
+|osx-spack-v0.16.3| |osx-spack-develop|
+
 
 Octopus in Container
 ====================
@@ -100,3 +111,13 @@ To use Octopus after installation
 
 .. |spack-develop-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
+
+
+      [![osx-spack-develop](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml/badge.svg?branch=osx)](https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml)
+
+
+.. |osx-spack-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop/badge.svg?branch=osx
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml
+      
+.. |osx-spack-v0.16.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml/badge.svg?branch=osx
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml
