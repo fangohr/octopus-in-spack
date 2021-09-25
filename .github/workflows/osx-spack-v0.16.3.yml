@@ -20,12 +20,12 @@ jobs:
           git clone https://github.com/spack/spack.git s
           cd s && git checkout v0.16.3 && cd ..
           ./s/bin/spack --version
-      - name: compile gcc10.2
+      - name: compile gcc10.1
         run: |
           pwd
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-          source s/share/spack/setup-env.sh && spack install gcc@10.2.0
+          source s/share/spack/setup-env.sh && spack install gcc@10.1.0
           source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
       - name: show spack compilers
         run: |
