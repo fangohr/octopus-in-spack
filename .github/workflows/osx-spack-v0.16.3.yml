@@ -20,12 +20,12 @@ jobs:
           git clone https://github.com/spack/spack.git s
           cd s && git checkout v0.16.3 && cd ..
           ./s/bin/spack --version
-      - name: compile gcc10.3
+      - name: compile gcc10.2
         run: |
           pwd
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-          source s/share/spack/setup-env.sh && spack install gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack install gcc@10.2.0
           source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
       - name: show spack compilers
         run: |
@@ -35,7 +35,7 @@ jobs:
       - name: compile octopus
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
-          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.2.0
       - name: run smoke tests
         run: |
           source s/share/spack/setup-env.sh && cd /opt/octopus-examples/h-atom && octopus
