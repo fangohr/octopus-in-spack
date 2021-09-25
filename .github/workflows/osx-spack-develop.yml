@@ -18,12 +18,13 @@ jobs:
         run: |
           git clone https://github.com/spack/spack.git s
           ./s/bin/spack --version
-      - name: compile gcc10.3
+	  git branch
+      - name: compile gcc11.2
         run: |
           pwd
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-          source s/share/spack/setup-env.sh && spack install gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack install gcc@11.2
           source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
       - name: show spack compilers
         run: |
