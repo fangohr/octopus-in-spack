@@ -18,7 +18,7 @@ jobs:
         run: |
           git clone https://github.com/spack/spack.git s
           ./s/bin/spack --version
-	  git branch
+          git branch
       - name: compile gcc11.2
         run: |
           pwd
