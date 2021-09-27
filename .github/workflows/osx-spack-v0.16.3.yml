@@ -15,6 +15,19 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+
+      - name: Install gcc from brew
+        run: |
+          brew update
+          brew install gcc@10 
+          brew upgrade
+
+      - name: show spack the gcc-10 compiler
+
+        env:
+          CC: gcc-10 
+          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
+
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
@@ -30,17 +43,12 @@ jobs:
       #     pwd
       #     ls -l
       #     cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-      #     source s/share/spack/setup-env.sh && spack install gcc@10.1.0
+      #     source s/share/spack/setup-env.sh && spack install gcc@10.3.0
       #     source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
-      # - name: show spack compilers
-      #   run: |
-      #     source s/share/spack/setup-env.sh && spack compilers
-      #     source s/share/spack/setup-env.sh && spack compiler info apple-clang
-      #     source s/share/spack/setup-env.sh && spack compiler info gcc
       - name: compile octopus
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
-          source s/share/spack/setup-env.sh && spack install octopus 
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0  
       - name: run smoke tests
         run: |
           source s/share/spack/setup-env.sh && cd /opt/octopus-examples/h-atom && octopus
