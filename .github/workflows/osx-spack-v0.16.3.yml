@@ -32,7 +32,7 @@ jobs:
         env:
           CC: gcc-10
         run:
-          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
+          source s/share/spack/setup-env.sh && spack compiler find 
       - name: show spack compilers1
         run: |
           source s/share/spack/setup-env.sh && spack compilers
