@@ -23,11 +23,10 @@ jobs:
           brew upgrade
 
       - name: show spack the gcc-10 compiler
-
         env:
-          CC: gcc-10 
+          CC: gcc-10
+        run:
           source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
-
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
