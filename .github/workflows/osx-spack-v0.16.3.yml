@@ -18,9 +18,10 @@ jobs:
 
       - name: Install gcc from brew
         run: |
-          brew update
-          brew install gcc@10 
-          brew upgrade
+          ### it seems that gcc-10 is installed already on github workflows
+          # brew update
+          # brew install gcc@10 
+          # brew upgrade
           gcc-10 --version
       - name: install spack
         run: |
