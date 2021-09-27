@@ -40,7 +40,7 @@ jobs:
       - name: show spack the gcc-10 compiler
         env:
           CC: gcc-10
-        run:
+        run: |
           source s/share/spack/setup-env.sh && spack compiler find 
       - name: show spack compilers1
         run: |
@@ -52,10 +52,12 @@ jobs:
           pwd
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-      - name: compile spack gcc-10.3.0 for better reproducibility 
+      - name: compile spack gcc-10.3.0 for better reproducibility
+        run: |
           source s/share/spack/setup-env.sh && spack install gcc@10.3.0
           source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
       - name: show spack compilers2
+        run: |
           source s/share/spack/setup-env.sh && spack compilers
           source s/share/spack/setup-env.sh && spack compiler info gcc
       - name: compile octopus
