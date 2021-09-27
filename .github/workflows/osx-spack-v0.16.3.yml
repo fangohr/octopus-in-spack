@@ -31,7 +31,7 @@ jobs:
           # brew install gcc@10 
           # brew upgrade
           gcc-10 --version
-	  gcc-9 --version
+          gcc-9 --version
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
