@@ -18,7 +18,7 @@ jobs:
 
       - name: copy examples for smoke test into place
         run: |
-          mkdir -p /opt/octopus-examples
+          sudo mkdir -p /opt/octopus-examples
           cp -va examples/* /opt/octopus-examples
           ls -l /opt/octopus-examples/
           ls -l /opt/octopus-examples/recipe
