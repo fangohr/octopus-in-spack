@@ -20,11 +20,11 @@ jobs:
         run: |
           pwd
           ls -l
-          sudo mkdir -p octopus-examples
-          cp -va examples/* octopus-examples
-          ls -l octopus-examples/
-          ls -l octopus-examples/recipe
-          ls -l octopus-examples/h-atom
+          echo $HOME
+          env
+          ls -l examples/
+          ls -l examples/recipe
+          ls -l examples/h-atom
 
       - name: Install gcc from brew
         run: |
@@ -69,7 +69,7 @@ jobs:
           source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
-          source s/share/spack/setup-env.sh && pushd octopus-examples/h-atom && octopus && popd
-          source s/share/spack/setup-env.sh && pushd octopus-examples/recipe && octopus && popd
+          source s/share/spack/setup-env.sh && pushd examples/h-atom && octopus && popd
+          source s/share/spack/setup-env.sh && pushd examples/recipe && octopus && popd
           
 
