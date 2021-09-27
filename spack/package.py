@@ -48,7 +48,7 @@ class Octopus(Package, CudaPackage):
             description='Compile with PFFT')
     variant('poke', default=False,
             description='Compile with poke (not available in spack yet)')
-    variant('python', default=True,
+    variant('python', default=False,
             description='Activates Python support')
     variant('likwid', default=False,
             description='Compile with likwid')

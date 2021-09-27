@@ -16,6 +16,14 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: copy examples for smoke test into place
+        run: |
+          mkdir -p /opt/octopus-examples
+          cp -va examples/* /opt/octopus-examples
+          ls -l /opt/octopus-examples/
+          ls -l /opt/octopus-examples/recipe
+	  ls -l /opt/octopus-examples/h-atom
+
       - name: Install gcc from brew
         run: |
           ### it seems that gcc-10 is installed already on github workflows
@@ -23,6 +31,7 @@ jobs:
           # brew install gcc@10 
           # brew upgrade
           gcc-10 --version
+	  gcc-9 --version
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
@@ -43,10 +52,17 @@ jobs:
           pwd
           ls -l
           cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
+      - name: compile spack gcc-10.3.0 for better reproducibility 
+          source s/share/spack/setup-env.sh && spack install gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
+      - name: show spack compilers2
+      	  source s/share/spack/setup-env.sh && spack compilers
+          source s/share/spack/setup-env.sh && spack compiler info gcc
       - name: compile octopus
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
-          source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
+          # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
+	  source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
           source s/share/spack/setup-env.sh && cd /opt/octopus-examples/h-atom && octopus
