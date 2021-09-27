@@ -22,7 +22,7 @@ jobs:
           cp -va examples/* /opt/octopus-examples
           ls -l /opt/octopus-examples/
           ls -l /opt/octopus-examples/recipe
-	  ls -l /opt/octopus-examples/h-atom
+          ls -l /opt/octopus-examples/h-atom
 
       - name: Install gcc from brew
         run: |
