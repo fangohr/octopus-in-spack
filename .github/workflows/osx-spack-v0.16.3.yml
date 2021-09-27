@@ -69,7 +69,7 @@ jobs:
           source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
-          source s/share/spack/setup-env.sh && pushd examples/h-atom && octopus && popd
-          source s/share/spack/setup-env.sh && pushd examples/recipe && octopus && popd
+          source s/share/spack/setup-env.sh && spack load octopus && pushd examples/h-atom && octopus && popd
+          source s/share/spack/setup-env.sh && spack load octopus && pushd examples/recipe && octopus && popd
           
 
