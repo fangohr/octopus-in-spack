@@ -66,7 +66,7 @@ jobs:
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
           # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
-          source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0
+          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0
       - name: run smoke tests
         run: |
           source s/share/spack/setup-env.sh && spack load octopus && pushd examples/h-atom && octopus && popd
