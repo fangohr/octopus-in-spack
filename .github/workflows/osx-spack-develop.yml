@@ -1,4 +1,4 @@
-name: osx-spack-v0.16.3
+name: osx-spack-develop
 
 on:
   push:
@@ -18,10 +18,6 @@ jobs:
 
       - name: copy examples for smoke test into place
         run: |
-          pwd
-          ls -l
-          echo $HOME
-          env
           ls -l examples/
           ls -l examples/recipe
           ls -l examples/h-atom
@@ -37,7 +33,8 @@ jobs:
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
-          cd s && git checkout v0.16.3 && cd ..
+          cd s && git checkout develop && cd ..
+          git branch
           ./s/bin/spack --version
       - name: show spack the gcc-10 compiler
         env:
