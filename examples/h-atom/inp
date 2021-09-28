@@ -3,3 +3,5 @@ CalculationMode = gs
 %Coordinates
  'H' | 0 | 0 | 0
 %
+
+Debug = trace

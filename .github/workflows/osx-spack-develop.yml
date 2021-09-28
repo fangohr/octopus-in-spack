@@ -15,13 +15,9 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-
-      - name: copy examples for smoke test into place
+      - name: Dump environment
         run: |
-          ls -l examples/
-          ls -l examples/recipe
-          ls -l examples/h-atom
-
+          env 
       - name: Install gcc from brew
         run: |
           ### it seems that gcc-10 is installed already on github workflows
@@ -64,9 +60,13 @@ jobs:
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
           # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
           source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
-      - name: run smoke tests
+
+      - name: run smoke test recipe
         run: |
-          source s/share/spack/setup-env.sh && spack load octopus && pushd examples/h-atom && octopus && popd
-          source s/share/spack/setup-env.sh && spack load octopus && pushd examples/recipe && octopus && popd
-          
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/h-atom && octopus
+          find .
+      - name: run smoke test h-atom
+        run: |
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus 
+          find .
 

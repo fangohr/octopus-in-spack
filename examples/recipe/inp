@@ -1,1 +1,3 @@
 CalculationMode = recipe
+
+Debug = trace
