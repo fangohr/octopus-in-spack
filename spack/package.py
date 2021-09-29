@@ -75,8 +75,8 @@ class Octopus(Package, CudaPackage):
     depends_on('libxc@2:3.99', when='@6:7.99')
     depends_on('libxc@2:4.99', when='@8:9.99')
     # For OSX, need libxc 4.3
-    depends_on('libxc@4.3:4.99:', when='@10: platform=darwin')
-    depends_on('libxc@4.3:4.99:', when='@develop platform=darwin' )
+    depends_on('libxc@4.3:4.99', when='@10: platform=darwin')
+    depends_on('libxc@4.3:4.99', when='@develop platform=darwin' )
     # For linux, libxc 5 is fine
     depends_on('libxc@5.1.0:', when='@10: platform=linux')
     depends_on('libxc@5.1.0:', when='@develop platform=linux')
