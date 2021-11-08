@@ -63,10 +63,9 @@ jobs:
 
       - name: run smoke test recipe
         run: |
-          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/h-atom && octopus
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus 
           find .
       - name: run smoke test h-atom
         run: |
-          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus 
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/h-atom && octopus
           find .
-
