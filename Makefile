@@ -11,6 +11,10 @@ spack-v0.16.2:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.16.2 \
    -t octopus-spack-v0.16.2 .
 
+spack-v0.16.3:
+	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.16.3 \
+   -t octopus-spack-v0.16.3 .
+
 debian-11.1:
 	docker build -f Dockerfile-debian -t octopus .
 

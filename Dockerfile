@@ -28,6 +28,7 @@ RUN        apt-get install -y --no-install-recommends \
               coreutils \
               curl \
               environment-modules \
+	      file \
               gfortran \
               git \
               openssh-server \
@@ -54,8 +55,12 @@ RUN $SPACK --version
 
 # build octopus
 COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
+# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
+
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
+
 
 CMD /bin/bash -l
 
