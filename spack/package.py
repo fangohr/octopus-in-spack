@@ -207,7 +207,7 @@ class Octopus(Package, CudaPackage):
             ])
 
         if '+python' in spec:
-            args.extend('--enable-python')
+            args.extend(['--enable-python'])
 
         # --with-etsf-io-prefix=
         # --with-sparskit=${prefix}/lib/libskit.a
