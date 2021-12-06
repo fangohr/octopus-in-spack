@@ -15,17 +15,17 @@ spack-v0.16.3:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.16.3 \
    -t octopus-spack-v0.16.3 .
 
-debian-11.1:
+debian-11.3:
 	docker build -f Dockerfile-debian -t octopus .
 
 debian-develop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
-.PHONY: octopus-spack-v0.17.0 octopus-spack run-spack debian-11.1 debian-develop
+.PHONY: octopus-spack-v0.17.0 octopus-spack run-spack debian-11.3 debian-develop
 
 
 
-dockerhub-update-11.1:
+dockerhub-update-11.3:
 	@echo "Run 'docker login'"
-	docker build -f Dockerfile-debian -t fangohr/octopus:11.1 .
-  @echo "Run 'docker push fangohr/octopus:11.1' "
+	docker build -f Dockerfile-debian -t fangohr/octopus:11.3 .
+  @echo "Run 'docker push fangohr/octopus:11.3' "
