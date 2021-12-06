@@ -62,6 +62,9 @@ class Octopus(Package, CudaPackage):
             description='Compile with nlopt')
     variant('debug', default=False,
             description='Compile with debug flags')
+    variant('etsf-io', default=False,
+            description='Compile with etsf-io')
+
 
     depends_on('autoconf', type='build')
     depends_on('automake', type='build')
@@ -77,6 +80,7 @@ class Octopus(Package, CudaPackage):
     depends_on('libxc@5.1.0:', when='@10:')
     depends_on('libxc@5.1.0:', when='@develop')
     depends_on('mpi')
+    depends_on('etsf-io', when='+etsf-io')
     depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
     depends_on('fftw-api@3:', when='@10:')
     depends_on('metis@5:', when='+metis')
@@ -96,7 +100,7 @@ class Octopus(Package, CudaPackage):
     depends_on('nlopt', when='+nlopt')
 
     # optional dependencies:
-    # TODO: etsf-io, sparskit,
+    # TODO: sparskit,
     # feast, libfm, pfft, isf, pnfft
 
     def install(self, spec, prefix):
@@ -210,6 +214,13 @@ class Octopus(Package, CudaPackage):
             args.extend(['--enable-python'])
 
         # --with-etsf-io-prefix=
+
+        if '+etsf-io' in spec:
+            args.extend([
+                '--with-etsf-io=%s' % spec['etsf-io'].prefix,
+            ])
+
+
         # --with-sparskit=${prefix}/lib/libskit.a
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
         # --with-berkeleygw-prefix=${prefix}
