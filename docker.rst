@@ -25,11 +25,11 @@ There are two steps required:
 How to compile and execute `OCTOPUS code <http://octopus-code.org>`__ in a Docker container
 -------------------------------------------------------------------------------------------
 
-We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 11.1
+We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 11.3
 and `Dockerfile-debian-develop <Dockerfile-debian-develop>`__ to compile the ``develop`` branch of the Octopus
 repository in a container.
 
-The following examples are for the 11.1 release version. (To build a container
+The following examples are for the 11.3 release version. (To build a container
 for the latest Octopus version from the ``develop`` branch, replace
 ``Dockerfile-debian`` with ``Dockerfile-debian-develop``.)
 
@@ -46,11 +46,11 @@ On Linux, you need to prefix all docker calls with ``sudo``::
 
 This will take some time to complete.
 
-Instead of building it yourself, for Octopus 11.1, you can also pull an image from Dockerhub using::
+Instead of building it yourself, for Octopus 11.3, you can also pull an image from Dockerhub using::
 
-  docker pull fangohr/octopus:11.1
+  docker pull fangohr/octopus:11.3
 
-and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:11.1``.
+and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:11.3``.
 
 
 Use the Docker image
@@ -92,15 +92,15 @@ Status
 
 Compile Octopus on Debian Linux:
 
-|debian-11.1| Debian Bullseye (11), Octopus release 11.1
+|debian-11.3| Debian Bullseye (11), Octopus release 11.3
 
 |debian-develop| Debian Bullseye (11), Octopus develop branch
 
-.. |spack-develop-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
+.. |spack-develop-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
-.. |spack-v0.16.2-oct-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml/badge.svg
+.. |spack-v0.16.2-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml
-.. |debian-11.1| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml/badge.svg
-  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.1.yml
+.. |debian-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml/badge.svg
+  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml
 .. |debian-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml

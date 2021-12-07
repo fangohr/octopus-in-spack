@@ -17,7 +17,7 @@ class Octopus(Package, CudaPackage):
     git      = "https://gitlab.com/octopus-code/octopus"
 
     
-
+    version('11.3', sha256='0c98417071b5e38ba6cbdd409adf917837c387a010e321c0a7f94d9bd9478930')
     version('11.1',  sha256='d943cc2419ca409dda7459b7622987029f2af89984d0d5f39a6b464c3fc266da')
 
     version('develop', branch='develop')
