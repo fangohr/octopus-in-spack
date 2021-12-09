@@ -58,9 +58,9 @@ At the moment, this is under development, and we need two lines:
 -  get spack: ``git clone https://github.com/fangohr/spack``
 -  check out the right branch::
 
-   cd spack
-   git checkout octopus-review-2021-08
-   cd ..
+    cd spack
+    git checkout octopus-review-2021-08
+    cd ..
 
 Then activate spack:
 
