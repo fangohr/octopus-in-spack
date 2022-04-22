@@ -112,6 +112,7 @@ class Octopus(Package, CudaPackage):
             'CC=%s' % spec['mpi'].mpicc,
             'FC=%s' % spec['mpi'].mpifc,
             '--enable-mpi',
+            '--enable-openmp',
         ])
         if '^fftw' in spec:
             args.extend([
