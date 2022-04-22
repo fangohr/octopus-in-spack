@@ -78,7 +78,8 @@ class Octopus(Package, CudaPackage):
     depends_on('libxc@5.1.0:', when='@develop')
     depends_on('mpi')
     depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
-    depends_on('fftw-api@3:', when='@10:')
+    depends_on('fftw-api@3:+mpi+openmp', when='@10:')
+    # old version:
     depends_on('py-numpy', when='+python')
     depends_on('py-mpi4py', when='+python')
     depends_on('metis@5:+int64', when='+metis')
