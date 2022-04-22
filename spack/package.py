@@ -80,6 +80,8 @@ class Octopus(Package, CudaPackage):
     depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
     depends_on('fftw-api@3:+mpi+openmp', when='@10:')
     # old version:
+    #   depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
+    #   depends_on('fftw-api@3:', when='@10:')
     depends_on('py-numpy', when='+python')
     depends_on('py-mpi4py', when='+python')
     depends_on('metis@5:+int64', when='+metis')
@@ -244,3 +246,16 @@ class Octopus(Package, CudaPackage):
         # short tests take forever...
         # make('check-short')
         make('install')
+
+
+
+
+
+# Debug flags from SO
+
+"""
+                args.extend([
+                    'FCFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds',
+                    'FFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds'])
+p
+"""
