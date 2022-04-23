@@ -43,7 +43,9 @@ RUN mkdir -p /opt/octopus-examples
 COPY examples /opt/octopus-examples
 
 # Instead of tests, run two short examples
-RUN cd /opt/octopus-examples/h-atom && octopus
+### h-atom needs updating for octopus > 11.3
+### RUN cd /opt/octopus-examples/h-atom && octopus
+RUN cd /opt/octopus-examples/he && octopus
 RUN cd /opt/octopus-examples/recipe && octopus
 
 # offer directory for mounting container
