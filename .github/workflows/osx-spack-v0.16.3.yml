@@ -1,4 +1,4 @@
-name: osx-spack-v0.16.3
+name: osx-spack-v0.17.2
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
-          cd s && git checkout v0.16.3 && cd ..
+          cd s && git checkout v0.17.2 && cd ..
           ./s/bin/spack --version
       - name: show spack the gcc-10 compiler
         env:
@@ -65,10 +65,10 @@ jobs:
           source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
       - name: run smoke test recipe
         run: |
-          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/h-atom && octopus
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus
           find .
-      - name: run smoke test h-atom
+      - name: run smoke test he
         run: |
-          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus 
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/he && octopus 
           find .
 
