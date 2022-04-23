@@ -49,7 +49,7 @@ Compile Octopus on Debian Linux (no spack)
 Compile Octopus on OSX with spack (WIP)
 ---------------------------------------
 
-|osx-spack-v0.16.3|
+|osx-spack-last-release|
 |osx-spack-develop|
 
 
@@ -116,5 +116,5 @@ To use Octopus after installation
 .. |osx-spack-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop/badge.svg?branch=osx
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-develop.yml
       
-.. |osx-spack-v0.16.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml/badge.svg?branch=osx
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-v0.16.3.yml
+.. |osx-spack-last-release| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-last-release.yml/badge.svg?branch=osx
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/osx-spack-last-release.yml
