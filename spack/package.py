@@ -78,11 +78,14 @@ class Octopus(Package, CudaPackage):
     depends_on('libxc@5.1.0:', when='@develop')
     depends_on('mpi')
     depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
-    depends_on('fftw-api@3:', when='@10:')
-    depends_on('metis@5:', when='+metis')
-    depends_on('parmetis', when='+parmetis')
+    depends_on('fftw-api@3:+mpi+openmp', when='@10:')
+    # old version:
+    #   depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
+    #   depends_on('fftw-api@3:', when='@10:')
     depends_on('py-numpy', when='+python')
     depends_on('py-mpi4py', when='+python')
+    depends_on('metis@5:+int64', when='+metis')
+    depends_on('parmetis+int64', when='+parmetis')
     depends_on('scalapack', when='+scalapack')
     depends_on('netcdf-fortran', when='+netcdf')
     depends_on('arpack-ng', when='+arpack')
@@ -112,6 +115,7 @@ class Octopus(Package, CudaPackage):
             'CC=%s' % spec['mpi'].mpicc,
             'FC=%s' % spec['mpi'].mpifc,
             '--enable-mpi',
+            '--enable-openmp',
         ])
         if '^fftw' in spec:
             args.extend([
@@ -242,3 +246,16 @@ class Octopus(Package, CudaPackage):
         # short tests take forever...
         # make('check-short')
         make('install')
+
+
+
+
+
+# Debug flags from SO
+
+"""
+                args.extend([
+                    'FCFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds',
+                    'FFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds'])
+p
+"""
