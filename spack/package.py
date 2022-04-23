@@ -248,6 +248,54 @@ class Octopus(Package, CudaPackage):
         make('install')
 
 
+    def test(self):
+        """Run these smoke tests when requested explicitly"""
+
+        # run "octopus +version"
+        spec = self.spec
+        exe = join_path(spec.prefix.bin, "octopus")
+        options = ["--version"]
+        purpose = "Check octopus can execute (--version)"
+        # Example output:
+        #
+        # spack-v0.17.2$ octopus --version
+        # octopus 11.3 (git commit )
+        expected = ["octopus "]
+
+        self.run_test(
+            exe,
+            options=options,
+            expected=expected,
+            status=[0],
+            installed=False,
+            purpose=purpose,
+            skip_missing=False,
+            work_dir=None
+        )
+
+
+        # # run standard problem 3 with  (about 30 seconds runtime)
+        # purpose = "Testing oommf.tcl standard problem 3"
+        # print(purpose)
+        # 
+        # oommf_examples = join_path(spec.prefix.usr.bin, "oommf/app/oxs/examples")
+        # task = join_path(oommf_examples, "stdprob3.mif")
+        # 
+        # options = [oommf_tcl_path, "boxsi", "+fg", task, "-exitondone", "1"]
+        # 
+        # expected = ['End "stdprob3.mif"', "Mesh geometry: 32 x 32 x 32 = 32 768 cells"]
+        # self.run_test(
+        #     exe,
+        #     options=options,
+        #     expected=expected,
+        #     status=[0],
+        #     installed=False,
+        #     purpose=purpose,
+        #     skip_missing=False,
+        #     work_dir=None,
+        #
+        #)
+
 
 
 
