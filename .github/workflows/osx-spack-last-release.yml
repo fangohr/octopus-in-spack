@@ -1,4 +1,7 @@
-name: osx-spack-v0.17.2
+name: osx-spack-last-release
+
+# building using the last Spack release (and the
+# preferred version of octopus)
 
 on:
   push:
