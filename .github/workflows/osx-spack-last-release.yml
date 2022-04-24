@@ -4,13 +4,13 @@ name: osx-spack-last-release
 # preferred version of octopus)
 
 on:
-  push:
-    branches:
-      - osx
+  # push:
+  #   branches:
+  #     - main
   pull_request:
     branches:
-      - osx
-
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
