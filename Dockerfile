@@ -60,6 +60,11 @@ COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
 
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
+# run spack smoke tests for octopus
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test run --alias testname octopus
+# display output from smoke tests
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test results -l oc testname
+
 
 
 CMD /bin/bash -l
