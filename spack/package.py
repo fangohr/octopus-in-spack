@@ -290,24 +290,21 @@ class Octopus(Package, CudaPackage):
         mkdir("example-recipe")
         copy(join_path(os.path.dirname(__file__), "recipe.inp"), join_path("example-recipe", "inp"))
 
-        expected = ["octopus "]
+        expected = ["Running octopus", "Running octopus", "Info: Starting calculation mode.",
+                    "Info: Writing states.", "Calculation ended on"]
+
         options = []
         purpose = "Run tiny calculation for He"
-        with working_dir("example-he"):
-            copy(join_path(os.path.dirname(__file__), "he.inp"), "inp")
+        with working_dir("example-he", create=True):
             print("Current working directory (in example-he)")
-            print(os.getcwd())
-
-            self.run_test(
-                exe,
-                options=options,
-                expected=expected,
-                status=[0],
-                installed=False,
-                purpose=purpose,
-                skip_missing=False)
-                # work_dir=None
-                #)
+            copy(join_path(os.path.dirname(__file__), "he.inp"), "inp")
+            self.run_test(exe,
+                           options=options,
+                           expected=expected,
+                           status=[0],
+                           installed=False,
+                           purpose=purpose,
+                           skip_missing=False)
 
 
         # # run standard problem 3 with  (about 30 seconds runtime)
