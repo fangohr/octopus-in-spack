@@ -54,7 +54,7 @@ RUN cd spack && git checkout $SPACK_VERSION
 RUN $SPACK --version
 
 # copy our package.py into the spack tree (and also example files)
-COPY spack/* $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
+COPY spack/* $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/
 # RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
 # RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
 
