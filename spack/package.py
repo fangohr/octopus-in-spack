@@ -3,6 +3,8 @@
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
 
+import os
+
 import llnl.util.tty as tty
 
 from spack import *
@@ -251,7 +253,9 @@ class Octopus(Package, CudaPackage):
     def test(self):
         """Run these smoke tests when requested explicitly"""
 
-        # run "octopus +version"
+        #
+        ### run "octopus +version"
+        #
         spec = self.spec
         exe = join_path(spec.prefix.bin, "octopus")
         options = ["--version"]
@@ -272,6 +276,38 @@ class Octopus(Package, CudaPackage):
             skip_missing=False,
             work_dir=None
         )
+
+        #
+        ### run recipe
+        #
+
+        print("Current working directory")
+        print(os.getcwd())
+        print("Config file")
+        print(__file__)
+        print(os.path.dirname(__file__))
+        print(join_path(os.path.dirname(__file__), "recipe.inp"))
+        mkdir("example-recipe")
+        copy(join_path(os.path.dirname(__file__), "recipe.inp"), join_path("example-recipe", "inp"))
+
+        expected = ["octopus "]
+        options = []
+        purpose = "Run tiny calculation for He"
+        with working_dir("example-he"):
+            copy(join_path(os.path.dirname(__file__), "he.inp"), "inp")
+            print("Current working directory (in example-he)")
+            print(os.getcwd())
+
+            self.run_test(
+                exe,
+                options=options,
+                expected=expected,
+                status=[0],
+                installed=False,
+                purpose=purpose,
+                skip_missing=False)
+                # work_dir=None
+                #)
 
 
         # # run standard problem 3 with  (about 30 seconds runtime)
