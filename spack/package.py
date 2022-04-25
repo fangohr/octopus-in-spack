@@ -251,13 +251,15 @@ class Octopus(Package, CudaPackage):
 
 
     def test(self):
-        """Run these smoke tests when requested explicitly"""
+        self.smoke_tests()
 
+    @run_after("install")
+    def smoke_tests(self):
+        """Run these smoke tests when requested explicitly"""
         #
-        ### run "octopus +version"
+        ### run "octopus --version"
         #
-        spec = self.spec
-        exe = join_path(spec.prefix.bin, "octopus")
+        exe = join_path(self.spec.prefix.bin, "octopus")
         options = ["--version"]
         purpose = "Check octopus can execute (--version)"
         # Example output:
@@ -273,26 +275,41 @@ class Octopus(Package, CudaPackage):
             status=[0],
             installed=False,
             purpose=purpose,
-            skip_missing=False,
-            work_dir=None
-        )
+            skip_missing=False)
+
+        # Octopus expects a file with name `inp` in the current working
+        # directory to read configuration information for a simulation run from
+        # that file. We copy the relevant configuration file in a dedicated
+        # subfolder for each test.
 
         #
-        ### run recipe
+        ### run recipe example
         #
 
-        print("Current working directory")
-        print(os.getcwd())
-        print("Config file")
-        print(__file__)
-        print(os.path.dirname(__file__))
-        print(join_path(os.path.dirname(__file__), "recipe.inp"))
-        mkdir("example-recipe")
-        copy(join_path(os.path.dirname(__file__), "recipe.inp"), join_path("example-recipe", "inp"))
+        expected = ["Running octopus", "CalculationMode = recipe",
+                    "DISCLAIMER: The authors do not guarantee that the implementation",
+                    'recipe leads to an edible dish, for it is clearly "system-dependent".',
+                    "Calculation ended on"]
+        options = []
+        purpose = "Run Octopus recipe example"
+        with working_dir("example-recipe", create=True):
+            print("Current working directory (in example-recipe)")
+            copy(join_path(os.path.dirname(__file__), "recipe.inp"), "inp")
+            self.run_test(exe,
+                           options=options,
+                           expected=expected,
+                           status=[0],
+                           installed=False,
+                           purpose=purpose,
+                           skip_missing=False)
 
-        expected = ["Running octopus", "Running octopus", "Info: Starting calculation mode.",
+        #
+        ### run He example
+        #
+        expected = ["Running octopus", "Info: Starting calculation mode.",
+                    "CalculationMode = gs",
+                    '''Species "helium" is a user-defined potential.''',
                     "Info: Writing states.", "Calculation ended on"]
-
         options = []
         purpose = "Run tiny calculation for He"
         with working_dir("example-he", create=True):
@@ -305,30 +322,6 @@ class Octopus(Package, CudaPackage):
                            installed=False,
                            purpose=purpose,
                            skip_missing=False)
-
-
-        # # run standard problem 3 with  (about 30 seconds runtime)
-        # purpose = "Testing oommf.tcl standard problem 3"
-        # print(purpose)
-        # 
-        # oommf_examples = join_path(spec.prefix.usr.bin, "oommf/app/oxs/examples")
-        # task = join_path(oommf_examples, "stdprob3.mif")
-        # 
-        # options = [oommf_tcl_path, "boxsi", "+fg", task, "-exitondone", "1"]
-        # 
-        # expected = ['End "stdprob3.mif"', "Mesh geometry: 32 x 32 x 32 = 32 768 cells"]
-        # self.run_test(
-        #     exe,
-        #     options=options,
-        #     expected=expected,
-        #     status=[0],
-        #     installed=False,
-        #     purpose=purpose,
-        #     skip_missing=False,
-        #     work_dir=None,
-        #
-        #)
-
 
 
 
