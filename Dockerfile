@@ -16,19 +16,19 @@ ENV SPACK_ROOT=/home/user/spack \
 	  FORCE_UNSAFE_CONFIGURE=1
 
 RUN apt-get -y update
-# Convenience tools
+# Convenience tools, if desired for debugging etc
 # RUN apt-get -y install wget time nano vim emacs git
 
 # From https://github.com/ax3l/dockerfiles/blob/master/spack/base/Dockerfile:
 # install minimal spack dependencies
-RUN        apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends \
               autoconf \
               build-essential \
               ca-certificates \
               coreutils \
               curl \
               environment-modules \
-	      file \
+	            file \
               gfortran \
               git \
               openssh-server \
@@ -53,14 +53,20 @@ RUN cd spack && git checkout $SPACK_VERSION
 # # show which version we use
 RUN $SPACK --version
 
-# build octopus
-COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
-# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf
-# RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf
+# copy our package.py into the spack tree (and also example files)
+COPY spack/* $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/
 
+# display specs of upcoming spack installation
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
+
+# run the spack installation
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
 
+# run spack smoke tests for octopus. We get an error if any of the fail.
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test run --alias testname octopus
+# display output from smoke tests (just for information)
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test results -l testname
 
+# Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
 
