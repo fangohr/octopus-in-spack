@@ -1,4 +1,4 @@
-# Copyright 2013-2021 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2022 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -21,9 +21,6 @@ class Octopus(Package, CudaPackage):
     version('11.4', sha256='73bb872bff8165ddd8efc5b891f767cb3fe575b5a4b518416c834450a4492da7')
     version('11.3', sha256='0c98417071b5e38ba6cbdd409adf917837c387a010e321c0a7f94d9bd9478930')
     version('11.1',  sha256='d943cc2419ca409dda7459b7622987029f2af89984d0d5f39a6b464c3fc266da')
-
-    version('develop', branch='develop')
-
     version('10.5',  sha256='deb92e3491b0c6ac5736960d075b44cab466f528b69715ed44968ecfe2953ec4')
     version('10.4',  sha256='4de9dc6f5815a45e43320e4abc7ef3e501e34bc327441376ea20ca1a992bdb72')
     version('10.3',  sha256='4633490e21593b51b60a8391b8aa0ed17fa52a3a0030630de123b67a41f88b33')
@@ -33,6 +30,8 @@ class Octopus(Package, CudaPackage):
     version('7.3',   sha256='ad843d49d4beeed63e8b9a2ca6bfb2f4c5a421f13a4f66dc7b02f6d6a5c4d742')
     version('6.0',   sha256='4a802ee86c1e06846aa7fa317bd2216c6170871632c9e03d020d7970a08a8198')
     version('5.0.1', sha256='3423049729e03f25512b1b315d9d62691cd0a6bd2722c7373a61d51bfbee14e0')
+
+    version('develop', branch='develop')
 
     variant('scalapack', default=False,
             description='Compile with Scalapack')
@@ -50,7 +49,7 @@ class Octopus(Package, CudaPackage):
             description='Compile with PFFT')
     variant('poke', default=False,
             description='Compile with poke (not available in spack yet)')
-    variant('python', default=True,
+    variant('python', default=False,
             description='Activates Python support')
     variant('likwid', default=False,
             description='Compile with likwid')
@@ -81,9 +80,6 @@ class Octopus(Package, CudaPackage):
     depends_on('mpi')
     depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
     depends_on('fftw-api@3:+mpi+openmp', when='@10:')
-    # old version:
-    #   depends_on('fftw@3:+mpi+openmp', when='@8:9.99')
-    #   depends_on('fftw-api@3:', when='@10:')
     depends_on('py-numpy', when='+python')
     depends_on('py-mpi4py', when='+python')
     depends_on('metis@5:+int64', when='+metis')
@@ -230,12 +226,15 @@ class Octopus(Package, CudaPackage):
         if (spec.satisfies('%apple-clang') or
                 spec.satisfies('%clang') or
                 spec.satisfies('%gcc')):
-            # In case of GCC version 10, we will have errors because of argument mismatching.
-            # Need to provide a flag to turn this into a warning and build sucessfully
+            # In case of GCC version 10, we will have errors because of
+            # argument mismatching. Need to provide a flag to turn this into a
+            # warning and build sucessfully
             if (spec.satisfies('%gcc@10:')):
                 args.extend([
-                    'FCFLAGS=-O2 -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz',
-                    'FFLAGS=-O2 -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz'])
+                    'FCFLAGS=-O2 -ffree-line-length-none '
+                    '-fallow-argument-mismatch -fallow-invalid-boz',
+                    'FFLAGS=-O2 -ffree-line-length-none '
+                    '-fallow-argument-mismatch -fallow-invalid-boz'])
             else:
                 args.extend([
                     'FCFLAGS=-O2 -ffree-line-length-none',
@@ -249,7 +248,6 @@ class Octopus(Package, CudaPackage):
         # make('check-short')
         make('install')
 
-
     def test(self):
         self.smoke_tests()
 
@@ -257,7 +255,7 @@ class Octopus(Package, CudaPackage):
     def smoke_tests(self):
         """Run these smoke tests when requested explicitly"""
         #
-        ### run "octopus --version"
+        # run "octopus --version"
         #
         exe = join_path(self.spec.prefix.bin, "octopus")
         options = ["--version"]
@@ -283,12 +281,14 @@ class Octopus(Package, CudaPackage):
         # subfolder for each test.
 
         #
-        ### run recipe example
+        # run recipe example
         #
 
         expected = ["Running octopus", "CalculationMode = recipe",
-                    "DISCLAIMER: The authors do not guarantee that the implementation",
-                    'recipe leads to an edible dish, for it is clearly "system-dependent".',
+                    "DISCLAIMER: The authors do not "
+                    "guarantee that the implementation",
+                    'recipe leads to an edible dish, '
+                    'for it is clearly "system-dependent".',
                     "Calculation ended on"]
         options = []
         purpose = "Run Octopus recipe example"
@@ -296,15 +296,15 @@ class Octopus(Package, CudaPackage):
             print("Current working directory (in example-recipe)")
             copy(join_path(os.path.dirname(__file__), "recipe.inp"), "inp")
             self.run_test(exe,
-                           options=options,
-                           expected=expected,
-                           status=[0],
-                           installed=False,
-                           purpose=purpose,
-                           skip_missing=False)
+                          options=options,
+                          expected=expected,
+                          status=[0],
+                          installed=False,
+                          purpose=purpose,
+                          skip_missing=False)
 
         #
-        ### run He example
+        # run He example
         #
         expected = ["Running octopus", "Info: Starting calculation mode.",
                     "CalculationMode = gs",
@@ -316,20 +316,9 @@ class Octopus(Package, CudaPackage):
             print("Current working directory (in example-he)")
             copy(join_path(os.path.dirname(__file__), "he.inp"), "inp")
             self.run_test(exe,
-                           options=options,
-                           expected=expected,
-                           status=[0],
-                           installed=False,
-                           purpose=purpose,
-                           skip_missing=False)
-
-
-
-# Debug flags from SO
-
-"""
-                args.extend([
-                    'FCFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds',
-                    'FFLAGS=-O2 -g -fbacktrace -march=native -ffree-line-length-none -fallow-argument-mismatch -fallow-invalid-boz -fcheck=bounds'])
-p
-"""
+                          options=options,
+                          expected=expected,
+                          status=[0],
+                          installed=False,
+                          purpose=purpose,
+                          skip_missing=False)
