@@ -95,7 +95,7 @@ To use Octopus after installation
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
-.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
+.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
 
 .. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
