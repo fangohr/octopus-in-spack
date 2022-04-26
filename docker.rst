@@ -92,15 +92,11 @@ Status
 
 Compile Octopus on Debian Linux:
 
-|debian-11.3| Debian Bullseye (11), Octopus release 11.3
+|debian-octopusstable| Debian Bullseye (11), Octopus release 11.3
 
-|debian-develop| Debian Bullseye (11), Octopus develop branch
+|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
 
-.. |spack-develop-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
-  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
-.. |spack-v0.16.2-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml/badge.svg
-  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.16.2.yml
-.. |debian-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml/badge.svg
-  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml
-.. |debian-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
+.. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
+  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
+.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml

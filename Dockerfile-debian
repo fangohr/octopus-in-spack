@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-# install Octopus 11.3 on Debian
+# install Octopus 11.4 on Debian
 
 # Convenience tools (up to emacs)
 # Libraries that octopus needs (up to procps)
@@ -11,9 +11,9 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
-RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.3/octopus-11.3.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
+RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=11.4/octopus-11.4.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
 
-WORKDIR /opt/octopus-11.3
+WORKDIR /opt/octopus-11.4
 RUN autoreconf -i
 RUN ./configure
 

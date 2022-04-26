@@ -15,13 +15,13 @@ spack-v0.17.2:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.17.2 \
    -t octopus-spack-v0.17.2 .
 
-debian-11.3:
+debian-octopusstable:
 	docker build -f Dockerfile-debian -t octopus .
 
-debian-develop:
+debian-octopusdevelop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
-.PHONY: octopus-spack-v0.17.0 octopus-spack run-spack debian-11.3 debian-develop spack-v0.17.2
+.PHONY: octopus-spack-v0.17.0 octopus-spack run-spack debian-octopusstable debian-octopusdevelop debian-develop spack-v0.17.2
 
 
 

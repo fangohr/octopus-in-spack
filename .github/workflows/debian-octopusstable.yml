@@ -1,4 +1,4 @@
-name: debian-11.3
+name: debian-octopusstable
 
 on:
   push:
@@ -14,6 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build Octopus 11.3 on Debian in Docker
-      run: make debian-11.3
+    - name: Build Octopus release on Debian in Docker
+      run: make debian-octopusstable
       

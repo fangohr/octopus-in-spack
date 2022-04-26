@@ -1,4 +1,4 @@
-name: debian-develop
+name: debian-octopusdevelop
 
 on:
   push:
@@ -15,5 +15,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build Octopus develop on Debian in Docker
-      run: make debian-develop
+      run: make debian-octopusdevelop
       
