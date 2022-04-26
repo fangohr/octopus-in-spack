@@ -23,12 +23,12 @@ Status
 Compile Octopus on Linux with Spack. Spack's preferred option is 11.3 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
-|spack-v0.17.0-oct-11.3| Spack release 0.17.0, preferred version of Octopus
+|spack-v0.17.0-octopus-stable| Spack release 0.17.0, preferred version of Octopus
 
-|spack-v0.17.2-oct-11.3| Spack release 0.17.2, preferred version of Octopus
+|spack-v0.17.2-octopus-stable| Spack release 0.17.2, preferred version of Octopus
 
 
-|spack-develop-oct-11.3| Spack develop version, preferred version of Octopus. 
+|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus. 
 The spack `develop` branch is relatively unstable regarding successful building 
 of Octopus. We have a 
 `separate spack-develop <https://github.com/fangohr/octopus-in-spack/tree/spack-develop>`__ 
@@ -37,9 +37,9 @@ it), and show the result with this badge here for information.
 
 Compile Octopus on Debian Linux:
 
-|debian-11.3| Debian Bullseye (11), Octopus release 11.3
+|debian-octopusstable| Debian Bullseye (11), Octopus release 11.3
 
-|debian-develop| Debian Bullseye (11), Octopus develop branch
+|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
 
 Octopus in Container
 ====================
@@ -88,15 +88,15 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``)
 
-.. |spack-v0.17.0-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.0.yml/badge.svg
+.. |spack-v0.17.0-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.0.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.0.yml
-.. |spack-v0.17.2-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml/badge.svg
+.. |spack-v0.17.2-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml
 
-.. |debian-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-11.3.yml
-.. |debian-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
+.. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
+.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
 
-.. |spack-develop-oct-11.3| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
+.. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
