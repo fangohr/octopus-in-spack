@@ -18,6 +18,8 @@ class Octopus(Package, CudaPackage):
     url      = "http://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
     git      = "https://gitlab.com/octopus-code/octopus"
 
+    maintainers = ['fangohr']
+
     version('11.4', sha256='73bb872bff8165ddd8efc5b891f767cb3fe575b5a4b518416c834450a4492da7')
     version('11.3', sha256='0c98417071b5e38ba6cbdd409adf917837c387a010e321c0a7f94d9bd9478930')
     version('11.1',  sha256='d943cc2419ca409dda7459b7622987029f2af89984d0d5f39a6b464c3fc266da')
@@ -47,8 +49,9 @@ class Octopus(Package, CudaPackage):
             description='Compile with CGAL library support')
     variant('pfft', default=False,
             description='Compile with PFFT')
-    variant('poke', default=False,
-            description='Compile with poke (not available in spack yet)')
+    # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
+    # variant('poke', default=False,
+    #         description='Compile with poke (not available in spack yet)')
     variant('python', default=False,
             description='Activates Python support')
     variant('likwid', default=False,
@@ -89,7 +92,6 @@ class Octopus(Package, CudaPackage):
     depends_on('arpack-ng', when='+arpack')
     depends_on('cgal', when='+cgal')
     depends_on('pfft', when='+pfft')
-    depends_on('poke', when='+poke')
     depends_on('likwid', when='+likwid')
     depends_on('libvdwxc', when='+libvdwxc')
     depends_on('libyaml', when='+libyaml')
@@ -98,7 +100,7 @@ class Octopus(Package, CudaPackage):
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
-    # feast, libfm, pfft, isf, pnfft
+    # feast, libfm, pfft, isf, pnfft, poke
 
     def install(self, spec, prefix):
         lapack = spec['lapack'].libs
@@ -178,10 +180,10 @@ class Octopus(Package, CudaPackage):
                 '--with-pfft-prefix=%s' % spec['pfft'].prefix,
             ])
 
-        if '+poke' in spec:
-            args.extend([
-                '--with-poke-prefix=%s' % spec['poke'].prefix,
-            ])
+        # if '+poke' in spec:
+        #     args.extend([
+        #         '--with-poke-prefix=%s' % spec['poke'].prefix,
+        #     ])
 
         if '+libvdwxc' in spec:
             args.extend([
