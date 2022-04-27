@@ -20,7 +20,7 @@ Status
 ------
 
 
-Compile Octopus on Linux with Spack. Spack's preferred option is 11.3 at the
+Compile Octopus on Linux with Spack. Spack's preferred option is 11.4 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-v0.17.0-octopus-stable| Spack release 0.17.0, preferred version of Octopus
@@ -37,7 +37,7 @@ it), and show the result with this badge here for information.
 
 Compile Octopus on Debian Linux:
 
-|debian-octopusstable| Debian Bullseye (11), Octopus release 11.3
+|debian-octopusstable| Debian Bullseye (11), Last octopus release (11.4)
 
 |debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
 
@@ -59,7 +59,7 @@ At the moment, this is under development, and we need two lines:
 -  check out the right branch::
 
     cd spack
-    git checkout octopus-review-2021-08
+    git checkout octopus-update-to-11.4-and-add-tests
     cd ..
 
 Then activate spack:
@@ -71,9 +71,14 @@ want to include netcdf support:
 
 -  ``spack install octopus +netcdf``
 
-Ideally, there are no errors.
+Ideally, there are no errors. This should install Octopus 11.4
 
-This should install Octopus 11.3
+There are further *variants* you can install. For example:
+
+- ``spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt``
+
+To see an overview of available variants, use ``spack show octopus``.
+
 
 To use Octopus after installation
 ---------------------------------
