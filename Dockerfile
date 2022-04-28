@@ -55,6 +55,9 @@ RUN $SPACK --version
 
 # copy our package.py into the spack tree (and also example files)
 COPY spack/* $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/
+COPY spack/test/ $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
+RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
+RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
 
 # display specs of upcoming spack installation
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
