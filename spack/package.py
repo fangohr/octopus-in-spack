@@ -250,12 +250,21 @@ class Octopus(Package, CudaPackage):
         # make('check-short')
         make('install')
 
-    def test(self):
+    @run_after('install')
+    @on_package_attributes(run_tests=True)
+    def smoke_tests_after_install(self):
+        """Function stub to run tests after install if desired
+        (for example through `spack install --test=root octopus`)
+        """
         self.smoke_tests()
 
-    @run_after("install")
+    def test(self):
+        """Entry point for smoke tests run through `spack test run octopus`.
+        """
+        self.smoke_tests()
+
     def smoke_tests(self):
-        """Run these smoke tests when requested explicitly"""
+        """Actual smoke tests for Octopus."""
         #
         # run "octopus --version"
         #
@@ -296,7 +305,7 @@ class Octopus(Package, CudaPackage):
         purpose = "Run Octopus recipe example"
         with working_dir("example-recipe", create=True):
             print("Current working directory (in example-recipe)")
-            copy(join_path(os.path.dirname(__file__), "recipe.inp"), "inp")
+            copy(join_path(os.path.dirname(__file__), "test", "recipe.inp"), "inp")
             self.run_test(exe,
                           options=options,
                           expected=expected,
@@ -316,7 +325,7 @@ class Octopus(Package, CudaPackage):
         purpose = "Run tiny calculation for He"
         with working_dir("example-he", create=True):
             print("Current working directory (in example-he)")
-            copy(join_path(os.path.dirname(__file__), "he.inp"), "inp")
+            copy(join_path(os.path.dirname(__file__), "test", "he.inp"), "inp")
             self.run_test(exe,
                           options=options,
                           expected=expected,
@@ -324,3 +333,5 @@ class Octopus(Package, CudaPackage):
                           installed=False,
                           purpose=purpose,
                           skip_missing=False)
+
+        # raise NotImplementedError("test")
