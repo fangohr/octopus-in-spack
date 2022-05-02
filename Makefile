@@ -29,3 +29,9 @@ dockerhub-update-11.3:
 	@echo "Run 'docker login'"
 	docker build -f Dockerfile-debian -t fangohr/octopus:11.3 .
   @echo "Run 'docker push fangohr/octopus:11.3' "
+
+dockerhub-update-11.4:
+	@echo "Run 'docker login'"
+	docker build -f Dockerfile-debian -t fangohr/octopus:11.4 .
+	# docker build -f Dockerfile --build-arg SPACK_VERSION=v0.17.2 -t fangohr/octopus:11.4 .
+  @echo "Run 'docker push fangohr/octopus:11.4' "
