@@ -25,11 +25,11 @@ There are two steps required:
 How to compile and execute `OCTOPUS code <http://octopus-code.org>`__ in a Docker container
 -------------------------------------------------------------------------------------------
 
-We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 11.3
+We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 11.4
 and `Dockerfile-debian-develop <Dockerfile-debian-develop>`__ to compile the ``develop`` branch of the Octopus
 repository in a container.
 
-The following examples are for the 11.3 release version. (To build a container
+The following examples are for the 11.4 release version. (To build a container
 for the latest Octopus version from the ``develop`` branch, replace
 ``Dockerfile-debian`` with ``Dockerfile-debian-develop``.)
 
@@ -48,9 +48,9 @@ This will take some time to complete.
 
 Instead of building it yourself, for Octopus 11.3, you can also pull an image from Dockerhub using::
 
-  docker pull fangohr/octopus:11.3
+  docker pull fangohr/octopus:11.4
 
-and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:11.3``.
+and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:11.4``.
 
 
 Use the Docker image
@@ -92,11 +92,11 @@ Status
 
 Compile Octopus on Debian Linux:
 
-|debian-octopusstable| Debian Bullseye (11), Octopus release 11.3
+|debian-octopusstable| Debian Bullseye (11), last Octopus release
 
 |debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
-.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml/badge.svg
-  :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
+.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
