@@ -46,7 +46,10 @@ On Linux, you need to prefix all docker calls with ``sudo``::
 
 This will take some time to complete.
 
-Instead of building it yourself, for Octopus 11.3, you can also pull an image from Dockerhub using::
+Download Docker image from Dockerhub
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Instead of building it yourself, you can also pull an image from Dockerhub (`available versions <https://hub.docker.com/r/fangohr/octopus/tags>`__) using::
 
   docker pull fangohr/octopus:11.4
 
@@ -60,7 +63,6 @@ To use the Docker image::
 
   docker run --rm -ti -v $PWD:/io octimage octopus
   
-
 Meaning of the switches:
 
 - ``--rm`` remove docker container after it has been carried out (good practice to reduce disk usage).
@@ -84,7 +86,6 @@ Typical workflow with octopus in container
 If you want to work interactively in the container, replace the name of the executable with ``bash``::
 
   docker run --rm -ti -v $PWD:/io octimage octopus
-
 
 
 Status
