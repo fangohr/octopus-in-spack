@@ -55,16 +55,8 @@ Compilation of Octopus using Spack
 
 At the moment, this is under development, and we need two lines:
 
--  get spack: ``git clone https://github.com/fangohr/spack``
--  check out the right branch::
-
-    cd spack
-    git checkout octopus-review-2021-08
-    cd ..
-
-Then activate spack:
-
--  ``source spack/share/spack/setup-env.sh``
+-  get spack: ``git clone https://github.com/spack/spack``
+-  activate spack: ``source spack/share/spack/setup-env.sh``
 
 Then compile octopus (this could take some time). For this example, we
 want to include netcdf support:
@@ -73,7 +65,7 @@ want to include netcdf support:
 
 Ideally, there are no errors.
 
-This should install Octopus 11.3
+This should install the last Octopus release available in spack. (Use ``spack info octopus`` to see available versions.)
 
 To use Octopus after installation
 ---------------------------------
@@ -86,7 +78,7 @@ To use Octopus after installation
 
 -  ``spack load octopus``
 
-3. Use octopus (it should be in the ``$PATH``)
+3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
 .. |spack-v0.17.0-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.0.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.0.yml
