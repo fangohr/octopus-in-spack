@@ -18,7 +18,7 @@ class Octopus(Package, CudaPackage):
     url      = "http://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
     git      = "https://gitlab.com/octopus-code/octopus"
 
-    maintainers = ['fangohr']
+    maintainers = ['fangohr', 'RemiLacroix-IDRIS']
 
     version('11.4', sha256='73bb872bff8165ddd8efc5b891f767cb3fe575b5a4b518416c834450a4492da7')
     version('11.3', sha256='0c98417071b5e38ba6cbdd409adf917837c387a010e321c0a7f94d9bd9478930')
@@ -289,6 +289,11 @@ class Octopus(Package, CudaPackage):
         # directory to read configuration information for a simulation run from
         # that file. We copy the relevant configuration file in a dedicated
         # subfolder for each test.
+        #
+        # As we like to be able to run these tests also with the
+        # `spack install --test=root` command, we cannot rely on
+        # self.test_suite.current_test_data_dir, and need to copy the test
+        # input files manually (see below).
 
         #
         # run recipe example
@@ -332,5 +337,3 @@ class Octopus(Package, CudaPackage):
                           installed=False,
                           purpose=purpose,
                           skip_missing=False)
-
-        # raise NotImplementedError("test")
