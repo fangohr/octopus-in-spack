@@ -7,9 +7,9 @@ run-spack:
 	docker run --rm -ti -v $PWD:/io octopus-spack 
 
 # use particular versions of spack
-spack-v0.17.0:
-	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.17.0 \
-   -t octopus-spack-v0.17.0 .
+spack-v0.18.0:
+	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.18.0 \
+   -t octopus-spack-v0.18.0 .
 
 spack-v0.17.2:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.17.2 \
@@ -21,7 +21,7 @@ debian-octopusstable:
 debian-octopusdevelop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
-.PHONY: octopus-spack-v0.17.0 octopus-spack run-spack debian-octopusstable debian-octopusdevelop debian-develop spack-v0.17.2
+.PHONY: octopus-spack-v0.18.0 octopus-spack run-spack debian-octopusstable debian-octopusdevelop debian-develop spack-v0.17.2
 
 
 
