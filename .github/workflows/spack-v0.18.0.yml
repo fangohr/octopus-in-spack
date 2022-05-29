@@ -1,4 +1,4 @@
-name: spack-v0.17.0
+name: spack-v0.18.0
 
 on:
   push:
@@ -16,5 +16,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: make spack-v0.17.0
+      run: make spack-v0.18.0
       
