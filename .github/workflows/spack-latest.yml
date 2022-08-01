@@ -1,4 +1,4 @@
-name: spack-v0.18.0
+name: spack-latest
 
 on:
   push:
