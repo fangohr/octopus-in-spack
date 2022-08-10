@@ -83,8 +83,8 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
-.. |spack-latest-octopus-stable| image:: https://github.com/iamashwin99/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
-   :target: https://github.com/iamashwin99/octopus-in-spack/actions/workflows/spack-latest.yml
+.. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
    
 .. |spack-v0.18.0-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml
