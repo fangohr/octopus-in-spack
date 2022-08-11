@@ -8,6 +8,13 @@ RUN echo "Building with spack version ${SPACK_VERSION}"
 
 # Any extra packages to be installed in the host
 ARG EXTRA_PACKAGES
+
+#Choose the make check variant
+#MAKE_CHECK=check-short - run make check with short tests
+#MAKE_CHECK=check-long - run make check with full tests
+#MAKE_CHECK=false - do not run make check
+ARG MAKE_CHECK=false
+
 RUN echo "Installing EXTRA_PACKAGES ${EXTRA_PACKAGES} on container host"
 
 # general environment for docker
@@ -63,7 +70,7 @@ RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack spec octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
 
 # run the spack installation
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt$(if [ "$MAKE_CHECK" = "check-short" ]; then echo "+check-short"; fi)$(if [ "$MAKE_CHECK" = "check-long" ]; then echo "+check-long"; fi)
 
 # run spack smoke tests for octopus. We get an error if any of the fail.
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test run --alias testname octopus

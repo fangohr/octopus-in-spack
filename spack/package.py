@@ -66,6 +66,10 @@ class Octopus(Package, CudaPackage):
             description='Compile with nlopt')
     variant('debug', default=False,
             description='Compile with debug flags')
+    variant('check-short', default=False,
+            description='Run make check-short post compilation')
+    variant('check-long', default=False,
+            description='Run make check-long post compilation')
 
     depends_on('autoconf', type='build')
     depends_on('automake', type='build')
@@ -244,9 +248,19 @@ class Octopus(Package, CudaPackage):
 
         autoreconf('-i')
         configure(*args)
+        print("debug: running make for octopus")
         make()
         # short tests take forever...
-        # make('check-short')
+        print("debug:finished make")
+        if '+check-short' in spec:
+            print("debug:Compilation finished. Running short tests now.")
+            make('check-short')
+            print("debug:Finished short tests.")
+
+        if '+check-long' in spec:
+            print("debug:Compilation finished. Running long tests now.")
+            make('check-long')
+            print("debug:Finished long tests.")
         make('install')
 
     @run_after('install')

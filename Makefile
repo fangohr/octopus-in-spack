@@ -11,6 +11,7 @@ spack-latest:
 	{ \
 	set -e ;\
 	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest \
+	--build-arg MAKE_CHECK=check-short \
     -t octopus-spack-latest .;\
    	docker save octopus-spack-latest > octopus-spack-latest.tar;\
 	gzip < octopus-spack-latest.tar > octopus-spack-latest.tar.gz  ;\
