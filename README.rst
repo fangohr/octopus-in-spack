@@ -23,6 +23,8 @@ Status
 Compile Octopus on Linux with Spack. Spack's preferred option is 11.4 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
+|spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; Compiled every Monday 2PM CET
+
 |spack-v0.18.0-octopus-stable| Spack release 0.18.0, preferred version of Octopus
 
 |spack-v0.17.2-octopus-stable| Spack release 0.17.2, preferred version of Octopus
@@ -81,6 +83,9 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
+.. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
+   
 .. |spack-v0.18.0-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml
 .. |spack-v0.17.2-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml/badge.svg
