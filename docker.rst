@@ -73,6 +73,8 @@ Meaning of the switches:
 - ``octimage`` is the name of the container image. The next 
 - ``octopus`` is the name of the executable to run in the container. 
 
+This is tested and known to work on OSX. On Linux, there is a permissions issue
+if (numerical) user id on the host system and in the container deviate.
 
 Typical workflow with octopus in container
 ------------------------------------------
