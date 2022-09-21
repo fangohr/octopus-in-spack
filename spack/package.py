@@ -8,7 +8,7 @@ import os
 import llnl.util.tty as tty
 
 from spack.package import *
-from llnl.util.filesystem as fs
+import llnl.util.filesystem as fs
 
 class Octopus(Package, CudaPackage):
     """A real-space finite-difference (time-dependent) density-functional
