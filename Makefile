@@ -28,10 +28,10 @@ debian-octopusdevelop:
 
 
 
-dockerhub-update-11.3:
+dockerhub-update-12.0:
 	@echo "Run 'docker login'"
-	docker build -f Dockerfile-debian -t fangohr/octopus:11.3 .
-  @echo "Run 'docker push fangohr/octopus:11.3' "
+	docker build -f Dockerfile-debian -t fangohr/octopus:12.0 .
+  @echo "Run 'docker push fangohr/octopus:12.0' "
 
 dockerhub-update-11.4:
 	@echo "Run 'docker login'"
