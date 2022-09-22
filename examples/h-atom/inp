@@ -3,3 +3,6 @@ CalculationMode = gs
 %Coordinates
  'H' | 0 | 0 | 0
 %
+
+Spacing = 0.43463
+Radius = 7.5589
