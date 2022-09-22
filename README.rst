@@ -14,30 +14,23 @@ Octopus-in-spack
 Support repository for getting the `OCTOPUS code <http://octopus-code.org>`__ package into
 `Spack <http://spack.readthedocs.io>`__.
 
-Also providing some hints on how to install Octopus with Spack.
+Mostly aimed for maintainers of the Octopus package in spack: to test changes to
+the `octopus/spack.py` file before request merges in spack upstream.
+
+There is a related effort to run some tests on the Octopus package in spack for older versions of spack at https://github.com/fangohr/spack-ci-octopus.
+
+We also provide some hints on how to install Octopus with Spack (see below).
 
 Status
 ------
-
 
 Compile Octopus on Linux with Spack. Spack's preferred option is 11.4 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; Compiled every Monday 2PM CET
 
+|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus.
 
-|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus. 
-
-Compile Octopus on Debian Linux:
-
-|debian-octopusstable| Debian Bullseye (11), Last octopus release (11.4)
-
-|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
-
-Octopus in Container
-====================
-
-Please see `here <docker.rst>`__.
 
 
 Octopus and Spack - Quick start
@@ -79,14 +72,33 @@ To use Octopus after installation
 
 3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
+
+Compile Octopus on Debian Linux (without spack)
+===============================================
+
+|debian-octopusstable| Debian Bullseye (11), Last octopus release (11.4)
+
+|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
+
+
+Octopus in Docker container
+===========================
+
+Please see `here <docker.rst>`__.
+
+
+
+
 .. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
+
+.. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
+
 .. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
 
-.. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
