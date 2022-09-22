@@ -24,13 +24,12 @@ We also provide some hints on how to install Octopus with Spack (see below).
 Status
 ------
 
-Compile Octopus on Linux with Spack. Spack's preferred option is 11.4 at the
+Compile Octopus on Linux with Spack. Spack's preferred version of Octopus is 11.4 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
-|spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; Compiled every Monday 2PM CET
+|spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; run every month
 
-|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus.
-
+|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus; run every week
 
 
 Octopus and Spack - Quick start
