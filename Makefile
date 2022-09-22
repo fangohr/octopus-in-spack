@@ -1,15 +1,14 @@
 
 # Install octopus via spack. Using most recent spack version
 spack-develop:
-	docker build -f Dockerfile -t octopus-spack --build-arg SPACK_VERSION=develop  .
+	docker build -f Dockerfile --build-arg SPACK_VERSION=develop -t octopus-spack  .
 
 run-spack:
 	docker run --rm -ti -v $PWD:/io octopus-spack 
 
 # use particular versions of spack
 spack-latest:
-	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest \
-	-t octopus-spack
+	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest -t octopus-spack .
 
 run-spack:
 	docker run --rm -ti -v $PWD:/io octopus-spack 
