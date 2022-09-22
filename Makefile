@@ -22,6 +22,10 @@ debian-octopusdevelop:
 
 .PHONY: spack-latest run-spack debian-octopusstable debian-octopusdevelop spack-develop
 
+diff:
+	@echo "Compare (diff) spack/package.py with current package.py from spack develop"
+	wget --output-document=spack/package-upstream.py https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/octopus/package.py
+	diff spack/package-upstream.py spack/package.py || true
 
 dockerhub-update-12.0:
 	@echo "Run 'docker login'"
