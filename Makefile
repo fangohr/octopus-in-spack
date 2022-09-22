@@ -9,14 +9,10 @@ run-spack:
 # use particular versions of spack
 spack-latest:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest \
-	-t octopus-spack-latest .
-spack-v0.18.0:
-	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.18.0 \
-   -t octopus-spack-v0.18.0 .
+	-t octopus-spack
 
-spack-v0.17.2:
-	docker build -f Dockerfile --build-arg SPACK_VERSION=v0.17.2 \
-   -t octopus-spack-v0.17.2 .
+run-spack:
+	docker run --rm -ti -v $PWD:/io octopus-spack 
 
 debian-octopusstable:
 	docker build -f Dockerfile-debian -t octopus .
@@ -24,8 +20,7 @@ debian-octopusstable:
 debian-octopusdevelop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
-.PHONY: octopus-spack-v0.18.0 octopus-spack run-spack debian-octopusstable debian-octopusdevelop debian-develop spack-v0.17.2
-
+.PHONY: spack-latest run-spack debian-octopusstable debian-octopusdevelop spack-develop
 
 
 dockerhub-update-12.0:

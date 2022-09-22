@@ -25,10 +25,6 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; Compiled every Monday 2PM CET
 
-|spack-v0.18.0-octopus-stable| Spack release 0.18.0, preferred version of Octopus
-
-|spack-v0.17.2-octopus-stable| Spack release 0.17.2, preferred version of Octopus
-
 
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus. 
 
@@ -85,11 +81,7 @@ To use Octopus after installation
 
 .. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
-   
-.. |spack-v0.18.0-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.18.0.yml
-.. |spack-v0.17.2-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-v0.17.2.yml
+
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
