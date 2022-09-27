@@ -70,6 +70,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test run --alias testname oc
 # display output from smoke tests (just for information)
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack test results -l testname
 
+# # show which octopus version we use (for convenience)
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && spack load octopus && octopus --version
+
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
 
