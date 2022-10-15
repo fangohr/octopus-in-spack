@@ -26,7 +26,8 @@ diff:
 	wget --output-document=spack/package-upstream.py https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/octopus/package.py
 	diff spack/package-upstream.py spack/package.py || true
 
-dockerhub-update-12.0:
+dockerhub-update-12.1:
+	docker build -f Dockerfile-debian -t fangohr/octopus:12.1 .
+	@echo "If the container has built successfully, do this to push to dockerhub:"
 	@echo "Run 'docker login'"
-	docker build -f Dockerfile-debian -t fangohr/octopus:12.0 .
-  @echo "Run 'docker push fangohr/octopus:12.0' "
+	@echo "Run 'docker push fangohr/octopus:12.1'"

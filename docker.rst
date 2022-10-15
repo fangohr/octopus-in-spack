@@ -25,11 +25,11 @@ There are two steps required:
 How to compile and execute `OCTOPUS code <http://octopus-code.org>`__ in a Docker container
 -------------------------------------------------------------------------------------------
 
-We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 12.0
+We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 12.1
 and `Dockerfile-debian-develop <Dockerfile-debian-develop>`__ to compile the ``develop`` branch of the Octopus
 repository in a container.
 
-The following examples are for the 12.0 release version. (To build a container
+The following examples are for the 12.1 release version. (To build a container
 for the latest Octopus version from the ``develop`` branch, replace
 ``Dockerfile-debian`` with ``Dockerfile-debian-develop``.)
 
@@ -51,9 +51,9 @@ Download Docker image from Dockerhub
 
 Instead of building it yourself, you can also pull an image from Dockerhub (`available versions <https://hub.docker.com/r/fangohr/octopus/tags>`__) using::
 
-  docker pull fangohr/octopus:12.0
+  docker pull fangohr/octopus:12.1
 
-and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:12.0``.
+and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:12.1``.
 
 
 Use the Docker image
