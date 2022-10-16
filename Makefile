@@ -19,6 +19,13 @@ debian-octopusstable:
 debian-octopusdevelop:
 	docker build -f Dockerfile-debian-develop -t octopus-develop .
 
+container-make-check:
+	docker build -f Dockerfile-debian-make-check -t octopus .
+
+container-make-check-short:
+	docker build -f Dockerfile-debian-make-check-short -t octopus .
+
+
 .PHONY: spack-latest run-spack debian-octopusstable debian-octopusdevelop spack-develop
 
 diff:
