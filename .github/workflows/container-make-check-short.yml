@@ -2,9 +2,7 @@ name: container-make-check-short
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
