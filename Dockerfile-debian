@@ -18,7 +18,7 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     libatlas-base-dev \
     libblas-dev \
     libboost-dev \
-    libcgal-dev
+    libcgal-dev \
     libelpa-dev \
     libetsf-io-dev \
     libfftw3-dev \
