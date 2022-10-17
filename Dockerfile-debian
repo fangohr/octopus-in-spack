@@ -38,6 +38,10 @@ RUN cd /opt/octopus-examples/recipe && octopus
 RUN cd /opt/octopus-examples/h-atom && octopus
 RUN cd /opt/octopus-examples/he && octopus
 
+# run one MPI-enable version
+RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np1 octopus
+RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np2 octopus
+
 # offer directory for mounting container
 RUN mkdir /io
 WORKDIR /io
