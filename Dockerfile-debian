@@ -7,25 +7,35 @@ FROM debian:bullseye
 # and optional dependencies (starting from libnetcdf-dev)
 RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     autoconf \
+    automake \
     build-essential \
+    conf \
+    fftw3-dev \
     g++ \
     gcc \
     gfortran \
+    git \
+    libatlas-base-dev \
     libblas-dev \
     libboost-dev \
+    libcgal-dev
+    libelpa-dev \
     libetsf-io-dev \
     libfftw3-dev \
     libgmp-dev \
     libgsl-dev \
     liblapack-dev \
+    liblapack-dev \
     libmpfr-dev \
     libnetcdff-dev \
     libnlopt-dev \
-    libscalapack-mpi-dev\ 
+    libopenmpi-dev \
+    libscalapack-mpi-dev \
     libspfft-dev \
-    libtool git \
+    libtool \
     libxc-dev \
     libyaml-dev \
+    pkg-config \
     procps \
     && rm -rf /var/lib/apt/lists/*
 
