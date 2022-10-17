@@ -35,6 +35,8 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     libtool \
     libxc-dev \
     libyaml-dev \
+    openscad \
+    openctm-tools \
     pkg-config \
     procps \
     && rm -rf /var/lib/apt/lists/*
