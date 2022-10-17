@@ -16,14 +16,14 @@ inside the container.
 
 There are two steps required:
 
-- (i) build the container image (only once)
+- Step 1: build the container image (only once) or download it (only once)
 
-- (ii) use the container to execute Octopus inside the container
+- Step 2: use the container to execute Octopus inside the container
 
 
 
-How to compile and execute `OCTOPUS code <http://octopus-code.org>`__ in a Docker container
--------------------------------------------------------------------------------------------
+Step 1: How obtain a Docker container image with Octopus
+--------------------------------------------------------
 
 We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 12.1
 and `Dockerfile-debian-develop <Dockerfile-debian-develop>`__ to compile the ``develop`` branch of the Octopus
@@ -33,8 +33,8 @@ The following examples are for the 12.1 release version. (To build a container
 for the latest Octopus version from the ``develop`` branch, replace
 ``Dockerfile-debian`` with ``Dockerfile-debian-develop``.)
 
-Build the Docker image
-~~~~~~~~~~~~~~~~~~~~~~
+Option A: Build the Docker image on your computer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 First clone this repository. Then run::
 
@@ -46,18 +46,30 @@ On Linux, you need to prefix all docker calls with ``sudo``::
 
 This will take some time to complete.
 
-Download Docker image from Dockerhub
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Option B: Download Docker image from Dockerhub
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Instead of building it yourself, you can also pull an image from Dockerhub (`available versions <https://hub.docker.com/r/fangohr/octopus/tags>`__) using::
+Instead of building it yourself, you can also pull an image from Dockerhub
+(`available versions <https://hub.docker.com/r/fangohr/octopus/tags>`__) using::
 
   docker pull fangohr/octopus:12.1
 
-and then move on to using this image in the next section, where you replace ``octimage`` with ``fangohr/octopus:12.1``.
+and then move on to using this image in the next section, where you replace
+``octimage`` with ``fangohr/octopus:12.1``.
+
+[You should only use this "Option B" if your processor is x86 type. This is true
+for most CPUs - with the exception of the 'new' Apple M1 computers (which have
+the ARM64 architecture). If you have a M1 Mac, you could also download and use
+this docker image *but* it will execute very slowly (because the x86 hardware
+needs to be emulated). You are much better advised to follow "Option A" to build
+the image yourself (on your M1 Mac), and then it will execute fast.
+
+This advice and this documentation will change when we have managed to upload an
+ARM64 image to Dockerhub.]
 
 
-Use the Docker image
-~~~~~~~~~~~~~~~~~~~~
+Step 2: Use the Docker image
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use the Docker image::
 
@@ -93,11 +105,11 @@ If you want to work interactively in the container, replace the name of the exec
 Status
 ------
 
-Compile Octopus on Debian Linux:
+Compile Octopus on Debian Linux (in Docker container):
 
-|debian-octopusstable| Debian Bullseye (11), last Octopus release
+|debian-octopusstable| Debian Bullseye (11), last Octopus release (`Dockerfile <Dockerfile-debian>`__)
 
-|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
+|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch (`Dockerfile <Dockerfile-debian-develop>`__)
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
