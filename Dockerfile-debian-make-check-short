@@ -2,12 +2,43 @@ FROM debian:bullseye
 
 # install Octopus 12.1 on Debian
 
+
 # Convenience tools (up to emacs)
-# Libraries that octopus needs (up to procps)
-# and optional dependencies (starting from libnetcdf-dev)
+# Libraries that octopus needs 
+# and optional dependencies (in alphabetical order)
 RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
-    autoconf libtool git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps \
-    libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev libgmp-dev likwid libmpfr-dev libboost-dev \
+    autoconf \
+    automake \
+    build-essential \
+    fftw3-dev \
+    g++ \
+    gcc \
+    gfortran \
+    git \
+    libatlas-base-dev \
+    libblas-dev \
+    libboost-dev \
+    libcgal-dev \
+    libelpa-dev \
+    libetsf-io-dev \
+    libfftw3-dev \
+    libgmp-dev \
+    libgsl-dev \
+    liblapack-dev \
+    liblapack-dev \
+    libmpfr-dev \
+    libnetcdff-dev \
+    libnlopt-dev \
+    libopenmpi-dev \
+    libscalapack-mpi-dev \
+    libspfft-dev \
+    libtool \
+    libxc-dev \
+    libyaml-dev \
+    openscad \
+    openctm-tools \
+    pkg-config \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
@@ -15,7 +46,7 @@ RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=12.1/octopus-12.1.t
 
 WORKDIR /opt/octopus-12.1
 RUN autoreconf -i
-RUN ./configure
+RUN ./configure --enable-mpi --enable-openmp
 
 # Which optional dependencies are missing?
 RUN cat config.log | grep WARN > octopus-configlog-warnings
@@ -40,6 +71,10 @@ COPY examples /opt/octopus-examples
 RUN cd /opt/octopus-examples/recipe && octopus
 RUN cd /opt/octopus-examples/h-atom && octopus
 RUN cd /opt/octopus-examples/he && octopus
+
+# run one MPI-enable version
+RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np 1 octopus
+RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np 2 octopus
 
 # offer directory for mounting container
 RUN mkdir /io
