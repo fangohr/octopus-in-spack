@@ -6,8 +6,27 @@ FROM debian:bullseye
 # Libraries that octopus needs (up to procps)
 # and optional dependencies (starting from libnetcdf-dev)
 RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
-    autoconf libtool git gcc g++ gfortran libxc-dev libblas-dev liblapack-dev libgsl-dev libfftw3-dev build-essential procps \
-    libnetcdff-dev libetsf-io-dev libspfft-dev libnlopt-dev libyaml-dev libgmp-dev libmpfr-dev libboost-dev libscalapack-mpi-dev\
+    autoconf \
+    build-essential \
+    g++ \
+    gcc \
+    gfortran \
+    libblas-dev \
+    libboost-dev \
+    libetsf-io-dev \
+    libfftw3-dev \
+    libgmp-dev \
+    libgsl-dev \
+    liblapack-dev \
+    libmpfr-dev \
+    libnetcdff-dev \
+    libnlopt-dev \
+    libscalapack-mpi-dev\ \
+    libspfft-dev \
+    libtool git \
+    libxc-dev \
+    libyaml-dev \
+    procps \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
