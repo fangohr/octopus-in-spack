@@ -105,11 +105,11 @@ If you want to work interactively in the container, replace the name of the exec
 Status
 ------
 
-Compile Octopus on Debian Linux:
+Compile Octopus on Debian Linux (in Docker container):
 
-|debian-octopusstable| Debian Bullseye (11), last Octopus release
+|debian-octopusstable| Debian Bullseye (11), last Octopus release (`Dockerfile <Dockerfile-debian>`__)
 
-|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
+|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch (`Dockerfile <Dockerfile-debian-develop>`__)
 
 .. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
