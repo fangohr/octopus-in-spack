@@ -3,8 +3,8 @@ FROM debian:bullseye
 # install Octopus 12.1 on Debian
 
 # Convenience tools (up to emacs)
-# Libraries that octopus needs (up to procps)
-# and optional dependencies (starting from libnetcdf-dev)
+# Libraries that octopus needs 
+# and optional dependencies (in alphabetical order)
 RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     autoconf \
     build-essential \
