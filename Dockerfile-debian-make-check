@@ -51,6 +51,10 @@ RUN ./configure --enable-mpi --enable-openmp
 RUN cat config.log | grep WARN > octopus-configlog-warnings
 RUN cat octopus-configlog-warnings
 
+# allow root execution of mpirun
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
 # all in one line to make image smaller
 RUN make 
 RUN make check
