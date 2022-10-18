@@ -68,9 +68,13 @@ RUN cd /opt/octopus-examples/recipe && octopus
 RUN cd /opt/octopus-examples/h-atom && octopus
 RUN cd /opt/octopus-examples/he && octopus
 
+# allow root execution of mpirun
+ENV OMPI_ALLOW_RUN_AS_ROOT=1
+ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+
 # run one MPI-enable version
-RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np 1 octopus
-RUN cd /opt/octopus-examples/he && mpirun --allow-run-as-root -np 2 octopus
+RUN cd /opt/octopus-examples/he && mpirun -np 1 octopus
+RUN cd /opt/octopus-examples/he && mpirun -np 2 octopus
 
 # offer directory for mounting container
 RUN mkdir /io
