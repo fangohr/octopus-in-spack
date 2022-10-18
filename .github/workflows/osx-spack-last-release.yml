@@ -36,7 +36,7 @@ jobs:
       - name: install spack
         run: |
           git clone https://github.com/spack/spack.git s
-          cd s && git checkout v0.17.2 && cd ..
+          # cd s && git checkout v0.17.2 && cd ..
           ./s/bin/spack --version
       - name: show spack the gcc-10 compiler
         env:
@@ -51,8 +51,8 @@ jobs:
       - name: copy package.py into place
         run: |
           pwd
-          ls -l
-          cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
+          # ls -l
+          # cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
       # - name: compile spack gcc-10.3.0 for better reproducibility
       #   run: |
       #     source s/share/spack/setup-env.sh && spack install gcc@10.3.0 %gcc@9.4.0
@@ -65,12 +65,16 @@ jobs:
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
           # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
-          source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
+          # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@10.3.0
+      - name: octopus --version
+        run: |
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && octopus --version
       - name: run smoke test recipe
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus
           find .
-      - name: run smoke test he
+      - name: run smoke test He
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/he && octopus 
           find .
