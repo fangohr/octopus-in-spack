@@ -72,9 +72,13 @@ RUN cd /opt/octopus-examples/he && octopus
 ENV OMPI_ALLOW_RUN_AS_ROOT=1
 ENV OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
 
+# set number of openMP threads to 1 by default
+ENV OMP_NUM_THREADS=1
+
 # run one MPI-enable version
 RUN cd /opt/octopus-examples/he && mpirun -np 1 octopus
 RUN cd /opt/octopus-examples/he && mpirun -np 2 octopus
+RUN cd /opt/octopus-examples/he && mpirun -np 4 octopus
 
 # offer directory for mounting container
 RUN mkdir /io
