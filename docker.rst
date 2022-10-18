@@ -1,6 +1,9 @@
 Use Octopus through Docker
 ==========================
 
+
+.. contents::
+
 Introduction
 ------------
 
@@ -69,7 +72,7 @@ ARM64 image to Dockerhub.]
 
 
 Step 2: Use the Docker image
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
 
 To use the Docker image::
 
@@ -88,18 +91,28 @@ Meaning of the switches:
 This is tested and known to work on OSX. On Linux, there is a permissions issue
 if (numerical) user id on the host system and in the container deviate.
 
-Typical workflow with octopus in container
+If you want to use multiple MPI processes (for example 4), change the above line to::
+
+    docker run --rm -ti -v $PWD:/io octimage mpirun -np 4 octopus
+
+
+Typical workflow with Octopus in container
 ------------------------------------------
 
 - edit your ``inp`` file and save it  (on the host computer)
-- call Octopus (in the container) by running ``docker run --rm -ti -v $PWD:/io
-  octimage octopus``. Only the ``octopus`` command will be carried out in the
+- call Octopus (in the container) by running ::
+
+      docker run --rm -ti -v $PWD:/io octimage octopus
+  
+  Only the ``octopus`` command will be carried out in the
   container. Any output files are written to the current directory on the host.
 - carry out data analysis on the host
 
-If you want to work interactively in the container, replace the name of the executable with ``bash``::
+If you want to work interactively *inside* the container, replace the name of the executable with ``bash``::
 
-  docker run --rm -ti -v $PWD:/io octimage octopus
+  docker run --rm -ti -v $PWD:/io octimage bash
+  
+You are then the root user in the container. Octopus was compiled in ``/opt/octopus*``. There are also some trivial examples in ``/opt/octopus-examples``.
 
 
 Status
