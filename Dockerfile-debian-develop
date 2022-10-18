@@ -82,7 +82,6 @@ ENV OMP_NUM_THREADS=1
 # run one MPI-enable version
 RUN cd /opt/octopus-examples/he && mpirun -np 1 octopus
 RUN cd /opt/octopus-examples/he && mpirun -np 2 octopus
-RUN cd /opt/octopus-examples/he && mpirun -np 4 octopus
 
 # offer directory for mounting container
 RUN mkdir /io
