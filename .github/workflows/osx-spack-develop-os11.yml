@@ -1,4 +1,4 @@
-name: osx-spack-develop
+name: osx-spack-develop-os11
 
 # building using the development version of Spack 
 
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-12
+    runs-on: macOS-11
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -27,20 +27,19 @@ jobs:
       - name: Install gcc from brew
         run: |
           ### it seems that gcc-10 is installed already on github workflows
-          #brew update
-          #brew install gcc@10 
+          # brew update
+          # brew install gcc@10 
           # brew upgrade
-          #gcc-10 --version
-          #gcc-9 --version
+          gcc-10 --version
+          gcc-9 --version
       - name: install spack, pick latest release
         run: |
           git clone https://github.com/spack/spack.git s
           # cd s && git checkout releases/latest && cd ..
           ./s/bin/spack --version
-      - name: show spack the gcc-11 compiler
-        # see available compilers https://github.com/actions/runner-images/issues/6384
+      - name: show spack the gcc-10 compiler
         env:
-          CC: gcc-11
+          CC: gcc-10
         run: |
           source s/share/spack/setup-env.sh && spack compiler find
       - name: show spack compilers

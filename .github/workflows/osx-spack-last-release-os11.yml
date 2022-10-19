@@ -14,7 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macOS-11
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
