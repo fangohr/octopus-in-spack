@@ -64,12 +64,12 @@ jobs:
       #   run: |
       #     source s/share/spack/setup-env.sh && spack compilers
       #     source s/share/spack/setup-env.sh && spack compiler info gcc
-      - name: compile octopus with gcc 10.4.0
+      - name: compile octopus with gcc 11.3.0
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
           # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
-          source s/share/spack/setup-env.sh && spack install octopus%gcc@10.4.0
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0
       - name: octopus --version
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && octopus --version
