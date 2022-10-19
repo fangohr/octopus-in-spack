@@ -1,4 +1,4 @@
-name: osx-spack-last-release
+name: osx-spack-last-release-os11
 
 # building using the last Spack release (and the
 # preferred version of octopus)
