@@ -1,4 +1,4 @@
-name: osx-spack-develop
+name: osx-spack-last-release
 
 # building using the development version of Spack 
 
