@@ -1,0 +1,83 @@
+name: osx-spack-develop
+
+# building using the development version of Spack 
+
+on:
+  push:
+    branches:
+      - osx
+  pull_request:
+    branches:
+      - osx
+
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Dump environment
+        run: |
+          env 
+      - name: copy examples for smoke test into place
+        run: |
+          pwd
+          ls -l
+      - name: Install gcc from brew
+        run: |
+          ### it seems that gcc-10 is installed already on github workflows
+          # brew update
+          # brew install gcc@10 
+          # brew upgrade
+          gcc-10 --version
+          gcc-9 --version
+      - name: install spack, pick latest release
+        run: |
+          git clone https://github.com/spack/spack.git s
+          # cd s && git checkout releases/latest && cd ..
+          ./s/bin/spack --version
+      - name: show spack the gcc-10 compiler
+        env:
+          CC: gcc-10
+        run: |
+          source s/share/spack/setup-env.sh && spack compiler find
+      - name: show spack compilers
+        run: |
+          source s/share/spack/setup-env.sh && spack compilers
+          source s/share/spack/setup-env.sh && spack compiler info apple-clang
+          source s/share/spack/setup-env.sh && spack compiler info gcc
+          # would be nice to extract the precise version of gcc-10, such as gcc@10.4.0 automatically.
+          # in Bash, this works: export "GCC10_VERSION=$(spack compilers | grep gcc@10)".
+          # Add this to the github action at some point.
+      - name: copy package.py into place (skipped)
+        run: |
+          pwd
+          # ls -l
+          # cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
+      # - name: compile spack gcc-10.3.0 for better reproducibility
+      #   run: |
+      #     source s/share/spack/setup-env.sh && spack install gcc@10.3.0 %gcc@9.4.0
+      #     source s/share/spack/setup-env.sh && spack load gcc && spack compiler find 
+      # - name: show spack compilers2
+      #   run: |
+      #     source s/share/spack/setup-env.sh && spack compilers
+      #     source s/share/spack/setup-env.sh && spack compiler info gcc
+      - name: compile octopus with gcc 10.4.0
+        run: |
+          # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
+          # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
+          # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@10.4.0
+      - name: octopus --version
+        run: |
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && octopus --version
+      - name: run smoke test recipe
+        run: |
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/recipe && octopus
+          find .
+      - name: run smoke test He
+        run: |
+          cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/he && octopus 
+          find .
+
