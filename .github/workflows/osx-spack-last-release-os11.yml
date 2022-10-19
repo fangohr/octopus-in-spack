@@ -1,6 +1,7 @@
-name: osx-spack-develop
+name: osx-spack-last-release-os11
 
-# building using the development version of Spack 
+# building using the last Spack release (and the
+# preferred version of octopus)
 
 on:
   push:
@@ -13,7 +14,7 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-12
+    runs-on: macOS-11
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -27,20 +28,19 @@ jobs:
       - name: Install gcc from brew
         run: |
           ### it seems that gcc-10 is installed already on github workflows
-          #brew update
-          #brew install gcc@10 
+          # brew update
+          # brew install gcc@10 
           # brew upgrade
-          #gcc-10 --version
-          #gcc-9 --version
+          gcc-10 --version
+          gcc-9 --version
       - name: install spack, pick latest release
         run: |
           git clone https://github.com/spack/spack.git s
-          # cd s && git checkout releases/latest && cd ..
+          cd s && git checkout releases/latest && cd ..
           ./s/bin/spack --version
-      - name: show spack the gcc-11 compiler
-        # see available compilers https://github.com/actions/runner-images/issues/6384
+      - name: show spack the gcc-10 compiler
         env:
-          CC: gcc-11
+          CC: gcc-10
         run: |
           source s/share/spack/setup-env.sh && spack compiler find
       - name: show spack compilers
@@ -64,12 +64,12 @@ jobs:
       #   run: |
       #     source s/share/spack/setup-env.sh && spack compilers
       #     source s/share/spack/setup-env.sh && spack compiler info gcc
-      - name: compile octopus with gcc 11.3.0
+      - name: compile octopus with gcc 10.4.0
         run: |
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^cmake%apple-clang
           # source s/share/spack/setup-env.sh && spack install --verbose octopus %gcc@10.3.0 ^python%apple-clang
           # source s/share/spack/setup-env.sh && spack install octopus %gcc@10.3.0 ^libxc@4.3.4
-          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@10.4.0
       - name: octopus --version
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && octopus --version
