@@ -28,11 +28,11 @@ There are two steps required:
 Step 1: How obtain a Docker container image with Octopus
 --------------------------------------------------------
 
-We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 12.1
+We provide a `Dockerfile-debian <Dockerfile-debian>`__ to compile Octopus 12.2
 and `Dockerfile-debian-develop <Dockerfile-debian-develop>`__ to compile the ``develop`` branch of the Octopus
 repository in a container.
 
-The following examples are for the 12.1 release version. (To build a container
+The following examples are for the 12.2 release version. (To build a container
 for the latest Octopus version from the ``develop`` branch, replace
 ``Dockerfile-debian`` with ``Dockerfile-debian-develop``.)
 
@@ -55,10 +55,10 @@ Option B: Download Docker image from Dockerhub
 Instead of building it yourself, you can also pull an image from Dockerhub
 (`available versions <https://hub.docker.com/r/fangohr/octopus/tags>`__) using::
 
-  docker pull fangohr/octopus:12.1
+  docker pull fangohr/octopus:12.2
 
 and then move on to using this image in the next section, where you replace
-``octimage`` with ``fangohr/octopus:12.1``.
+``octimage`` with ``fangohr/octopus:12.2``.
 
 [You should only use this "Option B" if your processor is x86 type. This is true
 for most CPUs - with the exception of the 'new' Apple M1 computers (which have

@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-# install Octopus 12.1 on Debian
+# install Octopus 12.2 on Debian
 
 # Convenience tools (up to emacs)
 # Libraries that octopus needs 
@@ -41,9 +41,9 @@ RUN apt-get -y update && apt-get -y install wget time nano vim emacs \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt
-RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
+RUN wget -O oct.tar.gz http://octopus-code.org/down.php?file=12.2/octopus-12.2.tar.gz && tar xfvz oct.tar.gz && rm oct.tar.gz
 
-WORKDIR /opt/octopus-12.1
+WORKDIR /opt/octopus-12.2
 RUN autoreconf -i
 RUN ./configure --enable-mpi --enable-openmp
 
