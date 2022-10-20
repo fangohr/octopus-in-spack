@@ -79,4 +79,6 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/he && octopus 
           find .
-
+      - name: compile octopus with more dependencies
+        run: |
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0 +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt 
