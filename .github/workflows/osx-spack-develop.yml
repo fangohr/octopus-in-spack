@@ -95,8 +95,14 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE && source s/share/spack/setup-env.sh && spack load octopus && cd examples/he && octopus 
           find .
-
-          spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt
       - name: compile octopus with more dependencies
         run: |
-          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0 +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt 
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0 +netcdf+parmetis+arpack+cgal+pfft+python+libyaml+elpa+nlopt
+          # could try `threads=openmp` at some point
+      - name: show results
+        run: |
+          source s/share/spack/setup-env.sh && spack find -lv octopus
+          source s/share/spack/setup-env.sh && spack find -lvd octopus
+      - name: show results (without sourcing), debug
+        run: |
+          spack find -lv octopus
