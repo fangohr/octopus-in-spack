@@ -7,6 +7,10 @@ spack-develop:
 spack-latest:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest -t octopus-spack .
 
+spack-latest-octopus-develop:
+	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest --build-arg OCT_VERSION=develop -t octopus-spack .
+
+
 run-spack:
 	docker run --rm -ti -v $PWD:/io octopus-spack 
 
