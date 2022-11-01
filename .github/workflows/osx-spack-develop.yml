@@ -97,8 +97,10 @@ jobs:
           find .
       - name: compile octopus with more dependencies
         run: |
-          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0 +netcdf+parmetis+arpack+cgal+pfft+python+libyaml+elpa+nlopt
-          # could try `threads=openmp` at some point
+          source s/share/spack/setup-env.sh && spack install octopus%gcc@11.3.0 +netcdf+parmetis+arpack+cgal+python+libyaml+nlopt 
+          # +elpa fails on Hans' IntelMac
+          # +pfft fails as well
+          ## could try `threads=openmp` at some point for blas?
       - name: show results
         run: |
           source s/share/spack/setup-env.sh && spack find -lv octopus
