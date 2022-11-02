@@ -29,17 +29,23 @@ jobs:
           brew update
           brew install cmake
           cmake --version
+
+      - name: install gcc-10 from brew
+        run: |
+          brew install gcc@10
+
       - name: install spack, stick to develop version
         run: |
           git clone https://github.com/spack/spack.git s
           # cd s && git checkout releases/latest && cd ..
           ./s/bin/spack --version
-      - name: show spack the gcc-11 compiler
+      - name: show spack the gcc-10 compiler
         # see available compilers https://github.com/actions/runner-images/issues/6384
-        env:
-          CC: gcc-11
+        # env:
+        #  CC: gcc-11
         run: |
           source s/share/spack/setup-env.sh && spack compiler find
+
       - name: show spack compilers
         run: |
           source s/share/spack/setup-env.sh && spack compilers
