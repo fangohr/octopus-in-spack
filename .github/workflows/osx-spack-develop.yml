@@ -57,9 +57,9 @@ jobs:
         run: |
           ls -l
           cd $GITHUB_WORKSPACE && cp -v spack/package.py s/var/spack/repos/builtin/packages/octopus
-      - name: compile octopus with gcc 11.3.0
+      - name: compile octopus with gcc 10.4.0
         run: |
-          source s/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+python+libyaml+nlopt %gcc@11.3.0
+          source s/share/spack/setup-env.sh && spack install octopus +netcdf+parmetis+arpack+cgal+python+libyaml+nlopt %gcc@10.4.0
           # +elpa fails on Hans' IntelMac
           # +pfft fails as well
           ## could try `threads=openmp` at some point for blas?
