@@ -57,7 +57,7 @@ jobs:
 
       - name: wake up spack
         run: |
-          source s/share/spack/setup-env.sh && spack install zlib%gcc10.4.0
+          source s/share/spack/setup-env.sh && spack install zlib%gcc@10.4.0
 
       - name: show spack cmake
         run: |
