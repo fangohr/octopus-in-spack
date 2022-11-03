@@ -56,6 +56,7 @@ jobs:
           # Add this to the github action at some point.
 
       - name: wake up spack
+        run: |
           source s/share/spack/setup-env.sh && spack install zlib%gcc10.4.0
 
       - name: show spack cmake
