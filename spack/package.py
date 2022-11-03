@@ -56,10 +56,10 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("nlopt", default=False, description="Compile with nlopt")
     variant("debug", default=False, description="Compile with debug flags")
 
-    depends_on("autoconf", type="build")
-    depends_on("automake", type="build")
-    depends_on("libtool", type="build")
-    depends_on("m4", type="build")
+    depends_on("autoconf", type="build", when="@develop")
+    depends_on("automake", type="build", when="@develop")
+    depends_on("libtool", type="build", when="@develop")
+    depends_on("m4", type="build", when="@develop")
 
     depends_on("blas")
     depends_on("gsl@1.9:")
