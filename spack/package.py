@@ -91,9 +91,6 @@ class Octopus(AutotoolsPackage, CudaPackage):
     # TODO: etsf-io, sparskit,
     # feast, libfm, pfft, isf, pnfft, poke
 
-    def autoreconf(self, spec, prefix):
-
-        autoreconf("--install", "--verbose", "--force")
 
     def configure_args(self):
         spec = self.spec
@@ -316,4 +313,3 @@ class Octopus(AutotoolsPackage, CudaPackage):
                 purpose=purpose,
                 skip_missing=False,
             )
-            
