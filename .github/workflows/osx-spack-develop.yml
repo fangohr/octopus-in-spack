@@ -41,8 +41,8 @@ jobs:
           ./s/bin/spack --version
       - name: show spack the gcc-10 compiler
         # see available compilers https://github.com/actions/runner-images/issues/6384
-        # env:
-        #  CC: gcc-11
+        env:
+          CC: gcc-10
         run: |
           source s/share/spack/setup-env.sh && spack compiler find
 
@@ -55,9 +55,9 @@ jobs:
           # in Bash, this works: export "GCC10_VERSION=$(spack compilers | grep gcc@10)".
           # Add this to the github action at some point.
 
-      - name: wake up spack
-        run: |
-          source s/share/spack/setup-env.sh && spack install zlib%gcc@10.4.0
+      # - name: wake up spack
+      #   run: |
+      #     source s/share/spack/setup-env.sh && spack install zlib%gcc@10.4.0
 
       - name: show spack cmake
         run: |
