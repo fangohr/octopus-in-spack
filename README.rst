@@ -29,6 +29,9 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; run every month
 
+|spack-latest-octopus-develop| Spack latest release, development version of Octopus
+
+
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus; run every week
 
 
@@ -100,4 +103,7 @@ Please see `here <docker.rst>`__.
 
 .. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
+
+.. |spack-latest-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest-octopus-develop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latestoctopus-develop.yml
 
