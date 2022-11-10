@@ -75,15 +75,20 @@ To use Octopus after installation
 3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
 
-Compile Octopus on Debian Linux (without spack)
-===============================================
-
-See https://github.com/fangohr/octopus-in-docker .
-
 Octopus in Docker container
 ===========================
 
 See https://github.com/fangohr/octopus-in-docker .
+
+
+Compile Octopus on Debian Linux (without spack)
+===============================================
+
+See for example the steps in
+`this Dockerfile <https://github.com/fangohr/octopus-in-docker/blob/main/Dockerfile>`__
+on
+https://github.com/fangohr/octopus-in-docker
+
 
 
 
