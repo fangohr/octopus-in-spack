@@ -78,15 +78,12 @@ To use Octopus after installation
 Compile Octopus on Debian Linux (without spack)
 ===============================================
 
-|debian-octopusstable| Debian Bullseye (11), Last octopus release (11.4)
-
-|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
-
+See https://github.com/fangohr/octopus-in-docker .
 
 Octopus in Docker container
 ===========================
 
-Please see `here <docker.rst>`__.
+See https://github.com/fangohr/octopus-in-docker .
 
 
 
@@ -96,13 +93,6 @@ Please see `here <docker.rst>`__.
 
 .. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
-
-
-.. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
-
-.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
 
 .. |spack-latest-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest-octopus-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latestoctopus-develop.yml
