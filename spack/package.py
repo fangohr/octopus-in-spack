@@ -56,6 +56,13 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("elpa", default=False, description="Compile with ELPA")
     variant("nlopt", default=False, description="Compile with nlopt")
     variant("debug", default=False, description="Compile with debug flags")
+    variant(
+        "sparskit",
+        default=False,
+        description="Compile with sparskit - A Basic Tool Kit for Sparse Matrix Computations",
+    )
+    variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
+    variant("libgd", default=False, description="Compile with gdlib")  # Used for a few tests
 
     depends_on("autoconf", type="build", when="@develop")
     depends_on("automake", type="build", when="@develop")
@@ -77,11 +84,16 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("fftw@3:+mpi+openmp", when="@8:9")  # FFT library
         depends_on("fftw-api@3:+mpi+openmp", when="@10:")
         depends_on("libvdwxc+mpi", when="+libvdwxc")
+        depends_on("berkeleygw@2.1+mpi ", when="+berkeleygw")
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
         depends_on("fftw-api@3:+openmp~mpi", when="@10:")
         depends_on("libvdwxc~mpi", when="+libvdwxc")
+        depends_on(
+            "berkeleygw@2.1~mpi~scalapack ^hdf5~mpi ^fftw~mpi",
+            when="+berkeleygw",
+        )
 
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
@@ -96,6 +108,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("libyaml", when="+libyaml")
     depends_on("elpa", when="+elpa")
     depends_on("nlopt", when="+nlopt")
+    depends_on("sparskit", when="+sparskit")
+    depends_on("libgd", when="+libgd")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
@@ -209,10 +223,15 @@ class Octopus(AutotoolsPackage, CudaPackage):
         if "+python" in spec:
             args.append("--enable-python")
 
+        if "+sparskit" in self.spec:
+            args.append(
+                "--with-sparskit=%s" % os.path.join(self.spec["sparskit"].prefix.lib, "libskit.a")
+            )
+        if "+berkeleygw" in self.spec:
+            args.append("--with-berkeleygw-prefix=%s" % self.spec["berkeleygw"].prefix)
+
         # --with-etsf-io-prefix=
-        # --with-sparskit=${prefix}/lib/libskit.a
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
-        # --with-berkeleygw-prefix=${prefix}
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
         # strings the result may be > 132 chars and is terminated.
