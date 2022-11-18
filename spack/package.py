@@ -63,6 +63,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     )
     variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
     variant("libgd", default=False, description="Compile with gdlib")  # Used for a few tests
+    variant("etsf_io", default=False, description="Compile with ETSF_IO")
 
     depends_on("autoconf", type="build", when="@develop")
     depends_on("automake", type="build", when="@develop")
@@ -85,6 +86,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("fftw-api@3:+mpi+openmp", when="@10:")
         depends_on("libvdwxc+mpi", when="+libvdwxc")
         depends_on("berkeleygw@2.1+mpi ", when="+berkeleygw")
+        depends_on("etsf-io+mpi", when="+etsf_io")
+
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
@@ -94,6 +97,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             "berkeleygw@2.1~mpi~scalapack ^hdf5~mpi ^fftw~mpi",
             when="+berkeleygw",
         )
+        depends_on("etsf-io~mpi", when="+etsf_io")
 
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
@@ -229,8 +233,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
         if "+berkeleygw" in self.spec:
             args.append("--with-berkeleygw-prefix=%s" % self.spec["berkeleygw"].prefix)
-
-        # --with-etsf-io-prefix=
+        if "+etsf-io" in self.spec:
+            args.append("--with-etsf-io-prefix=%s" % self.spec["etsf-io"].prefix)
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
