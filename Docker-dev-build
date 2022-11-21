@@ -69,7 +69,8 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       # make a dev-build direcotry for the serial version:
       mkdir ~/dev-build-serial && cd ~/dev-build-serial && \
-      git clone https://gitlab.com/octopus-code/octopus . && \
+      wget https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz -O octopus-12.1.tar.gz &&\
+      tar --strip-components=1 -xf octopus-12.1.tar.gz -C ./&& \
       # install the serial version of octopus:
       # display specs of upcoming spack installation:
       spack spec octopus@${OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
@@ -96,7 +97,8 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       # make a dev-build direcotry for the parallel version:
       mkdir ~/dev-build-parallel && cd ~/dev-build-parallel && \
-      git clone https://gitlab.com/octopus-code/octopus . && \
+      wget https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz -O octopus-12.1.tar.gz &&\
+      tar --strip-components=1 -xf octopus-12.1.tar.gz -C ./&& \
       # display specs of upcoming spack installation:
       spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       # run the spack installation (adding it to the environment):
