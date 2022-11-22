@@ -79,6 +79,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("libvdwxc+mpi", when="+libvdwxc")
         depends_on("arpack-ng+mpi", when="+arpack")
         depends_on("elpa+mpi", when="+elpa")
+        depends_on("netcdf-fortran", when="+netcdf")
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
@@ -86,13 +87,13 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("libvdwxc~mpi", when="+libvdwxc")
         depends_on("arpack-ng~mpi", when="+arpack")
         depends_on("elpa~mpi", when="+elpa")
+        depends_on("netcdf-fortran ^netcdf-c~~mpi", when="+netcdf")
 
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
     depends_on("metis@5:+int64", when="+metis")
     depends_on("parmetis+int64", when="+parmetis")
     depends_on("scalapack", when="+scalapack")
-    depends_on("netcdf-fortran", when="+netcdf")
     depends_on("cgal", when="+cgal")
     depends_on("pfft", when="+pfft")
     depends_on("likwid", when="+likwid")
