@@ -60,6 +60,7 @@ COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/packa
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
 COPY spack/test/ $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
+COPY check_buildlog.py /home/user 
 
 # Install and test serial and MPI versions of ocoptus via spack
 # # serial version
@@ -70,7 +71,7 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       # make a dev-build direcotry for the serial version:
       mkdir ~/dev-build-serial && cd ~/dev-build-serial && \
-      
+
       wget https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz -O octopus-12.1.tar.gz &&\
       tar --strip-components=1 -xf octopus-12.1.tar.gz -C ./&& \
       # install the serial version of octopus:
@@ -86,8 +87,14 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack load octopus && octopus --version && \
       # Run make checks
       cd ~/dev-build-serial ; \
-      make check-short || /bin/true ; \
-      make check-long || /bin/true ; \
+      echo "-+-+-+-+ Running make check-short" ; \
+      make check-short | tee serial_check-short.log || /bin/true ; \
+      echo "-+-+-+-+ Running make check-long" ; \
+      make check-long  | tee serial_check-long.log || /bin/true ; \
+      echo "-+-+-+-+ Parsing serial_check-short.log" ; \
+      python3 /home/user/check_buildlog.py serial_check-short.log foss2021a-serial; \
+      echo "-+-+-+-+ Parsing serial_check-long.log" ; \
+      python3 /home/user/check_buildlog.py serial_check-long.log foss2021a-serial; \
       # deactivate the environment.
       spack env deactivate
 
@@ -113,9 +120,14 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack load octopus && octopus --version && \
       # Run make checks
       cd ~/dev-build-parallel ; \
-      make check-short || /bin/true ; \
-      make check-long || /bin/true ; \
-      # deactivate the environment.
+      echo "+|+|+|+ Running make check-short" ; \
+      make check-short | tee mpi_check-short.log || /bin/true ; \
+      echo "+|+|+|+ Running make check-long" ; \
+      make check-long  | tee mpi_check-long.log || /bin/true ; \
+      echo "+|+|+|+ Parsing mpi_check-short.log" ; \
+      python3 /home/user/check_buildlog.py mpi_check-short.log foss2021a-mpi; \
+      echo "+|+|+|+ Parsing mpi_check-long.log" ; \
+      python3 /home/user/check_buildlog.py mpi_check-long.log foss2021a-mpi; \
       spack env deactivate
 
 # Provide bash in case the image is meant to be used interactively
