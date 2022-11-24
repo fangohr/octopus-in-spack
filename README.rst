@@ -29,7 +29,7 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; run every month
 
-|spack-latest-octopus-develop| Spack latest release, development version of Octopus
+|spack-latest-octopus-develop| Spack latest release, development version of Octopus (branch "main")
 
 
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus; run every week
