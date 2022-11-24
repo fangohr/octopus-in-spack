@@ -92,9 +92,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       echo "-+-+-+-+ Running make check-long" ; \
       make check-long  | tee serial_check-long.log || /bin/true ; \
       echo "-+-+-+-+ Parsing serial_check-short.log" ; \
-      python3 /home/user/check_buildlog.py serial_check-short.log foss2021a-serial; \
+      python3 /home/user/check_buildlog.py serial_check-short.log foss2021a-serial || /bin/true; \
       echo "-+-+-+-+ Parsing serial_check-long.log" ; \
-      python3 /home/user/check_buildlog.py serial_check-long.log foss2021a-serial; \
+      python3 /home/user/check_buildlog.py serial_check-long.log foss2021a-serial || /bin/true; \
       # deactivate the environment.
       spack env deactivate
 
@@ -125,9 +125,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       echo "+|+|+|+ Running make check-long" ; \
       make check-long  | tee mpi_check-long.log || /bin/true ; \
       echo "+|+|+|+ Parsing mpi_check-short.log" ; \
-      python3 /home/user/check_buildlog.py mpi_check-short.log foss2021a-mpi; \
+      python3 /home/user/check_buildlog.py mpi_check-short.log foss2021a-mpi || /bin/true; \
       echo "+|+|+|+ Parsing mpi_check-long.log" ; \
-      python3 /home/user/check_buildlog.py mpi_check-long.log foss2021a-mpi; \
+      python3 /home/user/check_buildlog.py mpi_check-long.log foss2021a-mpi || /bin/true; \
       spack env deactivate
 
 # Provide bash in case the image is meant to be used interactively
