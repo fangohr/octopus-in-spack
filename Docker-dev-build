@@ -4,7 +4,7 @@ FROM debian:bullseye
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
-ARG OCT_VERSION=12.1
+ARG SPACK_OCT_VERSION=12.1
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
 # Any extra packages to be installed in the host
@@ -72,13 +72,13 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # make a dev-build direcotry for the serial version:
       mkdir ~/dev-build-serial && cd ~/dev-build-serial && \
 
-      wget https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz -O octopus-12.1.tar.gz &&\
-      tar --strip-components=1 -xf octopus-12.1.tar.gz -C ./&& \
+      wget https://octopus-code.org/down.php?file=${SPACK_OCT_VERSION}/octopus-${SPACK_OCT_VERSION}.tar.gz -O octopus-${SPACK_OCT_VERSION}.tar.gz &&\
+      tar --strip-components=1 -xf octopus-${SPACK_OCT_VERSION}.tar.gz -C ./&& \
       # install the serial version of octopus:
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
+      spack spec octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
       # run the spack installation (adding it to the environment):
-      spack dev-build octopus@${OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
+      spack dev-build octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
       # display output from smoke tests (just for information):
@@ -106,12 +106,12 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       # make a dev-build direcotry for the parallel version:
       mkdir ~/dev-build-parallel && cd ~/dev-build-parallel && \
-      wget https://octopus-code.org/down.php?file=12.1/octopus-12.1.tar.gz -O octopus-12.1.tar.gz &&\
-      tar --strip-components=1 -xf octopus-12.1.tar.gz -C ./&& \
+      wget https://octopus-code.org/down.php?file=${SPACK_OCT_VERSION}/octopus-${SPACK_OCT_VERSION}.tar.gz -O octopus-${SPACK_OCT_VERSION}.tar.gz &&\
+      tar --strip-components=1 -xf octopus-${SPACK_OCT_VERSION}.tar.gz -C ./&& \
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
+      spack spec octopus@${SPACK_OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       # run the spack installation (adding it to the environment):
-      spack dev-build octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
+      spack dev-build octopus@${SPACK_OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_MPI octopus && \
       # display output from smoke tests (just for information):
