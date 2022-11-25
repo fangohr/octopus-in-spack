@@ -48,7 +48,7 @@ USER user
 WORKDIR /home/user
 
 # install spack
-RUN git clone https://github.com/spack/spack.git
+RUN git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 # default branch is develop
 RUN cd spack && git checkout $SPACK_VERSION
 
