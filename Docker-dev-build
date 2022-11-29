@@ -78,13 +78,13 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # display specs of upcoming spack installation:
       spack spec octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack 
       
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       cd ~/dev-build-serial && \
       # run the spack installation (adding it to the environment):
       spack dev-build octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack 
       
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
@@ -92,18 +92,18 @@ RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
       spack test results -l test_serial 
 
       # show which octopus version we use (for convenience):
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       spack load octopus && octopus --version 
      
       # Run make checks
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       cd ~/dev-build-serial ; \
       echo "-+-+-+-+ Running make check-short" ; \
       make check-short | tee serial_check-short.log || /bin/true
 
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-serial && \
       cd ~/dev-build-serial ; \
       echo "-+-+-+-+ Running make check-long" ; \
@@ -132,13 +132,13 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # display specs of upcoming spack installation:
       spack spec octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack 
       
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       cd ~/dev-build-mpi && \
       # run the spack installation (adding it to the environment):
       spack dev-build octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack 
       
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_mpi octopus && \
@@ -146,18 +146,18 @@ RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
       spack test results -l test_mpi 
 
       # show which octopus version we use (for convenience):
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       spack load octopus && octopus --version 
      
       # Run make checks
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       cd ~/dev-build-mpi ; \
       echo "|+|+|+|+| Running make check-short" ; \
       make check-short | tee mpi_check-short.log || /bin/true
 
-RUN   $SPACK_ROOT/share/spack/setup-env.sh && \
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env activate octopus-mpi && \
       cd ~/dev-build-mpi ; \
       echo "|+|+|+|+| Running make check-long" ; \
