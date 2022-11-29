@@ -66,7 +66,7 @@ def check_log(log_file):
         if test not in ignored_test_list[used_toolchain]
     ]
     if unexpected_failures:
-        print("Unexpected failures : \n" + ", ".join(unexpected_failures))
+        print("Unexpected failures : \n" + ", \n".join(unexpected_failures))
         print("Built with tool chain : " + used_toolchain)
         sys.exit(1)
     print("All failed tests are ignored")
