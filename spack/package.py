@@ -36,16 +36,16 @@ class Octopus(AutotoolsPackage, CudaPackage):
     version("6.0", sha256="4a802ee86c1e06846aa7fa317bd2216c6170871632c9e03d020d7970a08a8198")
     version("5.0.1", sha256="3423049729e03f25512b1b315d9d62691cd0a6bd2722c7373a61d51bfbee14e0")
 
-    version("develop", branch="develop")
+    version("develop", branch="main")
 
     variant("mpi", default=True, description="Build with MPI support")
-    variant("scalapack", default=False, description="Compile with Scalapack", when="+mpi")
+    variant("scalapack", default=False, when="+mpi", description="Compile with Scalapack")
     variant("metis", default=False, description="Compile with METIS")
-    variant("parmetis", default=False, description="Compile with ParMETIS", when="+mpi")
+    variant("parmetis", default=False, when="+mpi", description="Compile with ParMETIS")
     variant("netcdf", default=False, description="Compile with Netcdf")
     variant("arpack", default=False, description="Compile with ARPACK")
     variant("cgal", default=False, description="Compile with CGAL library support")
-    variant("pfft", default=False, description="Compile with PFFT", when="+mpi")
+    variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
