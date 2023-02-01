@@ -1,4 +1,4 @@
-# Copyright 2013-2022 Lawrence Livermore National Security, LLC and other
+# Copyright 2013-2023 Lawrence Livermore National Security, LLC and other
 # Spack Project Developers. See the top-level COPYRIGHT file for details.
 #
 # SPDX-License-Identifier: (Apache-2.0 OR MIT)
@@ -36,7 +36,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     version("6.0", sha256="4a802ee86c1e06846aa7fa317bd2216c6170871632c9e03d020d7970a08a8198")
     version("5.0.1", sha256="3423049729e03f25512b1b315d9d62691cd0a6bd2722c7373a61d51bfbee14e0")
 
-    version("develop", branch="main")  # Octopus development branch is called "main" since Q3 2022
+    version("develop", branch="main")
 
     variant("mpi", default=True, description="Build with MPI support")
     variant("scalapack", default=False, when="+mpi", description="Compile with Scalapack")
@@ -338,4 +338,3 @@ class Octopus(AutotoolsPackage, CudaPackage):
                 purpose=purpose,
                 skip_missing=False,
             )
-            
