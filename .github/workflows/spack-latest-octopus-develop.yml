@@ -1,4 +1,4 @@
-name: debian-octopusstable
+name: spack-latest-octopus-develop
 
 on:
   push:
@@ -10,10 +10,11 @@ on:
 jobs:
 
   build:
+
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build Octopus release on Debian in Docker
-      run: make debian-octopusstable
+    - name: Build the Docker image
+      run: make spack-latest-octopus-develop
       

@@ -7,26 +7,16 @@ spack-develop:
 spack-latest:
 	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest -t octopus-spack .
 
+spack-latest-octopus-develop:
+	docker build -f Dockerfile --build-arg SPACK_VERSION=releases/latest --build-arg OCT_VERSION=develop -t octopus-spack .
+
+
 run-spack:
 	docker run --rm -ti -v $PWD:/io octopus-spack 
 
-debian-octopusstable:
-	docker build -f Dockerfile-debian -t octopus .
-
-debian-octopusdevelop:
-	docker build -f Dockerfile-debian-develop -t octopus-develop .
-
-.PHONY: spack-latest run-spack debian-octopusstable debian-octopusdevelop spack-develop
+.PHONY: spack-latest run-spack spack-develop
 
 diff:
 	@echo "Compare (diff) spack/package.py with current package.py from spack develop"
 	wget --output-document=spack/package-upstream.py https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/octopus/package.py
 	diff spack/package-upstream.py spack/package.py || true
-
-dockerhub-update-12.2:
-	docker build -f Dockerfile-debian -t fangohr/octopus:12.2 .
-	@echo "If the container has built successfully, do this to push to dockerhub:"
-	@echo "Run 'docker login'"
-	@echo "Run 'docker push fangohr/octopus:12.2'"
-	@echo "Run 'docker tag fangohr/octopus:12.2 fangohr/octopus:latest'"
-	@echo "Run 'docker push fangohr/octopus:latest'"

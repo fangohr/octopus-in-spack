@@ -29,6 +29,9 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; run every month
 
+|spack-latest-octopus-develop| Spack latest release, development version of Octopus (branch "main")
+
+
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus; run every week
 
 
@@ -72,18 +75,20 @@ To use Octopus after installation
 3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
 
 
-Compile Octopus on Debian Linux (without spack)
-===============================================
-
-|debian-octopusstable| Debian Bullseye (11), Last octopus release (11.4)
-
-|debian-octopusdevelop| Debian Bullseye (11), Octopus develop branch
-
-
 Octopus in Docker container
 ===========================
 
-Please see `here <docker.rst>`__.
+See https://github.com/fangohr/octopus-in-docker .
+
+
+Compile Octopus on Debian Linux (without spack)
+===============================================
+
+See for example the steps in
+`this Dockerfile <https://github.com/fangohr/octopus-in-docker/blob/main/Dockerfile>`__
+on
+https://github.com/fangohr/octopus-in-docker
+
 
 
 
@@ -94,10 +99,6 @@ Please see `here <docker.rst>`__.
 .. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 
-
-.. |debian-octopusstable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusstable.yml
-
-.. |debian-octopusdevelop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-octopusdevelop.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/debian-develop.yml
+.. |spack-latest-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest-octopus-develop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latestoctopus-develop.yml
 
