@@ -228,11 +228,15 @@ class Octopus(AutotoolsPackage, CudaPackage):
             # In case of GCC version 10, we will have errors because of
             # argument mismatching. Need to provide a flag to turn this into a
             # warning and build sucessfully
+            # We can also disable variable tracking at assignemnts introduced in GCC10
+            # for non debug variant to decrease compile time.
 
             fcflags = "FCFLAGS=-O2 -ffree-line-length-none"
             fflags = "FFLAGS=O2 -ffree-line-length-none"
             if spec.satisfies("%gcc@10:"):
                 gcc10_extra = "-fallow-argument-mismatch -fallow-invalid-boz"
+                if spec.satisfies("~debug"):
+                    gcc10_extra = gcc10_extra + " -fno-var-tracking-assignments"
                 args.append(fcflags + " " + gcc10_extra)
                 args.append(fflags + " " + gcc10_extra)
             else:
