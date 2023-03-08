@@ -230,14 +230,11 @@ class Octopus(AutotoolsPackage, CudaPackage):
             # warning and build sucessfully
 
             fcflags = "FCFLAGS=-O2 -ffree-line-length-none"
-            fflags = "FFLAGS=O2 -ffree-line-length-none"
             if spec.satisfies("%gcc@10:"):
                 gcc10_extra = "-fallow-argument-mismatch -fallow-invalid-boz"
                 args.append(fcflags + " " + gcc10_extra)
-                args.append(fflags + " " + gcc10_extra)
             else:
                 args.append(fcflags)
-                args.append(fflags)
 
         return args
 
