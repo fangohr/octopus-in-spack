@@ -235,7 +235,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             fflags = "FFLAGS=O2 -ffree-line-length-none"
             if spec.satisfies("%gcc@10:"):
                 gcc10_extra = "-fallow-argument-mismatch -fallow-invalid-boz"
-                if spec.satisfies("~debug"):
+                if spec.satisfies("+debug"):
                     gcc10_extra = gcc10_extra + " -fno-var-tracking-assignments"
                 args.append(fcflags + " " + gcc10_extra)
                 args.append(fflags + " " + gcc10_extra)
