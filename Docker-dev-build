@@ -36,6 +36,7 @@ RUN apt-get install -y --no-install-recommends \
               python \
               unzip \
               vim \
+              wget \
            && rm -rf /var/lib/apt/lists/*
 
 # load spack environment on login
@@ -59,18 +60,23 @@ COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/packa
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
 COPY spack/test/ $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
+COPY check_buildlog.py /home/user 
 
 # Install and test serial and MPI versions of ocoptus via spack
 # # serial version
 
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
+      # make a dev-build direcotry for the serial version:
+      mkdir ~/dev-build-serial && cd ~/dev-build-serial && \
       # create a new environment for the serial version and activate it:
-      spack env create octopus-serial && \
-      spack env activate octopus-serial && \
+      spack env create -d . && \
+      spack env activate -d . && \
+      # install the serial version of octopus:
       # display specs of upcoming spack installation:
-      spack spec octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
+      spack spec octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack && \
+      spack develop octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis && \
+      spack add octopus@${SPACK_OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
@@ -78,6 +84,16 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack test results -l test_serial && \
       # show which octopus version we use (for convenience):
       spack load octopus && octopus --version && \
+      # Run make checks
+      cd ~/dev-build-serial/octopus ; \
+      echo "-+-+-+-+ Running make check-short" ; \
+      make check-short | tee serial_check-short.log || /bin/true ; \
+      echo "-+-+-+-+ Running make check-long" ; \
+      make check-long  | tee serial_check-long.log || /bin/true ; \
+      echo "-+-+-+-+ Parsing serial_check-short.log" ; \
+      python3 /home/user/check_buildlog.py serial_check-short.log foss2021a-serial; \
+      echo "-+-+-+-+ Parsing serial_check-long.log" ; \
+      python3 /home/user/check_buildlog.py serial_check-long.log foss2021a-serial; \
       # deactivate the environment.
       spack env deactivate
 
@@ -85,11 +101,15 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
 
 RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # create a new environment for the MPI version and activate it:
-      spack env create octopus-mpi && \
-      spack env activate octopus-mpi && \
+      # make a dev-build direcotry for the parallel version:
+      mkdir ~/dev-build-parallel && cd ~/dev-build-parallel && \
+      spack env create -d . && \
+      spack env activate -d . && \
+      # install the parallel version of octopus:
       # display specs of upcoming spack installation:
       spack spec octopus@${SPACK_OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       # run the spack installation (adding it to the environment):
+      spack develop octopus@${SPACK_OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       spack add octopus@${SPACK_OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt~debug~cuda~metis~scalapack  && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
@@ -98,9 +118,17 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack test results -l test_MPI && \
       # show which octopus version we use (for convenience):
       spack load octopus && octopus --version && \
-      # deactivate the environment.
+      # Run make checks
+      cd ~/dev-build-parallel/octopus ; \
+      echo "+|+|+|+ Running make check-short" ; \
+      make check-short | tee mpi_check-short.log || /bin/true ; \
+      echo "+|+|+|+ Running make check-long" ; \
+      make check-long  | tee mpi_check-long.log || /bin/true ; \
+      echo "+|+|+|+ Parsing mpi_check-short.log" ; \
+      python3 /home/user/check_buildlog.py mpi_check-short.log foss2021a-mpi; \
+      echo "+|+|+|+ Parsing mpi_check-long.log" ; \
+      python3 /home/user/check_buildlog.py mpi_check-long.log foss2021a-mpi; \
       spack env deactivate
 
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
-
