@@ -228,7 +228,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             # In case of GCC version 10, we will have errors because of
             # argument mismatching. Need to provide a flag to turn this into a
             # warning and build sucessfully
-            # We can also disable variable tracking at assignemnts introduced in GCC10
+            # We can disable variable tracking at assignments introduced in GCC10
             # for non debug variant to decrease compile time.
 
             fcflags = "FCFLAGS=-O2 -ffree-line-length-none"
