@@ -180,6 +180,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
 
         if "+cgal" in spec:
             args.append("--with-cgal-prefix=%s" % spec["cgal"].prefix)
+            args.append("--with-boost=%s" % spec["boost"].prefix)
 
         if "+likwid" in spec:
             args.append("--with-likwid-prefix=%s" % spec["likwid"].prefix)
