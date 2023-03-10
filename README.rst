@@ -27,12 +27,9 @@ Status
 Compile Octopus on Linux with Spack. Spack's preferred version of Octopus is 12.1 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
-|spack-latest-octopus-stable| Spack latest release, preferred version of Octopus; run every month
+|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus
 
-|spack-latest-octopus-develop| Spack latest release, development version of Octopus (branch "main")
-
-
-|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus; run every week
+|spack-develop-octopus-develop| Spack develop version, develop version of Octopus
 
 
 Octopus and Spack - Quick start
@@ -91,13 +88,18 @@ https://github.com/fangohr/octopus-in-docker
 
 
 
+.. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 
+.. |spack-develop-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml
+
+
+.. comment: Outdated badges to follow
 
 .. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
 
-.. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg?branch=spack-develop
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml
 
 .. |spack-latest-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest-octopus-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latestoctopus-develop.yml
