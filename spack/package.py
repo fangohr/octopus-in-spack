@@ -19,7 +19,6 @@ class Octopus(AutotoolsPackage, CudaPackage):
     url = "https://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
     git = "https://gitlab.com/octopus-code/octopus"
 
-
     maintainers("fangohr", "RemiLacroix-IDRIS")
 
     version("12.2", sha256="e919e07703696eadb4ba59352d7a2678a9191b4586cb9da538661615e765a5a2")
