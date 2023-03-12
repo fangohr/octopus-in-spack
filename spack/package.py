@@ -19,8 +19,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
     url = "https://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
     git = "https://gitlab.com/octopus-code/octopus"
 
-    maintainers = ["fangohr", "RemiLacroix-IDRIS"]
-    
+
+    maintainers("fangohr", "RemiLacroix-IDRIS")
+
     version("12.2", sha256="e919e07703696eadb4ba59352d7a2678a9191b4586cb9da538661615e765a5a2")
     version("12.1", sha256="e2214e958f1e9631dbe6bf020c39f1fe4d71ab0b6118ea9bd8dc38f6d7a7959a")
     version("12.0", sha256="70beaf08573d394a766f10346a708219b355ad725642126065d12596afbc0dcc")
@@ -129,12 +130,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
                 ]
             )
         else:
-            args.extend(
-                [
-                    "CC=%s" % self.compiler.cc,
-                    "FC=%s" % self.compiler.fc,
-                ]
-            )
+            args.extend(["CC=%s" % self.compiler.cc, "FC=%s" % self.compiler.fc])
 
         if "^fftw" in spec:
             args.append("--with-fftw-prefix=%s" % spec["fftw"].prefix)
@@ -165,9 +161,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
         if "+arpack" in spec:
             arpack_libs = spec["arpack-ng"].libs.joined()
-            args.append(
-                "--with-arpack={0}".format(arpack_libs),
-            )
+            args.append("--with-arpack={0}".format(arpack_libs))
             if "+mpi" in spec["arpack-ng"]:
                 args.append("--with-parpack={0}".format(arpack_libs))
 
@@ -186,9 +180,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             args.append("--with-likwid-prefix=%s" % spec["likwid"].prefix)
 
         if "+pfft" in spec:
-            args.append(
-                "--with-pfft-prefix=%s" % spec["pfft"].prefix,
-            )
+            args.append("--with-pfft-prefix=%s" % spec["pfft"].prefix)
 
         # if '+poke' in spec:
         #     args.extend([
