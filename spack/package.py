@@ -82,6 +82,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("arpack-ng+mpi", when="+arpack")
         depends_on("elpa+mpi", when="+elpa")
         depends_on("netcdf-fortran ^netcdf-c+mpi", when="+netcdf")
+
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
         depends_on("fftw-api@3:+openmp~mpi", when="@10:")
@@ -100,7 +101,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
-    depends_on("pfft", when="+pfft")
+    depends_on("pnfft", when="+pnfft")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
