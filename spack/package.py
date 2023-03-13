@@ -47,6 +47,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("arpack", default=False, description="Compile with ARPACK")
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
+    variant("pnfft", default=False, when="+pfft", description="Compile with PNFFT")
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
@@ -100,6 +101,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
+    depends_on("pnfft", when="+pnfft")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
@@ -207,6 +209,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
         # --with-etsf-io-prefix=
         # --with-sparskit=${prefix}/lib/libskit.a
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
+        if "+pnfft" in spec:
+            args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
+
         # --with-berkeleygw-prefix=${prefix}
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
