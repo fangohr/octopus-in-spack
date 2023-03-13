@@ -47,6 +47,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("arpack", default=False, description="Compile with ARPACK")
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
+    variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
@@ -81,6 +82,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("arpack-ng+mpi", when="+arpack")
         depends_on("elpa+mpi", when="+elpa")
         depends_on("netcdf-fortran ^netcdf-c+mpi", when="+netcdf")
+        depends_on("berkeleygw+mpi", when="+berkeleygw")
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
@@ -89,6 +91,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("arpack-ng~mpi", when="+arpack")
         depends_on("elpa~mpi", when="+elpa")
         depends_on("netcdf-fortran ^netcdf-c~~mpi", when="+netcdf")
+        depends_on("berkeleygw~mpi", when="+berkeleygw")
 
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
@@ -208,6 +211,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
         # --with-sparskit=${prefix}/lib/libskit.a
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
         # --with-berkeleygw-prefix=${prefix}
+        if "+berkeleygw" in spec:
+            args.append("--with-berkeleygw-prefix=%s" % spec["berkeleygw"].prefix)
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
         # strings the result may be > 132 chars and is terminated.
