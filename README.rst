@@ -24,7 +24,7 @@ We also provide some hints on how to install Octopus with Spack (see below).
 Status
 ------
 
-Compile Octopus on Linux with Spack. Spack's preferred version of Octopus is 12.1 at the
+Compile Octopus on Linux with Spack. Spack's preferred version of Octopus is 12.2 at the
 moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus
@@ -48,7 +48,7 @@ want to include netcdf support:
 
 -  ``spack install octopus +netcdf``
 
-Ideally, there are no errors. This should install Octopus 12.1
+Ideally, there are no errors. This should install Octopus 12.2
 
 There are further *variants* you can install. For example:
 
