@@ -48,6 +48,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
     variant("sparskit", default=False, description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations")
+    variant('etsf-io', default=False, description='Compile with etsf-io')
+    variant("pnfft", default=False, when="+pfft", description="Compile with PNFFT")
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
@@ -102,9 +104,11 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
     depends_on("sparskit", when="+sparskit")
+    depends_on('etsf-io', when='+etsf-io')
+    depends_on("pnfft", when="+pnfft")
 
     # optional dependencies:
-    # TODO: etsf-io, 
+    # TODO:
     # feast, libfm, pfft, isf, pnfft, poke
 
     def configure_args(self):
@@ -175,7 +179,10 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
 
         if "+cgal" in spec:
+            # Boost is a dependency of CGAL, and is not picked up by the configure script
+            # unless specified explicitly with `--with-boost` option.
             args.append("--with-cgal-prefix=%s" % spec["cgal"].prefix)
+            args.append("--with-boost=%s" % spec["boost"].prefix)
 
         if "+likwid" in spec:
             args.append("--with-likwid-prefix=%s" % spec["likwid"].prefix)
@@ -207,10 +214,15 @@ class Octopus(AutotoolsPackage, CudaPackage):
             args.append("--enable-python")
 
         # --with-etsf-io-prefix=
+        if "+etsf-io" in spec:
+            args.append("--with-etsf-io-prefix=%s" % spec["etsf-io"].prefix)
         # --with-sparskit=${prefix}/lib/libskit.a
         if "+sparskit" in spec:
             "--with-sparskit=%s" % os.path.join(self.spec["sparskit"].prefix.lib, "libskit.a")
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
+        if "+pnfft" in spec:
+            args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
+
         # --with-berkeleygw-prefix=${prefix}
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
