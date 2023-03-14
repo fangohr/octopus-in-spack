@@ -97,7 +97,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("scalapack", when="+scalapack")
     depends_on("cgal", when="+cgal")
     depends_on("pfft", when="+pfft")
-    depends_on("nfft", when="+nfft")
+    depends_on("nfft@3.2.4", when="+nfft")
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
