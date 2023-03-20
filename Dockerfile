@@ -4,7 +4,7 @@ FROM debian:bullseye
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
-ARG OCT_VERSION=12.1
+ARG OCT_VERSION=12.2
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
 # Any extra packages to be installed in the host
@@ -68,9 +68,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env create octopus-serial && \
       spack env activate octopus-serial && \
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+nfft~debug~cuda~metis && \
+      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+nfft~debug~cuda~metis && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+nfft~debug~cuda~metis && \
+      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+nfft~debug~cuda~metis && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
@@ -88,9 +88,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env create octopus-mpi && \
       spack env activate octopus-mpi && \
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt+nfft~debug~cuda~metis~scalapack  && \
+      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+nfft~debug~cuda~metis~scalapack  && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt+nfft~debug~cuda~metis~scalapack  && \
+      spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+nfft~debug~cuda~metis~scalapack  && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_MPI octopus && \

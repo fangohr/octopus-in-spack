@@ -1,4 +1,4 @@
-name: spack-latest-octopus-develop
+name: spack-develop-octopus-develop
 
 on:
   push:
@@ -16,5 +16,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: make spack-latest-octopus-develop
+      run: make spack-develop-octopus-develop
       

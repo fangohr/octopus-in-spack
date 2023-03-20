@@ -19,8 +19,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
     url = "https://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
     git = "https://gitlab.com/octopus-code/octopus"
 
-    maintainers = ["fangohr", "RemiLacroix-IDRIS"]
+    maintainers("fangohr", "RemiLacroix-IDRIS")
 
+    version("12.2", sha256="e919e07703696eadb4ba59352d7a2678a9191b4586cb9da538661615e765a5a2")
     version("12.1", sha256="e2214e958f1e9631dbe6bf020c39f1fe4d71ab0b6118ea9bd8dc38f6d7a7959a")
     version("12.0", sha256="70beaf08573d394a766f10346a708219b355ad725642126065d12596afbc0dcc")
     version("11.4", sha256="73bb872bff8165ddd8efc5b891f767cb3fe575b5a4b518416c834450a4492da7")
@@ -47,6 +48,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
     variant("nfft", default=False, description="Compile with NFFT")
+    variant("sparskit", default=False, description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations")
+    variant('etsf-io', default=False, description='Compile with etsf-io')
+    variant("pnfft", default=False, when="+pfft", description="Compile with PNFFT")
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
@@ -101,9 +105,12 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
+    depends_on("sparskit", when="+sparskit")
+    depends_on('etsf-io', when='+etsf-io')
+    depends_on("pnfft", when="+pnfft")
 
     # optional dependencies:
-    # TODO: etsf-io, sparskit,
+    # TODO:
     # feast, libfm, pfft, isf, pnfft, poke
 
     def configure_args(self):
@@ -130,12 +137,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
                 ]
             )
         else:
-            args.extend(
-                [
-                    "CC=%s" % self.compiler.cc,
-                    "FC=%s" % self.compiler.fc,
-                ]
-            )
+            args.extend(["CC=%s" % self.compiler.cc, "FC=%s" % self.compiler.fc])
 
         if "^fftw" in spec:
             args.append("--with-fftw-prefix=%s" % spec["fftw"].prefix)
@@ -166,9 +168,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
         if "+arpack" in spec:
             arpack_libs = spec["arpack-ng"].libs.joined()
-            args.append(
-                "--with-arpack={0}".format(arpack_libs),
-            )
+            args.append("--with-arpack={0}".format(arpack_libs))
             if "+mpi" in spec["arpack-ng"]:
                 args.append("--with-parpack={0}".format(arpack_libs))
 
@@ -181,15 +181,16 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
 
         if "+cgal" in spec:
+            # Boost is a dependency of CGAL, and is not picked up by the configure script
+            # unless specified explicitly with `--with-boost` option.
             args.append("--with-cgal-prefix=%s" % spec["cgal"].prefix)
+            args.append("--with-boost=%s" % spec["boost"].prefix)
 
         if "+likwid" in spec:
             args.append("--with-likwid-prefix=%s" % spec["likwid"].prefix)
 
         if "+pfft" in spec:
-            args.append(
-                "--with-pfft-prefix=%s" % spec["pfft"].prefix,
-            )
+            args.append("--with-pfft-prefix=%s" % spec["pfft"].prefix)
 
         if "+nfft" in spec:
             args.append(
@@ -220,8 +221,15 @@ class Octopus(AutotoolsPackage, CudaPackage):
             args.append("--enable-python")
 
         # --with-etsf-io-prefix=
+        if "+etsf-io" in spec:
+            args.append("--with-etsf-io-prefix=%s" % spec["etsf-io"].prefix)
         # --with-sparskit=${prefix}/lib/libskit.a
+        if "+sparskit" in spec:
+            "--with-sparskit=%s" % os.path.join(self.spec["sparskit"].prefix.lib, "libskit.a")
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
+        if "+pnfft" in spec:
+            args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
+
         # --with-berkeleygw-prefix=${prefix}
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
@@ -235,16 +243,32 @@ class Octopus(AutotoolsPackage, CudaPackage):
             # In case of GCC version 10, we will have errors because of
             # argument mismatching. Need to provide a flag to turn this into a
             # warning and build sucessfully
+            # We can disable variable tracking at assignments introduced in GCC10
+            # for debug variant to decrease compile time.
 
-            fcflags = "FCFLAGS=-O2 -ffree-line-length-none"
-            fflags = "FFLAGS=O2 -ffree-line-length-none"
-            if spec.satisfies("%gcc@10:"):
-                gcc10_extra = "-fallow-argument-mismatch -fallow-invalid-boz"
-                args.append(fcflags + " " + gcc10_extra)
-                args.append(fflags + " " + gcc10_extra)
-            else:
-                args.append(fcflags)
-                args.append(fflags)
+            # Set optimization level for all flags
+            opt_level = "-O2"
+            fcflags = f"FCFLAGS={opt_level} -ffree-line-length-none"
+            cxxflags = f"CXXFLAGS={opt_level}"
+            cflags = f"CFLAGS={opt_level}"
+
+            # Add extra flags for gcc 10 or higher
+            gcc10_extra = (
+                "-fallow-argument-mismatch -fallow-invalid-boz"
+                if spec.satisfies("%gcc@10:")
+                else ""
+            )
+            # Add debug flag if needed
+            if spec.satisfies("+debug"):
+                fcflags += f" -g"
+                cxxflags += f" -g"
+                cflags += f" -g"
+                gcc10_extra += "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
+
+            args.append(f"{fcflags} {gcc10_extra}")
+            args.append(f"{cxxflags} {gcc10_extra}")
+            args.append(f"{cflags} {gcc10_extra}")
+
 
         return args
 
