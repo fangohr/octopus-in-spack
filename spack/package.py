@@ -55,7 +55,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("likwid", default=False, description="Compile with likwid")
     variant("libvdwxc", default=False, description="Compile with libvdwxc")
     variant("libyaml", default=False, description="Compile with libyaml")
-    variant("elpa", default=False, description="Compile with ELPA")
+    variant("elpa", default=False, when="+scalapack", description="Compile with ELPA")
     variant("nlopt", default=False, description="Compile with nlopt")
     variant("debug", default=False, description="Compile with debug flags")
 
@@ -246,7 +246,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
                 cxxflags += f" -g"
                 cflags += f" -g"
                 gcc10_extra += "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
-
+            # Help configure to find the ELPA F90 modules
+            fcflags += f" -I{spec['elpa'].prefix}/include/elpa-{spec['elpa'].version}/modules"
             args.append(f"{fcflags} {gcc10_extra}")
             args.append(f"{cxxflags} {gcc10_extra}")
             args.append(f"{cflags} {gcc10_extra}")
