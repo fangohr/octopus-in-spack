@@ -48,6 +48,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
     variant("nfft", default=False, description="Compile with NFFT")
+    variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
     variant("sparskit", default=False, description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations")
     variant('etsf-io', default=False, description='Compile with etsf-io')
     variant("pnfft", default=False, when="+pfft", description="Compile with PNFFT")
@@ -85,6 +86,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("arpack-ng+mpi", when="+arpack")
         depends_on("elpa+mpi", when="+elpa")
         depends_on("netcdf-fortran ^netcdf-c+mpi", when="+netcdf")
+        depends_on("berkeleygw@2.1+mpi", when="+berkeleygw")
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
@@ -93,6 +95,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("arpack-ng~mpi", when="+arpack")
         depends_on("elpa~mpi", when="+elpa")
         depends_on("netcdf-fortran ^netcdf-c~~mpi", when="+netcdf")
+        depends_on("berkeleygw@2.1~mpi", when="+berkeleygw")
 
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
@@ -231,6 +234,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
             args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
 
         # --with-berkeleygw-prefix=${prefix}
+        if "+berkeleygw" in spec:
+            args.append("--with-berkeleygw-prefix=%s" % spec["berkeleygw"].prefix)
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
         # strings the result may be > 132 chars and is terminated.
