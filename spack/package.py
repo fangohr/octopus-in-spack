@@ -47,6 +47,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("arpack", default=False, description="Compile with ARPACK")
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
+    variant("nfft", default=False, description="Compile with NFFT")
     variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
     variant("sparskit", default=False, description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations")
     variant('etsf-io', default=False, description='Compile with etsf-io')
@@ -103,6 +104,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("scalapack", when="+scalapack")
     depends_on("cgal", when="+cgal")
     depends_on("pfft", when="+pfft")
+    depends_on("nfft@3.2.4", when="+nfft")
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
     depends_on("nlopt", when="+nlopt")
@@ -192,6 +194,11 @@ class Octopus(AutotoolsPackage, CudaPackage):
 
         if "+pfft" in spec:
             args.append("--with-pfft-prefix=%s" % spec["pfft"].prefix)
+
+        if "+nfft" in spec:
+            args.append(
+                "--with-nfft=%s" % spec["nfft"].prefix,
+            )
 
         # if '+poke' in spec:
         #     args.extend([
