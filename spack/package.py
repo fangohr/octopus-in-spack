@@ -101,7 +101,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("py-mpi4py", when="+python")
     depends_on("metis@5:+int64", when="+metis")
     depends_on("parmetis+int64", when="+parmetis")
-    depends_on("netlib-scalapack", when="+scalapack")
+    depends_on("netlib-scalapack@2.1.0", when="+scalapack")
     depends_on("cgal", when="+cgal")
     depends_on("pfft", when="+pfft")
     depends_on("nfft@3.2.4", when="+nfft")
