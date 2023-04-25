@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: python:3.9-slim-buster
+      image: python:3.9-alpine
 
     steps:
     - name: Checkout
