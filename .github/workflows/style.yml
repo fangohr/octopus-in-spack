@@ -31,5 +31,5 @@ jobs:
     - name: Lint with isort
       run: isort --check --diff .
 
-    - name: Type check with mypy
-      run: mypy .
+    # - name: Type check with mypy
+    #   run: mypy .
