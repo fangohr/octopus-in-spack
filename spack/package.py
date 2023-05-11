@@ -112,7 +112,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on('etsf-io', when='+etsf-io')
     depends_on("pnfft", when="+pnfft")
 
-    # use elpa.patch for octopuus older than 13
+    # Use elpa.patch for octopus earlier than V13
+    # Previous verions of octopus couldnt detect  ELPA lib with openMP  (libelpa_openmp.so)
+    # See https://gitlab.com/octopus-code/octopus/-/merge_requests/1963
     patch("elpa.patch", when="@:13")
     # optional dependencies:
     # TODO:
