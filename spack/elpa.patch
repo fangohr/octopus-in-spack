@@ -1,0 +1,144 @@
+diff --git m4/elpa.m4 m4/elpa.m4
+index 057c476f7..62bec24bc 100644
+--- m4/elpa.m4
++++ m4/elpa.m4
+@@ -22,7 +22,8 @@ AC_DEFUN([ACX_ELPA],
+ 
+ if test x"$acx_scalapack_ok" = xyes; then
+   acx_elpa_ok=no
+-  acx_elpa_old_ok=no
++  test_elpa_with_openmp=False
++  test_elpa_without_openmp=False
+ 
+   dnl BACKUP LIBS AND FCFLAGS
+   acx_elpa_save_LIBS="$LIBS"
+@@ -43,14 +44,6 @@ if test x"$acx_scalapack_ok" = xyes; then
+ 
+   AC_MSG_CHECKING([for elpa])
+ 
+-  elpa_program_old="AC_LANG_PROGRAM([],[
+-    use :: elpa1
+-    implicit none
+-
+-    integer :: c1, c2, c3, err
+-    err = get_elpa_communicators(c1, 0, 0, c2, c3)
+-
+-  ])"
+ 
+   elpa_program="AC_LANG_PROGRAM([],[
+     use :: elpa
+@@ -65,34 +58,98 @@ if test x"$acx_scalapack_ok" = xyes; then
+ 
+   FCFLAGS="$FCFLAGS_ELPA $acx_elpa_save_FCFLAGS"
+ 
+-  if test x"$LIBS_ELPA" = x; then
+-    if test ! -z "$with_elpa_prefix"; then
+-      LIBS_ELPA="-L$with_elpa_prefix/lib -lelpa"
++  # If octopus is to be compiled without enable_openmp,
++  # then skip check with openMP and test without openMP only
++  # Here is the table for the different cases
++  # |                | LIBS_ELPA="-lelpa_openmp"      | LIBS_ELPA="-lelpa"   | LIBS_ELPA not set                     |
++  # | -------------- | ------------------------------ | -------------------- | ------------------------------------- |
++  # | Octopus+openmp | Test Elpa_openmp               | Test Elpa sequential | Test Elpa_openmp then Elpa sequential |
++  # | Octopus Serial | Fail with incompatible message | Test Elpa sequential | Test Elpa sequential                  |
++
++
++  if test -z "$enable_openmp" -o x"$enable_openmp" = x"no"; then
++    if test "$LIBS_ELPA" = "-lelpa_openmp"; then
++      AC_MSG_WARN([Octopus is compiled without openMP but elpa_openmp library is requested, skipping elpa inorder to avoid bringing in openMP])
++    elif test -z "$LIBS_ELPA" -o "$LIBS_ELPA" = "-lelpa"; then
++      # LIBS_ELPA is not set/ set to serial elpa, check only for elpa without openmp
++      test_elpa_without_openmp=True
+     else
+-      LIBS_ELPA="-lelpa"
++      AC_MSG_WARN([Unkonw value for LIBS_ELPA: $LIBS_ELPA])
++    fi
++  else
++    if test -z "$LIBS_ELPA"; then
++      # LIBS_ELPA is not set, check for elpa with openmp first and then without openmp
++      test_elpa_with_openmp=True
++      test_elpa_without_openmp=True
++    elif test "$LIBS_ELPA" = "-lelpa_openmp"; then
++      # LIBS_ELPA is set to lelpa_openmp
++      test_elpa_with_openmp=True
++    elif test "$LIBS_ELPA" = "-lelpa"; then
++      # LIBS_ELPA is set to lelpa
++      test_elpa_without_openmp=True
++    else
++      AC_MSG_WARN([Unkonw value for LIBS_ELPA: $LIBS_ELPA])
+     fi
+   fi
+ 
+-  LIBS="$LIBS_ELPA $acx_elpa_save_LIBS $LIBS_LAPACK $LIBS_BLAS"
+-  AC_LINK_IFELSE($elpa_program, [acx_elpa_ok=yes], [acx_elpa_ok=no])
+-  AC_LINK_IFELSE($elpa_program_old, [acx_elpa_old_ok=yes], [acx_elpa_old_ok=no])
++  # Section to test elpa with openMP support
++  if test x$test_elpa_with_openmp = xTrue; then
++    AC_MSG_CHECKING([for elpa with openMP support])
++    # Set LIBS_ELPA 
++    if test ! -z "$with_elpa_prefix"; then
++      LIBS_ELPA="-L$with_elpa_prefix/lib -lelpa_openmp"
++    else
++      LIBS_ELPA="-lelpa_openmp"
++    fi
++
++    LIBS="$LIBS_ELPA $acx_elpa_save_LIBS $LIBS_LAPACK $LIBS_BLAS"
++    AC_LINK_IFELSE($elpa_program, [acx_elpa_ok=yes], [acx_elpa_ok=no])
++
++    AC_MSG_RESULT([$acx_elpa_ok ($FCFLAGS_ELPA $LIBS_ELPA)])
++
++    if test x$acx_elpa_ok != xyes; then
+ 
+-  AC_MSG_RESULT([$acx_elpa_ok ($FCFLAGS_ELPA $LIBS_ELPA)])
++      AC_MSG_WARN([Could not find the elpa library with openMP support])
+ 
+-  if test x$acx_elpa_ok != xyes; then
++      if test x"$test_elpa_without_openmp" = xTrue; then
++        AC_MSG_WARN([Trying to find elpa library without openMP support])
++      else
++        FCFLAGS_ELPA=""
++        LIBS_ELPA=""
++      fi
+ 
+-    if test x$acx_elpa_old_ok != xyes; then
+-      AC_MSG_WARN([Could not find the elpa library])
+     else
+-      AC_MSG_WARN([Could only find an old version of the elpa library, compiling without elpa support])
++
++      AC_DEFINE(HAVE_ELPA, 1, [Define if ELPA is available])
++      # Elpa with openmp is found, no need to test elpa without openmp
++      test_elpa_without_openmp=False
++
+     fi
++  fi
+ 
+-    FCFLAGS_ELPA=""
+-    LIBS_ELPA=""
++  # Section to test elpa without openMP support
++  if test x$test_elpa_without_openmp = xTrue; then
+ 
+-  else
++    AC_MSG_CHECKING([for elpa without openMP support])
++      # Set LIBS_ELPA 
++      if test ! -z "$with_elpa_prefix"; then
++        LIBS_ELPA="-L$with_elpa_prefix/lib -lelpa"
++      else
++        LIBS_ELPA="-lelpa"
++      fi
++
++    LIBS="$LIBS_ELPA $acx_elpa_save_LIBS $LIBS_LAPACK $LIBS_BLAS"
++    AC_LINK_IFELSE($elpa_program, [acx_elpa_ok=yes], [acx_elpa_ok=no])
++
++    AC_MSG_RESULT([$acx_elpa_ok ($FCFLAGS_ELPA $LIBS_ELPA)])
+ 
+-    AC_DEFINE(HAVE_ELPA, 1, [Define if ELPA is available])
++    if test x$acx_elpa_ok = xyes; then
++      AC_DEFINE(HAVE_ELPA, 1, [Define if ELPA is available with openMP support])
++    else
++      AC_MSG_WARN([Could not find the elpa library, compiling without elpa support])
++      FCFLAGS_ELPA=""
++      LIBS_ELPA=""
++    fi
+ 
+   fi
+ 
