@@ -126,6 +126,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("pnfft", when="+pnfft")
     depends_on("nlopt", when="+nlopt")
 
+    # use elpa.patch for octopuus older than 13
+    patch("elpa.patch", when="@:13")
     # optional dependencies:
     # TODO: etsf-io, sparskit,
     # feast, libfm, pfft, isf, pnfft, poke
