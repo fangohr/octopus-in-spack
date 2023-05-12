@@ -1,0 +1,85 @@
+# Using template from https://github.com/spack/spack/blob/develop/pyproject.toml to get the settings for black and isort
+[tool.black]
+line-length = 99
+target-version = ['py36', 'py37', 'py38', 'py39', 'py310']
+include = '''
+    \.pyi?$
+'''
+# extend-exclude = '''
+# /(
+#     \.git
+#   | \.mypy_cache
+#   | ^lib/spack/external/
+#   | ^opt/
+# )/
+# '''
+skip_magic_trailing_comma = true
+
+[tool.isort]
+line_length = 99
+profile = "black"
+sections = [
+  "FUTURE",
+  "STDLIB",
+  "THIRDPARTY",
+  "ARCHSPEC", "LLNL", "FIRSTPARTY",
+  "LOCALFOLDER",
+]
+known_first_party = "spack"
+known_archspec = "archspec"
+known_llnl = "llnl"
+known_third_party = ["ruamel", "six"]
+src_paths = "lib"
+honor_noqa = true
+
+[tool.mypy]
+python_version = 3.7
+files = ['spack/test/package.py']
+# files = ['lib/spack/llnl/**/*.py', 'lib/spack/spack/**/*.py', './var/spack/repos/builtin/packages/*/package.py']
+mypy_path = ['spack']
+# mypy_path = ['bin', 'lib/spack', 'lib/spack/external', 'var/spack/repos/builtin']
+allow_redefinition = true
+
+# This and a generated import file allows supporting packages
+namespace_packages = true
+
+# To avoid re-factoring all the externals, ignore errors and missing imports
+# globally, then turn back on in spack and spack submodules
+ignore_errors = true
+ignore_missing_imports = true
+
+  # [[tool.mypy.overrides]]
+  # module = 'spack.*'
+  # ignore_errors = false
+  # ignore_missing_imports = false
+
+  # [[tool.mypy.overrides]]
+  # module = 'packages.*'
+  # ignore_errors = false
+  # ignore_missing_imports = false
+  # # we can't do this here, not a module scope option, in spack style instead
+  # # disable_error_code = 'no-redef'
+
+  # [[tool.mypy.overrides]]
+  # module = 'llnl.*'
+  # ignore_errors = false
+  # ignore_missing_imports = false
+
+  # [[tool.mypy.overrides]]
+  # module = 'spack.test.packages'
+  # ignore_errors = true
+
+  # # ignore errors in fake import path for packages
+  # [[tool.mypy.overrides]]
+  # module = 'spack.pkg.*'
+  # ignore_errors = true
+  # ignore_missing_imports = true
+
+  # # pytest (which we depend on) optionally imports numpy, which requires Python 3.8 in
+  # # recent versions. mypy still imports its .pyi file, which has positional-only
+  # # arguments, which don't work in 3.7, which causes mypy to bail out early if you have
+  # # numpy installed.
+  # [[tool.mypy.overrides]]
+  # module = 'numpy'
+  # follow_imports = 'skip'
+  # follow_imports_for_stubs = true
