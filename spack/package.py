@@ -76,6 +76,17 @@ class Octopus(AutotoolsPackage, CudaPackage):
         description="Compile with PNFFT - Parallel Nonequispaced FFT library",
     )
     variant("debug", default=False, description="Compile with debug flags")
+    # set a variant to quickly select a predefined set of optional dependencies
+    variant(
+        'flavor',
+        values=(
+            'minimal',
+            'full_serial',
+            'full_mpi',
+        ),
+        default=False,
+        description='Compile with a predefined set of optional dependencies',
+    )
 
     depends_on("autoconf", type="build", when="@develop")
     depends_on("automake", type="build", when="@develop")
@@ -125,6 +136,40 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("libyaml", when="+libyaml")
     depends_on("pnfft", when="+pnfft")
     depends_on("nlopt", when="+nlopt")
+
+    # Define the dependencies for the flavors
+    with when("flavor=minimal"):
+        depends_on("cgal")
+
+    with when("flavor=full_serial" or "flavor=full_mpi"):
+        # list all the dependencies
+        # that are independent of the parallelism
+        depends_on("cgal")
+        depends_on("python")
+        depends_on("likwid")
+        depends_on("libyaml")
+        depends_on("nlopt")
+        depends_on("etsf-io")
+        depends_on("sparskit")
+        depends_on("nfft@3.2.4")
+
+    with when("flavor=full_serial"):
+        # list all other serial dependencies
+        depends_on("netcdf-fortran ^netcdf-c~~mpi")
+        depends_on("arpack-ng~mpi")
+        depends_on("berkeleygw@2.1~mpi")
+
+    with when("flavor=full_mpi"):
+        # list all other parallel dependencies
+        depends_on("mpi")
+        depends_on("netcdf-fortran ^netcdf-c+mpi")
+        depends_on("arpack-ng+mpi")
+        depends_on("berkeleygw@2.1+mpi")
+        depends_on("scalapack")
+        depends_on("pfft")
+        depends_on("pnfft")
+        depends_on("libvdwxc+mpi")
+        depends_on("elpa+mpi")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
