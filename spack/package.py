@@ -78,14 +78,10 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("debug", default=False, description="Compile with debug flags")
     # set a variant to quickly select a predefined set of optional dependencies
     variant(
-        'flavor',
-        values=(
-            'minimal',
-            'full_serial',
-            'full_mpi',
-        ),
+        "flavor",
+        values=("minimal", "full_serial", "full_mpi"),
         default=False,
-        description='Compile with a predefined set of optional dependencies',
+        description="Compile with a predefined set of optional dependencies",
     )
 
     depends_on("autoconf", type="build", when="@develop")
