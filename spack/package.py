@@ -78,7 +78,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("debug", default=False, description="Compile with debug flags")
     # set a variant to quickly select a predefined set of optional dependencies
     variant(
-        "flavor",
+        "flavour",
         values=("minimal", "full_serial", "full_mpi"),
         default=False,
         description="Compile with a predefined set of optional dependencies",
@@ -133,11 +133,11 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("pnfft", when="+pnfft")
     depends_on("nlopt", when="+nlopt")
 
-    # Define the dependencies for the flavors
-    with when("flavor=minimal"):
+    # Define the dependencies for the flavours
+    with when("flavour=minimal"):
         depends_on("cgal")
 
-    with when("flavor=full_serial" or "flavor=full_mpi"):
+    with when("flavour=full_serial" or "flavour=full_mpi"):
         # list all the dependencies
         # that are independent of the parallelism
         depends_on("cgal")
@@ -149,13 +149,13 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("sparskit")
         depends_on("nfft@3.2.4")
 
-    with when("flavor=full_serial"):
+    with when("flavour=full_serial"):
         # list all other serial dependencies
         depends_on("netcdf-fortran ^netcdf-c~~mpi")
         depends_on("arpack-ng~mpi")
         depends_on("berkeleygw@2.1~mpi")
 
-    with when("flavor=full_mpi"):
+    with when("flavour=full_mpi"):
         # list all other parallel dependencies
         depends_on("mpi")
         depends_on("netcdf-fortran ^netcdf-c+mpi")
