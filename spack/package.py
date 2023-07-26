@@ -16,11 +16,12 @@ class Octopus(AutotoolsPackage, CudaPackage):
     theory code."""
 
     homepage = "https://octopus-code.org/"
-    url = "https://octopus-code.org/down.php?file=6.0/octopus-6.0.tar.gz"
+    url = "https://octopus-code.org/download/6.0/octopus-6.0.tar.gz"
     git = "https://gitlab.com/octopus-code/octopus"
 
     maintainers("fangohr", "RemiLacroix-IDRIS")
 
+    version("13.0", sha256="b4d0fd496c31a9c4aa4677360e631765049373131e61f396b00048235057aeb1")
     version("12.2", sha256="e919e07703696eadb4ba59352d7a2678a9191b4586cb9da538661615e765a5a2")
     version("12.1", sha256="e2214e958f1e9631dbe6bf020c39f1fe4d71ab0b6118ea9bd8dc38f6d7a7959a")
     version("12.0", sha256="70beaf08573d394a766f10346a708219b355ad725642126065d12596afbc0dcc")
@@ -41,17 +42,23 @@ class Octopus(AutotoolsPackage, CudaPackage):
 
     variant("mpi", default=True, description="Build with MPI support")
     variant("scalapack", default=False, when="+mpi", description="Compile with Scalapack")
+    variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
     variant("metis", default=False, description="Compile with METIS")
     variant("parmetis", default=False, when="+mpi", description="Compile with ParMETIS")
     variant("netcdf", default=False, description="Compile with Netcdf")
+    variant(
+        "sparskit",
+        default=False,
+        description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations",
+    )
     variant("arpack", default=False, description="Compile with ARPACK")
     variant("cgal", default=False, description="Compile with CGAL library support")
     variant("pfft", default=False, when="+mpi", description="Compile with PFFT")
-    variant("nfft", default=False, description="Compile with NFFT")
-    variant("berkeleygw", default=False, description="Compile with BerkeleyGW")
-    variant("sparskit", default=False, description="Compile with Sparskit - A Basic Tool Kit for Sparse Matrix Computations")
-    variant('etsf-io', default=False, description='Compile with etsf-io')
-    variant("pnfft", default=False, when="+pfft", description="Compile with PNFFT")
+    variant(
+        "nfft",
+        default=False,
+        description="Compile with NFFT - Nonequispaced Fast Fourier Transform library",
+    )
     # poke here refers to https://gitlab.e-cam2020.eu/esl/poke
     # variant('poke', default=False,
     #         description='Compile with poke (not available in spack yet)')
@@ -60,7 +67,14 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("libvdwxc", default=False, description="Compile with libvdwxc")
     variant("libyaml", default=False, description="Compile with libyaml")
     variant("elpa", default=False, description="Compile with ELPA")
+    variant("etsf-io", default=False, description="Compile with etsf-io")
     variant("nlopt", default=False, description="Compile with nlopt")
+    variant(
+        "pnfft",
+        default=False,
+        when="+pfft",
+        description="Compile with PNFFT - Parallel Nonequispaced FFT library",
+    )
     variant("debug", default=False, description="Compile with debug flags")
 
     depends_on("autoconf", type="build", when="@develop")
@@ -97,23 +111,23 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("netcdf-fortran ^netcdf-c~~mpi", when="+netcdf")
         depends_on("berkeleygw@2.1~mpi", when="+berkeleygw")
 
+    depends_on("etsf-io", when="+etsf-io")
     depends_on("py-numpy", when="+python")
     depends_on("py-mpi4py", when="+python")
     depends_on("metis@5:+int64", when="+metis")
     depends_on("parmetis+int64", when="+parmetis")
     depends_on("netlib-scalapack@2.1.0", when="+scalapack")
+    depends_on("sparskit", when="+sparskit")
     depends_on("cgal", when="+cgal")
     depends_on("pfft", when="+pfft")
     depends_on("nfft@3.2.4", when="+nfft")
     depends_on("likwid", when="+likwid")
     depends_on("libyaml", when="+libyaml")
-    depends_on("nlopt", when="+nlopt")
-    depends_on("sparskit", when="+sparskit")
-    depends_on('etsf-io', when='+etsf-io')
     depends_on("pnfft", when="+pnfft")
+    depends_on("nlopt", when="+nlopt")
 
     # optional dependencies:
-    # TODO:
+    # TODO: etsf-io, sparskit,
     # feast, libfm, pfft, isf, pnfft, poke
 
     def configure_args(self):
@@ -196,14 +210,14 @@ class Octopus(AutotoolsPackage, CudaPackage):
             args.append("--with-pfft-prefix=%s" % spec["pfft"].prefix)
 
         if "+nfft" in spec:
-            args.append(
-                "--with-nfft=%s" % spec["nfft"].prefix,
-            )
+            args.append("--with-nfft=%s" % spec["nfft"].prefix)
 
         # if '+poke' in spec:
         #     args.extend([
         #         '--with-poke-prefix=%s' % spec['poke'].prefix,
         #     ])
+        if "+pnfft" in spec:
+            args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
 
         if "+libvdwxc" in spec:
             args.append("--with-libvdwxc-prefix=%s" % spec["libvdwxc"].prefix)
@@ -223,16 +237,13 @@ class Octopus(AutotoolsPackage, CudaPackage):
         if "+python" in spec:
             args.append("--enable-python")
 
-        # --with-etsf-io-prefix=
+        if "+sparskit" in spec:
+            args.append(
+                "--with-sparskit=%s" % os.path.join(self.spec["sparskit"].prefix.lib, "libskit.a")
+            )
         if "+etsf-io" in spec:
             args.append("--with-etsf-io-prefix=%s" % spec["etsf-io"].prefix)
-        # --with-sparskit=${prefix}/lib/libskit.a
-        if "+sparskit" in spec:
-            "--with-sparskit=%s" % os.path.join(self.spec["sparskit"].prefix.lib, "libskit.a")
         # --with-pfft-prefix=${prefix} --with-mpifftw-prefix=${prefix}
-        if "+pnfft" in spec:
-            args.append("--with-pnfft-prefix=%s" % spec["pnfft"].prefix)
-
         # --with-berkeleygw-prefix=${prefix}
         if "+berkeleygw" in spec:
             args.append("--with-berkeleygw-prefix=%s" % spec["berkeleygw"].prefix)
@@ -265,15 +276,16 @@ class Octopus(AutotoolsPackage, CudaPackage):
             )
             # Add debug flag if needed
             if spec.satisfies("+debug"):
-                fcflags += f" -g"
-                cxxflags += f" -g"
-                cflags += f" -g"
-                gcc10_extra += "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
+                fcflags += " -g"
+                cxxflags += " -g"
+                cflags += " -g"
+                gcc10_extra += (
+                    "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
+                )
 
             args.append(f"{fcflags} {gcc10_extra}")
             args.append(f"{cxxflags} {gcc10_extra}")
             args.append(f"{cflags} {gcc10_extra}")
-
 
         return args
 
