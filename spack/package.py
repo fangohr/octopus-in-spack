@@ -299,7 +299,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
         # Disable flags
 
         # disable gdlib explicitly to avoid
-        # autotools picking it up gdlib from the system
+        # autotools picking gdlib up from the system
         args.append("--disable-gdlib")
 
         return args
