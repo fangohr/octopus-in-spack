@@ -39,13 +39,6 @@ RUN apt-get install -y --no-install-recommends \
               vim \
            && rm -rf /var/lib/apt/lists/*
 
-# install packages the are not needed
-# but are installed only to test the --disable-package
-# argument of autotools package
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-             libgd-dev \
-             && rm -rf /var/lib/apt/lists/*
 
 # load spack environment on login
 RUN echo "source $SPACK_ROOT/share/spack/setup-env.sh" \
