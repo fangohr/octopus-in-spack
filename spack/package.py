@@ -66,7 +66,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("likwid", default=False, description="Compile with likwid")
     variant("libvdwxc", default=False, description="Compile with libvdwxc")
     variant("libyaml", default=False, description="Compile with libyaml")
-    variant("elpa", default=False, description="Compile with ELPA")
+    variant("elpa", default=False, when="+scalapack", description="Compile with ELPA")
     variant("etsf-io", default=False, description="Compile with etsf-io")
     variant("nlopt", default=False, description="Compile with nlopt")
     variant(
