@@ -287,6 +287,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
                     "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
                 )
 
+            # Help configure to find the ELPA F90 modules
+            fcflags += f" -I{spec['elpa'].prefix}/include/elpa-{spec['elpa'].version}/modules"
+
             args.append(f"{fcflags} {gcc10_extra}")
             args.append(f"{cxxflags} {gcc10_extra}")
             args.append(f"{cflags} {gcc10_extra}")
