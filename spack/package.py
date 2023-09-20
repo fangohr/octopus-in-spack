@@ -268,24 +268,20 @@ class Octopus(AutotoolsPackage, CudaPackage):
             cxxflags = f"CXXFLAGS={opt_level}"
             cflags = f"CFLAGS={opt_level}"
 
+            extra_flags = ""
             # Add extra flags for gcc 10 or higher
-            gcc10_extra = (
-                "-fallow-argument-mismatch -fallow-invalid-boz"
-                if spec.satisfies("%gcc@10:")
-                else ""
-            )
+            if spec.satisfies("%gcc@10:"):
+                extra_flags += " -fallow-argument-mismatch -fallow-invalid-boz"
+
             # Add debug flag if needed
             if spec.satisfies("+debug"):
-                fcflags += " -g"
-                cxxflags += " -g"
-                cflags += " -g"
-                gcc10_extra += (
-                    "-fno-var-tracking-assignments" if spec.satisfies("%gcc@10:") else ""
-                )
+                extra_flags += " -g"
+                if spec.satisfies("%gcc@10:"):
+                    extra_flags += " -fno-var-tracking-assignments"
 
-            args.append(f"{fcflags} {gcc10_extra}")
-            args.append(f"{cxxflags} {gcc10_extra}")
-            args.append(f"{cflags} {gcc10_extra}")
+            args.append(fcflags + extra_flags)
+            args.append(cxxflags + extra_flags)
+            args.append(cflags + extra_flags)
 
         return args
 
