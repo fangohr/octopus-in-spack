@@ -99,7 +99,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("libvdwxc+mpi", when="+libvdwxc")
         depends_on("arpack-ng+mpi", when="+arpack")
         depends_on("elpa+mpi", when="+elpa")
-        depends_on("netcdf-fortran ^netcdf-c+mpi", when="+netcdf")
+        depends_on("netcdf-fortran", when="+netcdf")
+        depends_on("netcdf-c+mpi", when="+netcdf")
         depends_on("berkeleygw@2.1+mpi", when="+berkeleygw")
 
     with when("~mpi"):  # list all the serial dependencies
@@ -108,7 +109,8 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("libvdwxc~mpi", when="+libvdwxc")
         depends_on("arpack-ng~mpi", when="+arpack")
         depends_on("elpa~mpi", when="+elpa")
-        depends_on("netcdf-fortran ^netcdf-c~~mpi", when="+netcdf")
+        depends_on("netcdf-fortran", when="+netcdf")
+        depends_on("netcdf-c~~mpi", when="+netcdf")
         depends_on("berkeleygw@2.1~mpi", when="+berkeleygw")
 
     depends_on("etsf-io", when="+etsf-io")
