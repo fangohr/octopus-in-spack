@@ -128,7 +128,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("libyaml", when="+libyaml")
     depends_on("pnfft", when="+pnfft")
     depends_on("nlopt", when="+nlopt")
-    depends_on("dftbplus~mpi", when="+dftbplus")
+    depends_on("dftbplus~mpi+api+sharedlibs~openmp", when="+dftbplus")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
