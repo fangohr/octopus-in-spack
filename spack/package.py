@@ -46,6 +46,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     variant("metis", default=False, description="Compile with METIS")
     variant("parmetis", default=False, when="+mpi", description="Compile with ParMETIS")
     variant("netcdf", default=False, description="Compile with Netcdf")
+    variant("dftbplus", default=False, description="Compile with DFTB+")
     variant(
         "sparskit",
         default=False,
@@ -127,6 +128,7 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("libyaml", when="+libyaml")
     depends_on("pnfft", when="+pnfft")
     depends_on("nlopt", when="+nlopt")
+    depends_on("dftbplus~mpi", when="+dftbplus")
 
     # optional dependencies:
     # TODO: etsf-io, sparskit,
@@ -249,6 +251,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
         # --with-berkeleygw-prefix=${prefix}
         if "+berkeleygw" in spec:
             args.append("--with-berkeleygw-prefix=%s" % spec["berkeleygw"].prefix)
+
+        if "+dftbplus" in spec:
+            args.append("--with-dftbplus-prefix=%s" % spec["dftbplus"].prefix)
 
         # When preprocessor expands macros (i.e. CFLAGS) defined as quoted
         # strings the result may be > 132 chars and is terminated.
