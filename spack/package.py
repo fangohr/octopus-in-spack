@@ -101,7 +101,13 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("elpa+mpi", when="+elpa")
         depends_on("netcdf-fortran", when="+netcdf")
         depends_on("netcdf-c+mpi", when="+netcdf")
-        depends_on("berkeleygw@2.1+mpi", when="+berkeleygw")
+        with when("+berkeleygw")
+            # octopus dropped support for BerkeleyGW 2.1 in version 14
+            # only BerkeleyGW 3 is supported from version 14
+            # see https://gitlab.com/octopus-code/octopus/-/merge_requests/2257
+            # BerkeleyGW 2.1 is the last supported version until octopus@14
+            depends_on("berkeleygw@3:+mpi", when="@:13")
+            depends_on("berkeleygw@2.1+mpi", when="@14:")
 
     with when("~mpi"):  # list all the serial dependencies
         depends_on("fftw@3:+openmp~mpi", when="@8:9")  # FFT library
@@ -111,7 +117,9 @@ class Octopus(AutotoolsPackage, CudaPackage):
         depends_on("elpa~mpi", when="+elpa")
         depends_on("netcdf-fortran", when="+netcdf")
         depends_on("netcdf-c~~mpi", when="+netcdf")
-        depends_on("berkeleygw@2.1~mpi", when="+berkeleygw")
+        with when("+berkeleygw")
+            depends_on("berkeleygw@3:~~mpi", when="@:13")
+            depends_on("berkeleygw@2.1~~mpi", when="@14:")
 
     depends_on("etsf-io", when="+etsf-io")
     depends_on("py-numpy", when="+python")
