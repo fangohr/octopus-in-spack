@@ -68,9 +68,13 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env create octopus-serial && \
       spack env activate octopus-serial && \
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis && \
+      # we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
+      # see https://github.com/spack/spack/issues/43122
+      # TODO: remove the version number when the issue is resolved
+
+      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw@3.0.1 && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis && \
+      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw@3.0.1 && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
