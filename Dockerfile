@@ -5,7 +5,7 @@ FROM debian:bullseye
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
 ARG OCT_VERSION=13.0
-ARG BER_VER=""
+ARG BERKELEYGW_VER=""
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
 # Any extra packages to be installed in the host
@@ -72,9 +72,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
       # see https://github.com/spack/spack/issues/43122
       # TODO: remove the version number when the issue is resolved
-      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BER_VER} && \
+      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER} && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BER_VER} && \
+      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER} && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_serial octopus && \
@@ -92,9 +92,9 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env create octopus-mpi && \
       spack env activate octopus-mpi && \
       # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BER_VER}  && \
+      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER}  && \
       # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BER_VER} && \
+      spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER} && \
       spack install && \
       # run spack smoke tests for octopus. We get an error if any of the fails:
       spack test run --alias test_MPI octopus && \
