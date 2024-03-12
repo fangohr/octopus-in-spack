@@ -5,6 +5,7 @@ FROM debian:bullseye
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
 ARG OCT_VERSION=13.0
+ARG BER_VER=""
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
 # Any extra packages to be installed in the host
@@ -71,7 +72,6 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
       # see https://github.com/spack/spack/issues/43122
       # TODO: remove the version number when the issue is resolved
-      [[ "$OCT_VERSION" == "develop" ]] && export BER_VER="@3.0.1" || export BER_VER="" && \
       spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BER_VER} && \
       # run the spack installation (adding it to the environment):
       spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BER_VER} && \
@@ -92,7 +92,6 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       spack env create octopus-mpi && \
       spack env activate octopus-mpi && \
       # display specs of upcoming spack installation:
-      [[ "$OCT_VERSION" == "develop" ]] && export BER_VER="@3.0.1" || export BER_VER="" && \
       spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BER_VER}  && \
       # run the spack installation (adding it to the environment):
       spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BER_VER} && \
