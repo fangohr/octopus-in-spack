@@ -39,6 +39,7 @@ RUN apt-get install -y --no-install-recommends \
               vim \
            && rm -rf /var/lib/apt/lists/*
 
+
 # load spack environment on login
 RUN echo "source $SPACK_ROOT/share/spack/setup-env.sh" \
            > /etc/profile.d/spack.sh
