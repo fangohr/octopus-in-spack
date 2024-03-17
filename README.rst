@@ -6,7 +6,7 @@ Octopus in spack
 
 .. sectnum::
 
-.. contents:: 
+.. contents::
 
 Octopus-in-spack
 ================
@@ -30,6 +30,8 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 |spack-develop-octopus-stable| Spack develop version, preferred version of Octopus
 
 |spack-develop-octopus-develop| Spack develop version, develop version of Octopus
+
+|diff-with-upstream| A check to see if this repository is in sync with the upstream spack repository.
 
 
 Octopus and Spack - Quick start
@@ -94,6 +96,8 @@ https://github.com/fangohr/octopus-in-docker
 .. |spack-develop-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml
 
+.. |diff-with-upstream| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/diff-with-upstream.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/sdiff-with-upstream.yml
 
 .. comment: Outdated badges to follow
 
