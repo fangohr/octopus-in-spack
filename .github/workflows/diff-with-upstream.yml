@@ -1,0 +1,17 @@
+name: diff-with-upstream
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # Run once a week on Sunday at midnight
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: make diff
