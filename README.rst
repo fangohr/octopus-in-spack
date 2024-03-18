@@ -31,7 +31,7 @@ moment (if you follow `Compilation of Octopus using Spack`_):
 
 |spack-develop-octopus-develop| Spack develop version, develop version of Octopus
 
-|diff-with-upstream| A check to see if this repository is in sync with the upstream spack repository.
+|diff-with-upstream| A check to see if our `octopus/package.py` file is in sync with the upstream [spack repository](https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/octopus/package.py).
 
 
 Octopus and Spack - Quick start
