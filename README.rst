@@ -9,7 +9,7 @@ Support repository for getting the `OCTOPUS code <http://octopus-code.org>`__ pa
 `Spack <http://spack.readthedocs.io>`__.
 
 Mostly aimed for maintainers of the Octopus package in spack: to test changes to
-Spack's `package.py file <https://github.com/fangohr/octopus-in-spack/blob/main/spack/package.py>`_ for Octopus, before requesting merges 
+Spack's `package.py file <https://github.com/fangohr/octopus-in-spack/blob/main/spack/package.py>`_ for Octopus, before requesting merges
 in `spack upstream <https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/octopus/package.py>`_.
 
 There is a related effort to run some tests on the Octopus package in spack for older versions of spack at https://github.com/fangohr/spack-ci-octopus.
@@ -19,13 +19,17 @@ We also provide some hints on how to install Octopus with Spack (see below).
 Status
 ------
 
-Compile Octopus on Linux with Spack.
+Compile Octopus on Debian with Spack.
 
-|spack-develop-octopus-stable| Spack develop version, last Octopus release 
-
-|spack-develop-octopus-develop| Spack develop version, `develop version of Octopus <https://gitlab.com/octopus-code/octopus>`__
-
-|diff-with-upstream| A check to see if our ``octopus/package.py`` file is in sync with the `upstream spack repository <https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/octopus/package.py>`__
++----------------------------------+-------------------------------------------------------------+
+| Badge                            | Description                                                 |
++==================================+=============================================================+
+| |spack-develop-octopus-stable|   | Build ``latest`` octopus using spack develop branch         |
++----------------------------------+-------------------------------------------------------------+
+| |spack-develop-octopus-develop|  | Build develop branch of Octopus using spack develop branch  |
++----------------------------------+-------------------------------------------------------------+
+| |diff-with-upstream|             | A check to see if our ``octopus/package.py`` file is in sync with the `upstream spack repository <https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/octopus/package.py>`_ |
++----------------------------------+-------------------------------------------------------------+
 
 
 Octopus and Spack - Quick start
