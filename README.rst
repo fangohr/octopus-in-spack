@@ -24,12 +24,11 @@ We also provide some hints on how to install Octopus with Spack (see below).
 Status
 ------
 
-Compile Octopus on Linux with Spack. Spack's preferred version of Octopus is 12.2 at the
-moment (if you follow `Compilation of Octopus using Spack`_):
+Compile Octopus on Linux with Spack.
 
-|spack-develop-octopus-stable| Spack develop version, preferred version of Octopus
+|spack-develop-octopus-stable| Spack develop version, last Octopus release 
 
-|spack-develop-octopus-develop| Spack develop version, develop version of Octopus
+|spack-develop-octopus-develop| Spack develop version, `develop version of Octopus <https://gitlab.com/octopus-code/octopus>`__
 
 
 Octopus and Spack - Quick start
@@ -37,8 +36,6 @@ Octopus and Spack - Quick start
 
 Compilation of Octopus using Spack
 ----------------------------------
-
-At the moment, this is under development, and we need two lines:
 
 -  get spack: ``git clone https://github.com/spack/spack``
 -  activate spack: ``source spack/share/spack/setup-env.sh``
@@ -48,15 +45,19 @@ want to include netcdf support:
 
 -  ``spack install octopus +netcdf``
 
-Ideally, there are no errors. This should install Octopus 12.2
+This should install the last Octopus release available in spack. (Use ``spack info octopus`` to see available versions.)
+
+To install a particular Octopus version, for example 14.0, you can use this notation:
+
+-  ``spack install octopus@14.0 +netcdf``
 
 There are further *variants* you can install. For example:
 
 - ``spack install octopus +netcdf+parmetis+arpack+cgal+pfft+python+likwid+libyaml+elpa+nlopt``
 
-To see an overview of available variants, use ``spack show octopus``.
+To see an overview of available variants, use ``spack info octopus``.
 
-This should install the last Octopus release available in spack. (Use ``spack info octopus`` to see available versions.)
+
 
 To use Octopus after installation
 ---------------------------------
@@ -69,23 +70,17 @@ To use Octopus after installation
 
 -  ``spack load octopus``
 
-3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus version``.
+3. Use octopus (it should be in the ``$PATH``). You can check the octopus version using ``octopus --version``.
 
 
-Octopus in Docker container
-===========================
 
-See https://github.com/fangohr/octopus-in-docker .
+Other ways to compile / use Octopus
+===================================
 
-
-Compile Octopus on Debian Linux (without spack)
-===============================================
-
-See for example the steps in
-`this Dockerfile <https://github.com/fangohr/octopus-in-docker/blob/main/Dockerfile>`__
-on
-https://github.com/fangohr/octopus-in-docker
-
+- use a pre-built Docker container: https://github.com/fangohr/octopus-in-docker
+- compile Octopus from source on Debian Linux (without spack): See for example the steps in
+  `this Dockerfile <https://github.com/fangohr/octopus-in-docker/blob/main/Dockerfile>`__
+  on https://github.com/fangohr/octopus-in-docker
 
 
 .. |spack-develop-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop.yml/badge.svg
@@ -93,14 +88,3 @@ https://github.com/fangohr/octopus-in-docker
 
 .. |spack-develop-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml
-
-
-.. comment: Outdated badges to follow
-
-.. |spack-latest-octopus-stable| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest.yml
-
-
-.. |spack-latest-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latest-octopus-develop.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-latestoctopus-develop.yml
-
