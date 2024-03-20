@@ -1,6 +1,6 @@
 .. sectnum::
 
-.. contents:: 
+.. contents::
 
 Octopus-in-spack
 ================
@@ -24,6 +24,8 @@ Compile Octopus on Linux with Spack.
 |spack-develop-octopus-stable| Spack develop version, last Octopus release 
 
 |spack-develop-octopus-develop| Spack develop version, `develop version of Octopus <https://gitlab.com/octopus-code/octopus>`__
+
+|diff-with-upstream| A check to see if our `octopus/package.py` file is in sync with the upstream [spack repository](https://github.com/spack/spack/blob/develop/var/spack/repos/builtin/packages/octopus/package.py).
 
 
 Octopus and Spack - Quick start
@@ -83,3 +85,7 @@ Other ways to compile / use Octopus
 
 .. |spack-develop-octopus-develop| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml/badge.svg
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml
+
+.. |diff-with-upstream| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/diff-with-upstream.yml/badge.svg
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/sdiff-with-upstream.yml
+
