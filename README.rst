@@ -1,9 +1,3 @@
-
-
-
-Octopus in spack
-================
-
 .. sectnum::
 
 .. contents:: 
@@ -15,7 +9,8 @@ Support repository for getting the `OCTOPUS code <http://octopus-code.org>`__ pa
 `Spack <http://spack.readthedocs.io>`__.
 
 Mostly aimed for maintainers of the Octopus package in spack: to test changes to
-the `octopus/spack.py` file before request merges in spack upstream.
+Spack's `package.py file <https://github.com/fangohr/octopus-in-spack/blob/main/spack/package.py>`_ for Octopus, before requesting merges 
+in `spack upstream <https://raw.githubusercontent.com/spack/spack/develop/var/spack/repos/builtin/packages/octopus/package.py>`_.
 
 There is a related effort to run some tests on the Octopus package in spack for older versions of spack at https://github.com/fangohr/spack-ci-octopus.
 
