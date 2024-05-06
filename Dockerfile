@@ -4,7 +4,7 @@ FROM debian:bullseye
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
-ARG OCT_VERSION=13.0
+ARG OCT_VERSION=14.1
 ARG BERKELEYGW_VER=""
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
