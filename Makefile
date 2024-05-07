@@ -3,6 +3,7 @@
 # Using most recent spack version with preferred version of octopus
 spack-develop:
 	# Setting BERKELEYGW_VER to 3.0.1 as v4 is released but the download link is broken!
+	# This should be remoeved when the link is fixed as the versions for octopus stable should be infered by spack from the package.py file
 	docker build -f Dockerfile --build-arg SPACK_VERSION=develop --build-arg BERKELEYGW_VER="@3.0.1" -t octopus-spack  .
 
 # Using most recent spack version with most recent version of octopus
