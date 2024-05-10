@@ -106,6 +106,27 @@ RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
       # deactivate the environment.
       spack env deactivate
 
+# CMake build system
+RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
+      # create a new environment for the CMake version and activate it:
+      spack env create octopus-cmake && \
+      spack env activate octopus-cmake && \
+      # display specs of upcoming spack installation:
+      spack spec octopus@develop +mpi build_system=cmake && \
+      # run the spack installation (adding it to the environment):
+      spack add octopus@develop +mpi build_system=cmake && \
+      spack install && \
+      # run spack smoke tests for octopus. We get an error if any of the fails:
+      spack test run --alias test_cmake octopus && \
+      # display output from smoke tests (just for information):
+      spack test results -l test_cmake && \
+      # show which octopus version we use (for convenience):
+      spack load octopus && octopus --version && \
+      # deactivate the environment.
+      spack env deactivate
+
+
+
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
 
