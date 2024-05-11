@@ -30,10 +30,11 @@ RUN apt-get install -y --no-install-recommends \
               coreutils \
               curl \
               environment-modules \
-	            file \
+              file \
               gfortran \
               git \
               openssh-server \
+              pkg-config \
               python \
               unzip \
               vim \
