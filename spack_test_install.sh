@@ -54,8 +54,9 @@ done
 
 # cd into the spack root
 # If SPACK_ROOT is not specified, use spack@develop
-if [ -z "$SPACK_ROOT" ]; then
+if [ "$SPACK_ROOT" = "" ]; then
     SPACK_ROOT="/tmp/spack"
+    mkdir -p $SPACK_ROOT
     pushd $SPACK_ROOT
     git clone https://github.com/spack/spack.git .
     git checkout develop

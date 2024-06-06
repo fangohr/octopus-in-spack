@@ -66,16 +66,16 @@ COPY spack_test_install.sh $SPACK_ROOT
 # Install and test serial and MPI versions of ocoptus via spack
 # # serial version
 
-RUN  OCTOPUS_SPEC="octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER}" && \
-      # we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
-      # see https://github.com/spack/spack/issues/43122
-      # TODO: remove the version number when the issue is resolved
-      source ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-serial
+# we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
+# see https://github.com/spack/spack/issues/43122
+# TODO: remove the version number when the issue is resolved
+RUN   OCTOPUS_SPEC="octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER}" && \
+      bash ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-serial
 
 # # MPI version
 
-RUN OCTOPUS_SPEC="octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER}"  && \
-      source ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-mpi
+RUN   OCTOPUS_SPEC="octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER}"  && \
+      bash ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-mpi
 
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
