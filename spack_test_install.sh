@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Echo commands and exit on errors
-set -xe
-
 EXEC_DATE=$(date +%Y_%m_%d_%H_%M_%S)
 
 # Self documenting usage function
@@ -10,9 +7,11 @@ function usage() {
     echo "A bash script to install and test a spack \"spec\" of octopus package"
     echo "Usage: $0 --spec SPEC_TO_TEST [--spack-root SPACK_ROOT] [--test-name TEST_NAME]"
     echo "Where:"
-    echo "  --spec: The spack spec to test (eg octopus@14+mpi)"
-    echo "  --spack-root:(Optional) The spack root directory (eg /tmp/spack); if not specified, spack@develop will be cloned at /tmp/spack"
-    echo "  --test-name: (Optional) A name for the test and environment; defaults to \"Octopus_DATE\""
+    echo "  --spec: The spack spec to test (eg octopus@14+mpi)."
+    echo "  --spack-root:(Optional) The location of the cloned spack root directory (eg /tmp/spack)."
+    echo "                if not specified, spack@develop will be cloned at /tmp/spack."
+    echo "                if specified directory has no .git subdirectory, spack@develop will be cloned."
+    echo "  --test-name: (Optional) A name for the test and environment; defaults to \"Octopus_DATE\"."
     echo "Example: $0 --spec octopus@14+mpi --spack-root /tmp/spackv0.22.0"
     echo "Example: $0 --spec octopus@14+mpi --test-name Octopus_mytest"
     echo "Example: $0 --help"
@@ -52,17 +51,25 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
+# Echo commands and exit on errors
+set -xe
+
 # cd into the spack root
 # If SPACK_ROOT is not specified, use spack@develop
 if [ "$SPACK_ROOT" = "" ]; then
     SPACK_ROOT="/tmp/spack"
     mkdir -p $SPACK_ROOT
-    pushd $SPACK_ROOT
-    git clone https://github.com/spack/spack.git .
-    git checkout develop
-else
-    pushd $SPACK_ROOT
 fi
+pushd $SPACK_ROOT
+
+# clone spack if .git subdirectory does not exist
+# develop branch is the default
+if [ ! -d .git ]; then
+    git clone https://github.com/spack/spack.git .
+fi
+
+# Log the spack hash used
+git status
 
 source share/spack/setup-env.sh
 
