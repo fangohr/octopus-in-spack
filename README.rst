@@ -97,7 +97,7 @@ https://github.com/fangohr/octopus-in-docker
    :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/spack-develop-octopus-develop.yml
 
 .. |diff-with-upstream| image:: https://github.com/fangohr/octopus-in-spack/actions/workflows/diff-with-upstream.yml/badge.svg
-   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/sdiff-with-upstream.yml
+   :target: https://github.com/fangohr/octopus-in-spack/actions/workflows/diff-with-upstream.yml
 
 .. comment: Outdated badges to follow
 
