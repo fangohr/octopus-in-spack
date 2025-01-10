@@ -51,8 +51,11 @@ class Octopus(AutotoolsPackage, CudaPackage):
     depends_on("fortran", type="build")  # generated
 
     # To compile Octopus 15 with gcc, we need at least gcc 11.3:
-    conflicts('%gcc@:11.2', when='@15:',
-              msg='GCC version must be at least 11.3 for Octopus version 15 or newer')
+    conflicts(
+        "%gcc@:11.2",
+        when="@15:",
+        msg="GCC version must be at least 11.3 for Octopus version 15 or newer",
+    )
 
     variant("mpi", default=True, description="Build with MPI support")
     variant("scalapack", default=False, when="+mpi", description="Compile with Scalapack")
