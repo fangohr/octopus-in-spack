@@ -1,10 +1,10 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # # which spack version are we using now? Default is develop
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
-ARG OCT_VERSION=14.1
+ARG OCT_VERSION=15.1
 ARG BERKELEYGW_VER=""
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
@@ -34,7 +34,7 @@ RUN apt-get install -y --no-install-recommends \
               gfortran \
               git \
               openssh-server \
-              python \
+              python3 \
               unzip \
               vim \
            && rm -rf /var/lib/apt/lists/*
