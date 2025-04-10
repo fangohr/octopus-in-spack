@@ -4,7 +4,7 @@ FROM debian:bookworm
 # # but other strings can be given to the docker build command
 # # (for example docker build --build-arg SPACK_VERSION=v0.16.2)
 ARG SPACK_VERSION=develop
-ARG OCT_VERSION=15.1
+ARG OCT_VERSION=16.0
 ARG BERKELEYGW_VER=""
 RUN echo "Building with spack version ${SPACK_VERSION}"
 
