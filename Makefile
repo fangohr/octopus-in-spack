@@ -6,7 +6,7 @@ spack-develop:
 
 # Using most recent spack version with most recent version of octopus
 spack-develop-octopus-develop:
-	docker build -f Dockerfile --build-arg SPACK_VERSION=develop --build-arg OCT_VERSION=16.0  --build-arg BERKELEYGW_VER="@3.0.1" -t octopus-spack .
+	docker build -f Dockerfile --build-arg SPACK_VERSION=develop --build-arg OCT_VERSION=develop  --build-arg BERKELEYGW_VER="@3.0.1" -t octopus-spack .
 
 
 # use particular versions of spack (these are not in the CI as older version of
