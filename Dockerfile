@@ -56,55 +56,26 @@ RUN cd spack && git checkout $SPACK_VERSION
 # # show which version we use
 RUN $SPACK --version
 
-# copy our package.py into the spack tree (and also example files)
+# copy our package.py into the spack tree (and also example files and test scripts)
 COPY spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/package.py
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus
 COPY spack/test/ $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
 RUN ls -l $SPACK_ROOT/var/spack/repos/builtin/packages/octopus/test
+COPY spack_test_install.sh $SPACK_ROOT
 
 # Install and test serial and MPI versions of ocoptus via spack
 # # serial version
 
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
-      # create a new environment for the serial version and activate it:
-      spack env create octopus-serial && \
-      spack env activate octopus-serial && \
-      # display specs of upcoming spack installation:
-      # we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
-      # see https://github.com/spack/spack/issues/43122
-      # TODO: remove the version number when the issue is resolved
-      spack spec octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER} && \
-      # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} ~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis ^berkeleygw${BERKELEYGW_VER} && \
-      spack install && \
-      # run spack smoke tests for octopus. We get an error if any of the fails:
-      spack test run --alias test_serial octopus && \
-      # display output from smoke tests (just for information):
-      spack test results -l test_serial && \
-      # show which octopus version we use (for convenience):
-      spack load octopus && octopus --version && \
-      # deactivate the environment.
-      spack env deactivate
+# we use the berkeleygw@3.0.1 as newer versions are not downloadable at the moment
+# see https://github.com/spack/spack/issues/43122
+# TODO: remove the version number when the issue is resolved
+RUN   OCTOPUS_SPEC="octopus@${OCT_VERSION}~mpi+netcdf+arpack+cgal+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis^berkeleygw${BERKELEYGW_VER}" && \
+      bash ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-serial
 
 # # MPI version
 
-RUN . $SPACK_ROOT/share/spack/setup-env.sh && \
-      # create a new environment for the MPI version and activate it:
-      spack env create octopus-mpi && \
-      spack env activate octopus-mpi && \
-      # display specs of upcoming spack installation:
-      spack spec octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER}  && \
-      # run the spack installation (adding it to the environment):
-      spack add octopus@${OCT_VERSION} +mpi +netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack ^berkeleygw${BERKELEYGW_VER} && \
-      spack install && \
-      # run spack smoke tests for octopus. We get an error if any of the fails:
-      spack test run --alias test_MPI octopus && \
-      # display output from smoke tests (just for information):
-      spack test results -l test_MPI && \
-      # show which octopus version we use (for convenience):
-      spack load octopus && octopus --version && \
-      # deactivate the environment.
-      spack env deactivate
+RUN   OCTOPUS_SPEC="octopus@${OCT_VERSION}+mpi+netcdf+parmetis+arpack+cgal+pfft+pnfft+python+likwid+libyaml+elpa+nlopt+etsf-io+sparskit+berkeleygw+nfft~debug~cuda~metis~scalapack^berkeleygw${BERKELEYGW_VER}"  && \
+      bash ${SPACK_ROOT}/spack_test_install.sh --spec ${OCTOPUS_SPEC} --spack-root ${SPACK_ROOT} --test-name octopus-mpi
 
 # Provide bash in case the image is meant to be used interactively
 CMD /bin/bash -l
